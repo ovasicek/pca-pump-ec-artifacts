@@ -1,9 +1,15 @@
 % ----------------------------------------------------------------------------------------------------------------------
 % clinician requested bolus       --------------------------------------------------------------------------------------
 % X5.3.0(1), R5.3.0(5), R6.5.0(7)    
+
     % clinician bolus delivery trajectories
     fluent(clinician_bolus_delivery_enabled(DurationMinutes)).
-        fluent(clinician_bolus_delivery_enabled).   % helper fluent for not_holdsAt queries
+        fluent(clinician_bolus_delivery_enabled).   % helper fluent for not_holdsAt queries    
+    or_initiates(clinician_bolus_delivery_started(DurationMinutes), clinician_bolus_delivery_enabled(DurationMinutes), T).
+    or_initiates(clinician_bolus_delivery_started(DurationMinutes), clinician_bolus_delivery_enabled, T).
+    or_terminates(clinician_bolus_delivery_stopped, clinician_bolus_delivery_enabled(_), T).
+    or_terminates(clinician_bolus_delivery_stopped, clinician_bolus_delivery_enabled, T).
+
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2) :- % determining the total amount of drug delivered so far throughout the whole narrative
         shortcut_clinician_bolus_duration(DurationMinutes, CroppedDuration),    % TODO what if its after suspend (max duration will be shorter)
         T2 .=<. T1 + CroppedDuration,
@@ -21,21 +27,34 @@
         %//TotalBolusDelivered .=<. StartTotal + VTBI.
 
 
-    % starting clinician requested bolus delivery
-    or_initiates(clinician_bolus_delivery_started(DurationMinutes), clinician_bolus_delivery_enabled(DurationMinutes), T).
-    or_initiates(clinician_bolus_delivery_started(DurationMinutes), clinician_bolus_delivery_enabled, T).
-    
+% ----------------------------------------------------------------------------------------------------------------------
+% starting the trajectory
+% X5.3.0(1) -- starting a clinician requested bolus
+
+    % if requested, then start bolus with a given duration
+    or_happens(clinician_bolus_delivery_started(DurationMinutes), T) :- happens(clinician_bolus_requested_valid(DurationMinutes), T).
+
     % helper event for not_happens
     event(clinician_bolus_delivery_started).
     or_happens(clinician_bolus_delivery_started, T) :- happens(clinician_bolus_delivery_started(DurationMinutes), T).
 
-    % ending clinician requested bolus delivery
-    or_terminates(clinician_bolus_delivery_stopped, clinician_bolus_delivery_enabled(_), T).
-    or_terminates(clinician_bolus_delivery_stopped, clinician_bolus_delivery_enabled, T).
+
+% ----------------------------------------------------------------------------------------------------------------------
+% events on start of trajectory
+
+    or_happens(basal_delivery_stopped, T) :- happens(clinician_bolus_delivery_started(DurationMinutes), T),
+        holdsAt(basal_delivery_enabled, T).
+
+    % clean clinician_bolus_suspended related fluents after it is resumed
+    or_terminates(clinician_bolus_delivery_started(OriginalDuration), clinician_bolus_is_suspended(OriginalDuration), T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
+    or_terminates(clinician_bolus_delivery_started(OriginalDuration), clinician_bolus_is_suspended, T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
+    or_terminates(clinician_bolus_delivery_started(_), clinician_bolus_suspended_drug_delivered(_), T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
 
 
 % ----------------------------------------------------------------------------------------------------------------------
-% self-ending trajectory
+% ending the trajectory
+
+%! self-ending trajectory
 % clinician requested bolus delivery ends automatically after delivering the specified ammount of the drug (vtbi(X))
 
     % dedicated fluent for tracking trajectory progress
@@ -78,35 +97,34 @@
         trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
 
 
-% ----------------------------------------------------------------------------------------------------------------------
 % premature halt of the trajectory
+    or_happens(clinician_bolus_delivery_stopped, T) :- happens(clinician_bolus_halted, T).
 
-    % helper event, four types of premature halt
-    or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_max_dose, T).
-    or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_alarm, T).
-    or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_stop_button, T).
+    % R5.3.0(4) -- any alarm stops the bolus
+    or_happens(clinician_bolus_halted, T) :-
+        happens(any_alarm, T), holdsAt(clinician_bolus_delivery_enabled, T).
+
+    % R6.5.0(6) -- stop button stops everything
+    or_happens(clinician_bolus_halted, T) :- happens(stop_button_pressed_valid, T),
+        holdsAt(clinician_bolus_delivery_enabled, T).
+
+    % halt due to max dose caused by a denied patient bolus request
     or_happens(clinician_bolus_halted, T) :-
         happens(patient_bolus_denied_max_dose, T), holdsAt(clinician_bolus_delivery_enabled, T).
 
-    % stops the trajectory
-    or_happens(clinician_bolus_delivery_stopped, T) :- happens(clinician_bolus_halted, T).
+    % more in drug reservoir reasoning
+    % ...
 
+    %! self-ending premature halt
     % R5.3.0(7) -- if the total drug delivered exceeds the maximum vtbi over a period of time; then halt the clinician bolus, and issue a warning, and switch to KVO
+    or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_max_dose, T).
     % TODO multiple versions in separate files 06-selfend-halt_trigger-*
     % or_happens(clinician_bolus_halted_max_dose, T2) :- ...
 
     or_happens(max_dose_warning, T) :- happens(clinician_bolus_halted_max_dose, T).
 
-% ----------------------------------------------------------------------------------------------------------------------
-% events on start of trajectory
 
-    or_happens(basal_delivery_stopped, T) :- happens(clinician_bolus_delivery_started(DurationMinutes), T),
-        holdsAt(basal_delivery_enabled, T).
 
-    % clean clinician_bolus_suspended related fluents after it is resumed
-    or_terminates(clinician_bolus_delivery_started(OriginalDuration), clinician_bolus_is_suspended(OriginalDuration), T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
-    or_terminates(clinician_bolus_delivery_started(OriginalDuration), clinician_bolus_is_suspended, T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
-    or_terminates(clinician_bolus_delivery_started(_), clinician_bolus_suspended_drug_delivered(_), T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
 
 % ----------------------------------------------------------------------------------------------------------------------
 % events on end of trajectory
@@ -118,6 +136,7 @@
 
 % ----------------------------------------------------------------------------------------------------------------------
 % to avoid copy pasting these bits of code into multiple places
+
     shortcut_clinician_bolus_total_flow_rate(DurationMinutes, CroppedTotalFlowRate) :-   % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
         initiallyP(basal_flow_rate(BasalRate)),
         initiallyP(vtbi(VTBI)),
@@ -140,7 +159,9 @@
 
 
 % ----------------------------------------------------------------------------------------------------------------------
-% helper predicates % TODO should be automated preprocessing
+% helper predicates
+
+% TODO should be automated preprocessing
     can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2).
     can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
     can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2).

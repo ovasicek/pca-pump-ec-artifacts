@@ -6,21 +6,18 @@
 
 % components of the model
 #include './01-fluents.pl'.
+#include './01-continuous_fluents.pl'.
 #include './02-io_events.pl'.
-#include './03-continuous_fluents.pl'.
+#include './03-io_events-validity.pl'.
 #include './04-basal_delivery_trajectory.pl'.
 #include './04-clinician_bolus_trajectory.pl'.
 #include './04-kvo_delivery_trajectory.pl'.
 #include './04-patient_bolus_trajectory.pl'.
-#include './05-clinician_bolus_button.pl'.
-#include './05-patient_bolus_request.pl'.
-#include './05-pump_state.pl'.
-#include './05-start_stop_buttons.pl'.
+#include './04-pump_state.pl'.
 #include './05-suspending_patient_bolus_request.pl'.
 #include './06-total_drug_in_time_window.pl'.
 #include './07-alarms.pl'.
-#include './08-io_events-validity.pl'.
-#include './09-drug_reservoir.pl'.
+#include './08-drug_reservoir.pl'.
 
 % optional constraint rules to check narrative validity
 % - make everything slower, and only check the narrative -- better to check narrative once and then reason without these

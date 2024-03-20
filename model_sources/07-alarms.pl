@@ -6,16 +6,6 @@
         happens(max_dose_warning, T).
     % happens(any_alarm, T) :- happens(max_dose_warning, T).                    % this is not in the model on purpose -- could cause loops (maybe)
 
-% R5.1.0(4), R5.2.0(6), R5.3.0(4)
-    or_happens(basal_delivery_stopped, T) :-
-        happens(any_alarm, T), holdsAt(basal_delivery_enabled, T).
-    or_happens(patient_bolus_halted_alarm, T) :-
-        happens(any_alarm, T), holdsAt(patient_bolus_delivery_enabled, T).
-    or_happens(clinician_bolus_halted_alarm, T) :-
-        happens(any_alarm, T), holdsAt(clinician_bolus_delivery_enabled, T).
-    or_happens(kvo_delivery_stopped, T) :-
-        happens(alarm_to_off, T), holdsAt(kvo_delivery_enabled, T).
-
     fluent(alarm_active).
     or_initiates(any_alarm, alarm_active, T).
     or_initiates(max_dose_warning, alarm_active, T).

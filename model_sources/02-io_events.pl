@@ -49,16 +49,12 @@ event(patient_bolus_denied).
     event(patient_bolus_denied_too_soon).
 event(patient_bolus_completed).                 % automatic end of bolus after delivering the prescribed VTBI
 event(patient_bolus_halted).                    % premature end of bolus 
-    event(patient_bolus_halted_alarm).          %   - due to an alarm
-    event(patient_bolus_halted_stop_button).    %   - due to the stop button being pressed
 
 % clinician bolus delivery
 event(clinician_bolus_delivery_started(DurationMinutes)).
 event(clinician_bolus_delivery_stopped).
 event(clinician_bolus_completed).               % automatic end of bolus after delivering the prescribed VTBI
 event(clinician_bolus_halted).                  % premature end of bolus 
-    event(clinician_bolus_halted_alarm).        %   - due to an alarm
-    event(clinician_bolus_halted_stop_button).  %   - due to the stop button being pressed
     event(clinician_bolus_halted_max_dose).     %   - due to reaching max dose
 event(clinician_bolus_suspended(OriginalDuration)).
 

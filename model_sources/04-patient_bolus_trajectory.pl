@@ -4,6 +4,9 @@
 
     % patient bolus delivery trajectories
     fluent(patient_bolus_delivery_enabled).
+    or_initiates(patient_bolus_delivery_started, patient_bolus_delivery_enabled, T).
+    or_terminates(patient_bolus_delivery_stopped, patient_bolus_delivery_enabled, T).
+
     or_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2) :- % determining the total amount of drug delivered so far throughout the whole narrative
         shortcut_patient_bolus_duration(CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
@@ -20,15 +23,58 @@
         %//initiallyP(vtbi(VTBI)),
         %//TotalBolusDelivered .=<. StartTotal + VTBI.
 
-    % starting patient requested bolus delivery
-    or_initiates(patient_bolus_delivery_started, patient_bolus_delivery_enabled, T).
 
-    % ending patient requested bolus delivery
-    or_terminates(patient_bolus_delivery_stopped, patient_bolus_delivery_enabled, T).
+% ----------------------------------------------------------------------------------------------------------------------
+% starting the trajectory
+% X5.2.0(1) -- starting or denying a patient requested bolus
+
+    % if requested, will not exceed limit, and is not too soon; then start bolus 
+    or_happens(patient_bolus_delivery_started, T) :- happens(patient_bolus_requested_valid, T),
+        not_happens(patient_bolus_denied_too_soon, T),
+        not__happens(patient_bolus_denied_max_dose, T). %! TODO needed instead of not_happens when using abduction (bc findall look in all worlds)
+
+    % helper event, two reasons for denying a patient bolus
+    or_happens(patient_bolus_denied, T) :- happens(patient_bolus_denied_too_soon, T).
+    or_happens(patient_bolus_denied, T) :- happens(patient_bolus_denied_max_dose, T).
+
+    % R5.2.0(3) -- if its too soon since last bolus; then deny bolus
+    or_happens(patient_bolus_denied_too_soon, T) :-
+        happens(patient_bolus_requested_valid, T),
+        initiallyP(min_t_between_patient_bolus(MinTimeBetween)),
+        TLastBolus .>. 0,
+        TLastBolus .<. T,
+        TLastBolus .>. T - MinTimeBetween,
+        holdsAt(patient_bolus_delivery_enabled, TLastBolus).
+
+    % R5.2.0(5) -- if hard limit would be exceeded; then deny bolus, and issue a warning, and switch to KVO
+    or_happens(patient_bolus_denied_max_dose, T) :- happens(patient_bolus_requested_valid, T),
+        initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
+        shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
+        % trigger this rule if the VTBI limit was exceeded
+        TotalDuringVtbiPeriodWithCurrentBolus .>. VtbiLimit.
+    or_not__happens(patient_bolus_denied_max_dose, T) :- happens(patient_bolus_requested_valid, T),
+        initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
+        shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
+        % trigger this rule if the VTBI limit was NOT exceeded
+        TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.
+
+    or_happens(max_dose_warning, T) :- happens(patient_bolus_denied_max_dose, T).
+    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_denied_max_dose, T),
+        holdsAt(basal_delivery_enabled, T).
 
 
 % ----------------------------------------------------------------------------------------------------------------------
-% self-ending trajectory
+% events on start of trajectory
+
+    % stop basal on bolus start
+    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_delivery_started, T),
+        holdsAt(basal_delivery_enabled, T).
+
+
+% ----------------------------------------------------------------------------------------------------------------------
+% ending the trajectory
+
+%! self-ending trajectory
 % patient requested bolus delivery ends automatically after delivering the specified ammount of the drug (vtbi(X))
 
     % dedicated fluent for tracking trajectory progress
@@ -51,23 +97,19 @@
     or_happens(patient_bolus_delivery_stopped, T) :- happens(patient_bolus_completed, T).
 
 
-% ----------------------------------------------------------------------------------------------------------------------
 % premature halt of the trajectory
-
-    % helper event, two types of premature halt
-    or_happens(patient_bolus_halted, T) :- happens(patient_bolus_halted_alarm, T).
-    or_happens(patient_bolus_halted, T) :- happens(patient_bolus_halted_stop_button, T).
-
-    % stops the trajectory
     or_happens(patient_bolus_delivery_stopped, T) :- happens(patient_bolus_halted, T).
 
+    % R5.2.0(6) -- any alarm stops the bolus
+    or_happens(patient_bolus_halted, T) :-
+        happens(any_alarm, T), holdsAt(patient_bolus_delivery_enabled, T).
 
-% ----------------------------------------------------------------------------------------------------------------------
-% events on start of trajectory
+    % R6.5.0(6) -- stop button stops everything
+    or_happens(patient_bolus_halted, T) :- happens(stop_button_pressed_valid, T),
+        holdsAt(patient_bolus_delivery_enabled, T).
 
-    % stop basal on bolus start
-    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_delivery_started, T),
-        holdsAt(basal_delivery_enabled, T).
+    % more in drug reservoir reasoning
+    % ...
 
 
 % ----------------------------------------------------------------------------------------------------------------------
@@ -80,6 +122,7 @@
 
 % ----------------------------------------------------------------------------------------------------------------------
 % to avoid copy pasting these bits of code into multiple places
+
     shortcut_patient_bolus_total_flow_rate(CroppedTotalFlowRate) :-          % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
         initiallyP(patient_bolus_flow_rate(BolusRate)),
         initiallyP(basal_flow_rate(BasalRate)),
@@ -97,7 +140,9 @@
 
 
 % ----------------------------------------------------------------------------------------------------------------------
-% helper predicates % TODO should be automated preprocessing
+% helper predicates
+
+% TODO should be automated preprocessing
     can_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
     can_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
     can_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2).
