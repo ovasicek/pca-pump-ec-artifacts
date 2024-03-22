@@ -23,7 +23,7 @@
 %//     12
 %//     13
 %       14 - Clinician presses Start button to begin basal-rate infusion
-%?      15 - Bolus dose infused upon request; see Use Case: Bolus Infusion
+%?      15 - Bolus dose infused upon request; see Use Case: Bolus Infusion -- tested in UC2 and UC3
 %       16 - Clinician presses Stop button to halt infusion
 %//     17
 %//     18

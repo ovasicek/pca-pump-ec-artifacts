@@ -1,3 +1,3 @@
-#include './init-base.pl'.
-
-initiallyP(initial_drug_reservoir_contents(100)).          % made up
+#include './init-partial-base.pl'.
+#include './init-partial-reservoir.pl'.
+#include './init-partial-maxdose.pl'.

@@ -13,7 +13,9 @@
 %       1 - Alarm sounded and displayed
 %       2 - pumping halted
 
-#include './init-base.pl'.
+#include './init-partial-base.pl'.
+#include './init-partial-maxdose.pl'.
+
 initiallyP(initial_drug_reservoir_contents(7)).     % set contents so that it runs out at the right time
 low_reservoir_reasoning_enabled.                    % enable drug reservoir reasoning
 empty_reservoir_reasoning_enabled.

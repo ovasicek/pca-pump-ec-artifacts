@@ -14,16 +14,13 @@ initiallyP(min_t_between_patient_bolus(30)).                % prescription
 % typical: ~0.5h, 1hr, ...
 % --> time between boluses is 30mins (max one bolus every 31mins --- startAt(0) + duration(1) + timeBetween(30))
 
-initiallyP(vtbi_hard_limit_over_time(V, P)) :-      % drug library
-    initiallyP(basal_flow_rate(BasalRate)), initiallyP(vtbi(VTBI)),
-    NB .=. 2 + (1/2),   % how many boluses to allow
-    P .=. 4*60,         % time period of 4 hours
-    V .=. (P*BasalRate) + (NB*VTBI).    % max dose is full period of basal + allowed boluses
-% --> a maximum of 2.5 boluses allowed per 4hours
-
 initiallyP(vtbi_hard_max(60)).                             % drug library
 initiallyP(pump_flow_rate_max_MlperHour(100)).             % made up
 
+/* In a separate file to be configurable (different for some UC/ECs) 
+    initiallyP(vtbi_hard_limit_over_time(V, P)) :- ...
+    initiallyP(initial_drug_reservoir_contents(100)).       % made up
+*/
 
 % starting initialization ----------------------------------------------------------------------------------------------
 max_time(100000).
