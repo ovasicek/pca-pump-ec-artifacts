@@ -112,7 +112,7 @@ overdose-ec13c-nomaxdose:
 # analysis of overdose using abduction #########################################
 overdose-uc2-abduction:
 	@mkdir ./output 2> /dev/null || true
-	{ ${TIME} ../incremental_abduction/incremental_abduction.sh ../model-original.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-original-stdout.log
+	{ ${TIME} ./incremental_abduction/incremental_abduction.sh ../model-original.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-original-stdout.log
 overdose-uc2-abduction-fixed:
 	@mkdir ./output 2> /dev/null || true
-	{ ${TIME} ../incremental_abduction/incremental_abduction.sh ../model-fixed.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-fixed-stdout.log
+	{ ${TIME} ./incremental_abduction/incremental_abduction.sh ../model-fixed.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-fixed-stdout.log
