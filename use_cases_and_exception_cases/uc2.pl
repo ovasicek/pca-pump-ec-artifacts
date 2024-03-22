@@ -19,7 +19,8 @@
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                    60).    % Pre 1
     ?- holdsAt(basal_delivery_enabled,              70).    % Pre 2
-                                                            % Pre 3 %TODO no prior bolus
+    ?- not_holdsAt(patient_bolus_delivery_enabled,  X1),    % Pre 3 no prior bolus
+       X1 .<. 120.
 
 or_happens(patient_bolus_requested,                 120).   % Step 1
     
@@ -28,21 +29,23 @@ or_happens(patient_bolus_requested,                 120).   % Step 1
     ?- not_happens(patient_bolus_denied_max_dose,   120).   % Step 3, no EC
     ?- happens(patient_bolus_delivery_started,      120).   % Step 3
     
-    ?- initiallyP(vtbi(X1)),                                % Step 4
-       holdsAt(patient_bolus_drug_delivered(X2),    121),
-       X1 = X2.
+    ?- initiallyP(vtbi(X2)),                                % Step 4
+       holdsAt(patient_bolus_drug_delivered(X3),    121),
+       X2 .=. X3.
     ?- happens(patient_bolus_completed,             121).   % Step 4
     ?- happens(basal_delivery_started,              121).   % Step 4 && Post 1
     ?- holdsAt(basal_delivery_enabled,              122).   % Step 4 && Post 1
 
 % check all queries in one:
 ?-  holdsAt(basal_delivery_enabled,                 70),
+    not_holdsAt(patient_bolus_delivery_enabled,     X1),
+    X1 .<. 120,
     not_happens(patient_bolus_denied_too_soon,      120),
     not_happens(patient_bolus_denied_max_dose,      120),
     happens(patient_bolus_delivery_started,         120),
-    initiallyP(vtbi(X1)),
-    holdsAt(patient_bolus_drug_delivered(X2),       121),
-    X1 = X2,
+    initiallyP(vtbi(X2)),
+    holdsAt(patient_bolus_drug_delivered(X3),       121),
+    X2 .=. X3,
     happens(patient_bolus_completed,                121),
     happens(basal_delivery_started,                 121),
     holdsAt(basal_delivery_enabled,                 122).

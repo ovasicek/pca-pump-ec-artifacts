@@ -59,8 +59,6 @@
         TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.
 
     or_happens(max_dose_warning, T) :- happens(patient_bolus_denied_max_dose, T).
-    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_denied_max_dose, T),
-        holdsAt(basal_delivery_enabled, T).
 
 
 % ----------------------------------------------------------------------------------------------------------------------

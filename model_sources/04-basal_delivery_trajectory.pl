@@ -41,6 +41,10 @@
     or_happens(basal_delivery_stopped, T) :- happens(stop_button_pressed_valid, T),
         holdsAt(basal_delivery_enabled, T).
 
+    % stop due to max dose caused by a denied patient bolus request
+    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_denied_max_dose, T),
+        holdsAt(basal_delivery_enabled, T).
+
     % more in drug reservoir reasoning
     % ...
 
