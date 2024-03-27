@@ -2,8 +2,11 @@ TIME=/usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  
 MODEL=../model-original-wcache.pl
 
 # demonstrate constructive negation using "not"
-cn-example:
-	${TIME} scasp -s0 ./cn.pl
+cn-example1:
+	${TIME} scasp -s0 ./cn1.pl
+	
+cn-example2:
+	${TIME} scasp -s0 ./cn2.pl
 
 
 # "simulation" of use cases ####################################################
