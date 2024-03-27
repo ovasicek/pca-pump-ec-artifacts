@@ -1,0 +1,9 @@
+# source https://roneo.org/en/gitlab-render-html/
+pages:
+ script:
+ - mkdir .public
+ - cp -r * .public
+ - mv .public public
+ artifacts:
+    paths:
+    - public
