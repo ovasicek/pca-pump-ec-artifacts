@@ -1,6 +1,10 @@
 TIME=/usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K"
 MODEL=../model-original-wcache.pl
 
+# demonstrate constructive negation using "not"
+cn-example:
+	${TIME} scasp -s0 ./cn-query.pl
+
 
 # "simulation" of use cases ####################################################
 uc1:
