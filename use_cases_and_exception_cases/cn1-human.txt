@@ -1,0 +1,15 @@
+% QUERY:I would like to know if
+     'initiallyP' holds (for flow_rate(X)).
+
+	ANSWER:	1 (in 0.12 ms)
+
+JUSTIFICATION_TREE:
+'initiallyP' holds (for flow_rate(1/10)), because
+    'initiallyP' holds (for flow_rate_PerHour(6)).
+The global constraints hold.
+
+MODEL:
+{ initiallyP(flow_rate(1/10)),  initiallyP(flow_rate_PerHour(6)) }
+BINDINGS: 
+X equal 1/10
+

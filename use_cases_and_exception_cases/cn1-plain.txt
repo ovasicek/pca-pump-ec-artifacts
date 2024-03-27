@@ -1,0 +1,14 @@
+% QUERY:?- initiallyP(flow_rate(X)).
+
+	ANSWER:	1 (in 0.089 ms)
+
+JUSTIFICATION_TREE:
+initiallyP(flow_rate(1/10)) :-
+    initiallyP(flow_rate_PerHour(6)).
+global_constraint.
+
+MODEL:
+{ initiallyP(flow_rate(1/10)),  initiallyP(flow_rate_PerHour(6)) }
+BINDINGS: 
+X = 1/10
+
