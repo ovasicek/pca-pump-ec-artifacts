@@ -3,7 +3,7 @@ MODEL=../model-original-wcache.pl
 
 # demonstrate constructive negation using "not"
 cn-example:
-	${TIME} scasp -s0 ./cn-query.pl
+	${TIME} scasp -s0 ./cn.pl
 
 
 # "simulation" of use cases ####################################################
