@@ -78,9 +78,10 @@
         %//initiallyP(vtbi(VTBI)),
         %//VtbiDrugRes .=<. VTBI.
 
-    % trigger self-terminating event when VTBI is delivered
-    % TODO multiple versions in separate files 06-selfend-complete_trigger-*
-    % or_happens(clinician_bolus_completed, T2) :- ...
+    % trigger self-terminating event when VTBI is delivered -- using a dedicated fluent combined with holdsAt/3
+    or_happens(clinician_bolus_completed, T2) :-
+        initiallyP(vtbi(VTBI)),
+        holdsAt(clinician_bolus_drug_delivered(VTBI), T2, clinician_bolus_delivery_enabled(_)).
     
     or_happens(clinician_bolus_delivery_stopped, T) :- happens(clinician_bolus_completed, T).
 
@@ -118,8 +119,14 @@
     %! self-ending premature halt
     % R5.3.0(7) -- if the total drug delivered exceeds the maximum vtbi over a period of time; then halt the clinician bolus, and issue a warning, and switch to KVO
     or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_max_dose, T).
-    % TODO multiple versions in separate files 06-selfend-halt_trigger-*
-    % or_happens(clinician_bolus_halted_max_dose, T2) :- ...
+
+    or_happens(clinician_bolus_halted_max_dose, T2) :-
+        % need to tie to a start event to be able to split trigger into two situations based on T2-T1 compared to max dose time period size
+        T1 .<. T2,
+        happens(clinician_bolus_delivery_started(DurationMinutes), T1),
+        not_happensIn(clinician_bolus_delivery_started, T1, T2),
+        % rest is in the rule below to be configurable for fixed and original version of the model
+        shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, DurationMinutes, T2).
 
     or_happens(max_dose_warning, T) :- happens(clinician_bolus_halted_max_dose, T).
 

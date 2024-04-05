@@ -88,9 +88,10 @@
         %//VtbiDrugRes .=<. VTBI.
     
 
-    % trigger self-terminating event when VTBI is delivered
-    % TODO multiple versions in separate files 06-selfend-complete_trigger-*
-    % or_happens(patient_bolus_completed, T2) :- ...
+    % trigger self-terminating event when VTBI is delivered -- using a dedicated fluent combined with holdsAt/3
+    or_happens(patient_bolus_completed, T2) :-
+        initiallyP(vtbi(VTBI)),
+        holdsAt(patient_bolus_drug_delivered(VTBI), T2, patient_bolus_delivery_enabled).
        
     or_happens(patient_bolus_delivery_stopped, T) :- happens(patient_bolus_completed, T).
 
