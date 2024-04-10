@@ -122,4 +122,12 @@ overdose-uc2-abduction:
 	{ ${TIME} ./incremental_abduction/incremental_abduction.sh ../model-original.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-original-stdout.log
 overdose-uc2-abduction-fixed:
 	@mkdir ./output 2> /dev/null || true
-	{ ${TIME} ./incremental_abduction/incremental_abduction.sh ../model-fixed.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-fixed-stdout.log
+	{ ${TIME} ./incremental_abduction/incremental_abduction.sh ../model-fixed.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl 2>&1 ; } | tee output/output-fixed-stdout.log\
+
+
+# drug reservoir reasoning #####################################################
+empty_reserv-uc2-full_reasoning:
+	${TIME} scasp -s0 --dcc ${MODEL} ./empty_reserv-uc2-onerun.pl
+
+empty_reserv-uc2-3run_reasoning:
+	${TIME} ./three_runs.sh . empty_reserv-uc2 ${MODEL}
