@@ -67,11 +67,6 @@ or_startedIn(T1, Fluent, T2) :-
     happens(Event, T),
     releases(Event, Fluent, T).
 
-%% BEC3 - holdsAt(f,t) -- cached version
-or_holdsAt(Fluent2, T2) :-
-    T1 .>. 0, T1 .<. T2,
-    max_time(T3), T2 .<. T3,
-    cached_trajectory(Fluent1, T1, Fluent2, T2).
 
 %% BEC4 - holdsAt(f,t)
 or_holdsAt(Fluent, T) :-
@@ -101,7 +96,7 @@ or_holdsAt(Fluent2, T2) :-
     trajectory(Fluent1, T1, Fluent2, T2),
     not_stoppedIn(T1, Fluent1, T2).
 
-% another new axiom approach -- holdsAt/3
+% new axiom -- holdsAt/3
 % - third parameter Fluent1 tries to say to only ever consider a specified trajectory
 holdsAt(Fluent2, T2, Fluent1) :-
     T1 .>. 0, T1 .<. T2,
@@ -112,20 +107,6 @@ holdsAt(Fluent2, T2, Fluent1) :-
     initiates(Event, Fluent1, T1),
     trajectory(Fluent1, T1, Fluent2, T2),
     not_stoppedIn(T1, Fluent1, T2).
-
-
-% NEW AXIOM -- selfend_trajectory
-% doing separate instances for each EndEvent to avoid a slowdown 
-%or_happens(EndEvent, T2) :-
-%    can_selfend_trajectory(EndEvent),
-%    T1 .>. 0, T1 .<. T2,                                                
-%    max_time(T3), T2 .<. T3,                                            
-%    can_selfend_trajectory(Fluent1, T1, EndEvent, T2),                  
-%    can_initiates(Event, Fluent1),                                      
-%    happens(Event, T1),                                                 
-%    initiates(Event, Fluent1, T1),
-%    selfend_trajectory(Fluent1, T1, EndEvent, T2),
-%    not_stoppedIn(T1, Fluent1, T2).
 
 
 %% BEC6 - holdsAt(f,t)
