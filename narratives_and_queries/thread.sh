@@ -12,7 +12,7 @@ if [ $# -eq 3 ]; then
     timeout="$2"
     queryWdir="$3"  # query to run 
 else
-    echo "Usage: $0 num_runs_to_avg query_to_run timeout model_file_name"
+    echo "Usage: $0 num_runs_to_avg query_to_run timeout"
     exit 1
 fi
 
