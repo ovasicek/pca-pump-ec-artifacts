@@ -1,0 +1,1 @@
+?- query_check_narrative_fluents.

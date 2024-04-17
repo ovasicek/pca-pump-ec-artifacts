@@ -1,4 +1,4 @@
-query_check_narrative_fluents_directly :- 
+query_check_narrative_fluents :- 
     initiallyP(pump_flow_rate_max_MlperHour(PumpFlowMax)), PumpFlowMax .>. 0,
     initiallyP(basal_flow_rate_min_MlperHour(BasalFlowMin)), BasalFlowMin .>. 0,
     initiallyP(basal_flow_rate_max_MlperHour(BasalFlowMax)), BasalFlowMax .>. 0,

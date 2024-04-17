@@ -2,7 +2,7 @@
 
 #include './init-partial-base.pl'.
 #include './init-partial-reservoir.pl'.
-#include '../../model_utils/analysis_utils.pl'.
+#include '../model_utils/analysis_utils.pl'.
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                    60).    % UC2

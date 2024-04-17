@@ -13,7 +13,7 @@
 %       1 - Alarm sounded and displayed
 %       2 - Infusion switched to KVO rate
 
-#include '../../model_utils/analysis_utils.pl'.
+#include '../model_utils/analysis_utils.pl'.
 #include './init-default.pl'.
 % --> max dose allows 2.5 boluses per 4 hours
 

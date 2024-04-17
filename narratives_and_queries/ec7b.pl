@@ -19,6 +19,8 @@
 %       1 - Alarm sounded and displayed
 %       2 - Infusion halted
 
+#include './init-default.pl'.
+
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).    % Pre 1
     ?- holdsAt(basal_delivery_enabled,                  70).    % Pre 1
