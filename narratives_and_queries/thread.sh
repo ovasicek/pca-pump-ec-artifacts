@@ -32,9 +32,10 @@ done
 
 avgRuntime=$(awk -v OFMT="%.2f" "BEGIN{ print $totalRuntime / $N_AVG }")
 avgRuntimeMins=$(awk -v OFMT="%.2f" "BEGIN{ print $avgRuntime / 60 }")
-avgMemory=$(awk -v OFMT="%.2f" "BEGIN{ print $totalMemory / $N_AVG / 1000 }")   # and change from KB to MB
+avgMemory=$(awk -v OFMT="%.2f" "BEGIN{ print $totalMemory / $N_AVG }")
+avgMemoryMB=$(awk -v OFMT="%.2f" "BEGIN{ print $avgMemory / 1000 }")
 sed -i "s|^  real \[s\]  [0-9\.]*$|  real [m]  $avgRuntimeMins (avg of $N_AVG runs)\n  real [s]  $avgRuntime (avg of $N_AVG runs)|" ./last_test_output/$query.txt
-sed -i "s|^  mem  \[KB\] [0-9\.]*$|  mem  [MB] $avgMemory (avg of $N_AVG runs)|" ./last_test_output/$query.txt
+sed -i "s|^  mem  \[KB\] [0-9\.]*$|  mem  [MB] $avgMemoryMB (avg of $N_AVG runs)\n  mem  [KB] $avgMemory (avg of $N_AVG runs)|" ./last_test_output/$query.txt
 
 # check output and print the result
 Nmodels=$( cat ./last_test_output/"$query".txt | grep -c "ANSWER" )
