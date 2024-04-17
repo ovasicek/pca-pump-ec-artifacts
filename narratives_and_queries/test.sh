@@ -39,7 +39,7 @@ fi
 
 queries=$(cat makefile | grep ":" | sed "s|:||" | sed "s| |\n|g" | grep "$grepQueries" | grep -v "$vgrepQueries")
 Nqueries=$(echo "$queries" | wc -l)
-Ncpus=$(cat /proc/cpuinfo | grep "cpu cores" | head -n1 | sed "s|.*: ||")
+Ncpus=$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
 cpuName=$(cat /proc/cpuinfo | grep "model name" | head -n1 | sed "s|.*: ||" | sed "s|  *| |g")
 
 # clean last outputs and prep folder for new outputs
@@ -68,16 +68,6 @@ run_queries()
 }
 
 { time run_queries ; } 2> ./last_test_output/total_time.txt
-
-
-# change memory measurements to GB from KB
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{1\}\)$|  mem  [GB] 0.00000\1|"             ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{2\}\)$|  mem  [GB] 0.0000\1|"              ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{3\}\)$|  mem  [GB] 0.000\1|"               ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{4\}\)$|  mem  [GB] 0.00\1|"                ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{5\}\)$|  mem  [GB] 0.0\1|"                 ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9]\{6\}\)$|  mem  [GB] 0.\1|"                  ./last_test_output/*.txt
-sed -i "s|^  mem  \[K[Bb]\] \([0-9][0-9]*\)\([0-9]\{6\}\)$|  mem  [GB] \1.\2|"  ./last_test_output/*.txt
 
 # sort the results of queries
 logSortedQueryResults=$(cat "./last_test_output/test_run.log" | tail -n+4 | LC_ALL=C.UTF-8 sort)
