@@ -34,4 +34,4 @@ sed -i "s|^  real \[s\]  [0-9\.]*$|  real [m]  $avgRuntimeMins (avg of $N_AVG ru
 # check output and print the result
 Nmodels=$( cat ./last_test_output/"$query".txt | grep -c "ANSWER" )
 
-printf "%-50s  %-10s  %-s\n" "$query" "${Nmodels} models" "${avgRuntime}s" | tee -a "./last_test_output/test_run.log"
+printf "%-40s  %+4s models  %+10ss\n" "$query" "${Nmodels}" "${avgRuntime}" | tee -a "./last_test_output/test_run.log"

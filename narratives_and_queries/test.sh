@@ -40,7 +40,7 @@ fi
 queries=$(cat makefile | grep ":" | sed "s|:||" | sed "s| |\n|g" | grep "$grepQueries" | grep -v "$vgrepQueries")
 Nqueries=$(echo "$queries" | wc -l)
 Ncpus=$(cat /proc/cpuinfo | grep "cpu cores" | head -n1 | sed "s|.*: ||")
-
+cpuName=$(cat /proc/cpuinfo | grep "model name" | head -n1 | sed "s|.*: ||" | sed "s|  *| |g")
 
 # clean last outputs and prep folder for new outputs
 rm -rf "./last_test_output/"
@@ -49,6 +49,9 @@ mkdir -p "./last_test_output/"
 # print intro
 echo "Running queries for the PCA pump specification:" | tee "./last_test_output/test_run.log"
 echo "  using a pool of $NcpusToUse CPU cores (out of $Ncpus available) to run $Nqueries queries in parallel" | tee -a "./last_test_output/test_run.log"
+echo "  average over N runs: $NrunsToAvg" | tee -a "./last_test_output/test_run.log"
+echo "  timeout per run    : $timeout" | tee -a "./last_test_output/test_run.log"
+echo "  CPU model          : $cpuName" | tee -a "./last_test_output/test_run.log"
 echo | tee -a "./last_test_output/test_run.log"
 
 # print progress bar and then jump cursor back to start
