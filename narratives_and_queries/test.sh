@@ -70,7 +70,7 @@ run_queries()
 { time run_queries ; } 2> ./last_test_output/total_time.txt
 
 # sort the results of queries
-logSortedQueryResults=$(cat "./last_test_output/test_run.log" | tail -n+4 | LC_ALL=C.UTF-8 sort)
+logSortedQueryResults=$(cat "./last_test_output/test_run.log" | tail -n+7 | LC_ALL=C.UTF-8 sort)
 logHead=$(cat "./last_test_output/test_run.log" | head -n 6)
 # rewrite the log file with the sorted query results
 echo "$logHead" > "./last_test_output/test_run.log"
