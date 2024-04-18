@@ -38,6 +38,6 @@ sed -i "s|^  real \[s\]  [0-9\.]*$|  real [m]  $avgRuntimeMins (avg of $N_AVG ru
 sed -i "s|^  mem  \[KB\] [0-9\.]*$|  mem  [MB] $avgMemoryMB (avg of $N_AVG runs)\n  mem  [KB] $avgMemory (avg of $N_AVG runs)|" ./last_test_output/$query.txt
 
 # check output and print the result
-Nmodels=$( cat ./last_test_output/"$query".txt | grep -c "ANSWER" )
+Nmodels=$( cat ./last_test_output/"$query".txt | grep -c "MODEL:" )
 
 printf "%-40s  %+4s models  %+10ss  %+10sMB\n" "$query" "${Nmodels}" "${avgRuntime}" "${avgMemoryMB}" | tee -a "./last_test_output/test_run.log"
