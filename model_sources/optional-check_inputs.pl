@@ -27,4 +27,4 @@
 :- initiallyP(vtbi_hard_limit_over_time(MaxDose, MaxDosePeriod)), MaxDose .<. BasalRate * MaxDosePeriod, initiallyP(basal_flow_rate(BasalRate)). %! TODO my own addition (not in the specification) 
 
 % the max dose time period must be bigger than the patient bolus duration
-:- initiallyP(vtbi_hard_limit_over_time(_, MaxDosePeriod)), shortcut_patient_bolus_duration(BolusDuration), MaxDosePeriod .<. BolusDuration. %! TODO my own addition (not in the specification) 
+:- initiallyP(vtbi_hard_limit_over_time(_, MaxDosePeriod)), patient_bolus_duration(BolusDuration), MaxDosePeriod .<. BolusDuration. %! TODO my own addition (not in the specification) 

@@ -20,7 +20,7 @@ or_happens(stop_button_pressed,                     6000).  % added for complete
     % define max dose parameter values using the abducible
     % - this is a way to restrict abduction values
     initiallyP(vtbi_hard_limit_over_time(V, P)) :-
-        shortcut_patient_bolus_duration(BolusDuration), initiallyP(basal_flow_rate(BasalRate)), initiallyP(vtbi(VTBI)),
+        patient_bolus_duration(BolusDuration), initiallyP(basal_flow_rate(BasalRate)), initiallyP(vtbi(VTBI)),
         abducible_initiallyP_vtbi_hard_limit_V_P(V, P),
         N .=. 0,                            % at least how many boluses to allow
         P .>. BolusDuration,                % time period must be longer than bolus duration

@@ -11,17 +11,17 @@
     or_terminates(clinician_bolus_delivery_stopped, clinician_bolus_delivery_enabled, T).
 
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2) :- % determining the total amount of drug delivered so far throughout the whole narrative
-        shortcut_clinician_bolus_duration(DurationMinutes, CroppedDuration),    % TODO what if its after suspend (max duration will be shorter)
+        clinician_bolus_duration(DurationMinutes, CroppedDuration),    % TODO what if its after suspend (max duration will be shorter)
         T2 .=<. T1 + CroppedDuration,
         holdsAt(total_drug_delivered(StartTotal), T1),
-        shortcut_clinician_bolus_total_flow_rate(DurationMinutes, FlowRate),
+        basal_and_clinician_bolus_flow_rate(DurationMinutes, FlowRate),
         TotalDelivered .=. StartTotal + ((T2-T1) * FlowRate).
 
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) :- % determining the volume of "bolus only" delivered so far during the entire narrative (bolus only, no basal)
-        shortcut_clinician_bolus_duration(DurationMinutes, CroppedDuration),     % TODO what if its after suspend (max duration will be shorter)
+        clinician_bolus_duration(DurationMinutes, CroppedDuration),     % TODO what if its after suspend (max duration will be shorter)
         T2 .=<. T1 + CroppedDuration,
         holdsAt(total_bolus_drug_delivered(StartTotal), T1),
-        shortcut_clinician_bolus_flow_rate(DurationMinutes, FlowRate),
+        clinician_bolus_only_flow_rate(DurationMinutes, FlowRate),
         TotalBolusDelivered .=. StartTotal + ((T2-T1) * FlowRate).
         %//initiallyP(vtbi(VTBI)),
         %//TotalBolusDelivered .=<. StartTotal + VTBI.
@@ -65,18 +65,18 @@
     initiallyR(clinician_bolus_drug_delivered(X)).
 
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2) :- % determining the volume of "bolus only" delivered so far during the current clinician bolus (bolus only, no basal)
-        shortcut_clinician_bolus_duration(DurationMinutes, CroppedDuration),
+        clinician_bolus_duration(DurationMinutes, CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
-        shortcut_clinician_bolus_flow_rate(DurationMinutes, FlowRate),
+        clinician_bolus_only_flow_rate(DurationMinutes, FlowRate),
         not_holdsAt(clinician_bolus_is_suspended, T1),
         VtbiDrugRes .=. (T2-T1) * FlowRate.
         %//initiallyP(vtbi(VTBI)),
         %//VtbiDrugRes .=<. VTBI.
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2) :-
         holdsAt(clinician_bolus_suspended_drug_delivered(DeliveredBeforeSuspend), T1),   % R5.3.0(3)
-        shortcut_clinician_bolus_duration_after_resume(DeliveredBeforeSuspend, DurationMinutes, CroppedDuration),
+        clinician_bolus_duration_after_resume(DeliveredBeforeSuspend, DurationMinutes, CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
-        shortcut_clinician_bolus_flow_rate(DurationMinutes, FlowRate),
+        clinician_bolus_only_flow_rate(DurationMinutes, FlowRate),
         VtbiDrugRes .=. ((T2-T1) * FlowRate) + DeliveredBeforeSuspend.
         %//initiallyP(vtbi(VTBI)),
         %//VtbiDrugRes .=<. VTBI.
@@ -151,23 +151,23 @@
 % ----------------------------------------------------------------------------------------------------------------------
 % to avoid copy pasting these bits of code into multiple places
 
-    shortcut_clinician_bolus_total_flow_rate(DurationMinutes, CroppedTotalFlowRate) :-   % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
+    basal_and_clinician_bolus_flow_rate(DurationMinutes, CroppedTotalFlowRate) :-   % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
         initiallyP(basal_flow_rate(BasalRate)),
         initiallyP(vtbi(VTBI)),
         BolusRate .=. VTBI / DurationMinutes,               % R5.3.0(2)
         CombinedRate .=. BolusRate + BasalRate,             % R5.3.0(2)
         initiallyP(pump_flow_rate_max(MaxRate)),
         min(CombinedRate, MaxRate, CroppedTotalFlowRate).   % R5.3.0(2)
-    shortcut_clinician_bolus_flow_rate(DurationMinutes, CroppedBolusFlowRate) :-         % bolus flow rate only (no basal), potentially cropped due to max pump flow
-        shortcut_clinician_bolus_total_flow_rate(DurationMinutes, CroppedTotalFlowRate),
+    clinician_bolus_only_flow_rate(DurationMinutes, CroppedBolusFlowRate) :-         % bolus flow rate only (no basal), potentially cropped due to max pump flow
+        basal_and_clinician_bolus_flow_rate(DurationMinutes, CroppedTotalFlowRate),
         initiallyP(basal_flow_rate(BasalRate)),
         CroppedBolusFlowRate .=. CroppedTotalFlowRate - BasalRate.
-    shortcut_clinician_bolus_duration(DurationMinutes, CroppedDuration) :-               % bolus duration can be longer than requested due to flow rate getting cropped due to max pump flow
-        shortcut_clinician_bolus_flow_rate(DurationMinutes, CroppedBolusFlowRate),
+    clinician_bolus_duration(DurationMinutes, CroppedDuration) :-               % bolus duration can be longer than requested due to flow rate getting cropped due to max pump flow
+        clinician_bolus_only_flow_rate(DurationMinutes, CroppedBolusFlowRate),
         initiallyP(vtbi(VTBI)),
         CroppedDuration .=. VTBI / CroppedBolusFlowRate.
-    shortcut_clinician_bolus_duration_after_resume(DeliveredBeforeSuspended, DurationMinutes, CroppedDuration) :-   % remaining bolus duration after resume, also can be cropped due to max pump flow
-        shortcut_clinician_bolus_flow_rate(DurationMinutes, CroppedBolusFlowRate),
+    clinician_bolus_duration_after_resume(DeliveredBeforeSuspended, DurationMinutes, CroppedDuration) :-   % remaining bolus duration after resume, also can be cropped due to max pump flow
+        clinician_bolus_only_flow_rate(DurationMinutes, CroppedBolusFlowRate),
         initiallyP(vtbi(VTBI)),
         CroppedDuration .=. (VTBI - DeliveredBeforeSuspended) / CroppedBolusFlowRate.
 

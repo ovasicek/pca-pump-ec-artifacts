@@ -11,7 +11,7 @@ query_check_narrative_fluents :-
     initiallyP(vtbi_hard_limit_over_time(MaxDose, MaxDosePeriod)), MaxDose .>. 0, MaxDosePeriod .>. 0,
     initiallyP(initial_drug_reservoir_contents(DrugReservoir)), DrugReservoir .>. 0,
     initiallyP(basal_flow_rate(BasalRate)), MaxDose .>=. BasalRate * MaxDosePeriod,
-    shortcut_patient_bolus_duration(BolusDuration), MaxDosePeriod .>. BolusDuration,
+    patient_bolus_duration(BolusDuration), MaxDosePeriod .>. BolusDuration,
     initiallyP(initial_total_drug_delivered(X)), X .=. 0,
     initiallyP(initial_total_bolus_drug_delivered(X)), X .=. 0,
     initiallyP(initial_drug_flow_rate(X)), X .=. 0.

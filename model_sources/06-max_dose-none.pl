@@ -3,7 +3,7 @@
 
 %----------------------------------------------------------------------------------------------------------------------%
 % used to deny an requested patient bolus
-shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, ResTotalDuringVtbiPeriodWithCurrentBolus) :-
+total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, ResTotalDuringVtbiPeriodWithCurrentBolus) :-
     initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
     % deny will not happen when ResTotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit
     % --> return exactly equal so that deny never happens
@@ -18,6 +18,6 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
 
 or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
     happens(clinician_bolus_halted_max_dose, T).
-    
+
 shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
     0 = 1. % will always fail

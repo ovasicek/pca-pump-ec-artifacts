@@ -35,9 +35,9 @@
     % R5.1.0(1) -- during basal
     or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(basal_delivery_enabled, T), initiallyP(basal_flow_rate(Rate)).
     % R5.2.0(2) -- during patient bolus
-    or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(patient_bolus_delivery_enabled, T), shortcut_patient_bolus_total_flow_rate(Rate).
+    or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(patient_bolus_delivery_enabled, T), basal_and_patient_bolus_flow_rate(Rate).
     % R5.3.0(2) -- during clinician bolus
-    or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(clinician_bolus_delivery_enabled(DurationMinutes), T), shortcut_clinician_bolus_total_flow_rate(DurationMinutes, Rate).
+    or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(clinician_bolus_delivery_enabled(DurationMinutes), T), basal_and_clinician_bolus_flow_rate(DurationMinutes, Rate).
     % R5.1.0(5) -- during kvo
     or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(kvo_delivery_enabled, T), initiallyP(kvo_flow_rate(Rate)).
 

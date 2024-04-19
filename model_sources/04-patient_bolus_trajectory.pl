@@ -8,16 +8,16 @@
     or_terminates(patient_bolus_delivery_stopped, patient_bolus_delivery_enabled, T).
 
     or_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2) :- % determining the total amount of drug delivered so far throughout the whole narrative
-        shortcut_patient_bolus_duration(CroppedDuration),
+        patient_bolus_duration(CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
-        shortcut_patient_bolus_total_flow_rate(FlowRate),
+        basal_and_patient_bolus_flow_rate(FlowRate),
         holdsAt(total_drug_delivered(StartTotal), T1),
         TotalDelivered .=. StartTotal + ((T2-T1) * FlowRate).
 
     or_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) :- % determining the volume of "bolus only" delivered so far during the entire narrative (bolus only, no basal)
-        shortcut_patient_bolus_duration(CroppedDuration),
+        patient_bolus_duration(CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
-        shortcut_patient_bolus_flow_rate(FlowRate),
+        patient_bolus_only_flow_rate(FlowRate),
         holdsAt(total_bolus_drug_delivered(StartTotal), T1),
         TotalBolusDelivered .=. StartTotal + ((T2-T1) * FlowRate).
         %//initiallyP(vtbi(VTBI)),
@@ -53,12 +53,12 @@
     or_happens(patient_bolus_denied_max_dose, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(patient_bolus_requested_valid, T),
         initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
-        shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
+        total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
         % trigger this rule if the VTBI limit was exceeded
         TotalDuringVtbiPeriodWithCurrentBolus .>. VtbiLimit.
     or_not__happens(patient_bolus_denied_max_dose, T) :- happens(patient_bolus_requested_valid, T),
         initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
-        shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
+        total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
         % trigger this rule if the VTBI limit was NOT exceeded
         TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.
 
@@ -86,9 +86,9 @@
     initiallyR(patient_bolus_drug_delivered(X)).
 
     or_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2) :- % determining the volume of "bolus only" delivered so far during the current patient bolus (bolus only, no basal)
-        shortcut_patient_bolus_duration(CroppedDuration),
+        patient_bolus_duration(CroppedDuration),
         T2 .=<. T1 + CroppedDuration,
-        shortcut_patient_bolus_flow_rate(FlowRate),
+        patient_bolus_only_flow_rate(FlowRate),
         VtbiDrugRes .=. ((T2-T1) * FlowRate).
         %//initiallyP(vtbi(VTBI)),
         %//VtbiDrugRes .=<. VTBI.
@@ -132,18 +132,18 @@
 % ----------------------------------------------------------------------------------------------------------------------
 % to avoid copy pasting these bits of code into multiple places
 
-    shortcut_patient_bolus_total_flow_rate(CroppedTotalFlowRate) :-          % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
+    basal_and_patient_bolus_flow_rate(CroppedTotalFlowRate) :-          % bolus flow rate combined with basal flow rate, potentially cropped due to max pump flow
         initiallyP(patient_bolus_flow_rate(BolusRate)),
         initiallyP(basal_flow_rate(BasalRate)),
         CombinedRate .=. BolusRate + BasalRate,             % R5.2.0(2)
         initiallyP(pump_flow_rate_max(MaxRate)),
         min(CombinedRate, MaxRate, CroppedTotalFlowRate).   % R5.2.0(2)
-    shortcut_patient_bolus_flow_rate(CroppedBolusFlowRate) :-                % bolus flow rate only (no basal), potentially cropped due to max pump flow
-        shortcut_patient_bolus_total_flow_rate(CroppedTotalFlowRate),
+    patient_bolus_only_flow_rate(CroppedBolusFlowRate) :-                % bolus flow rate only (no basal), potentially cropped due to max pump flow
+        basal_and_patient_bolus_flow_rate(CroppedTotalFlowRate),
         initiallyP(basal_flow_rate(BasalRate)),
         CroppedBolusFlowRate .=. CroppedTotalFlowRate - BasalRate.
-    shortcut_patient_bolus_duration(CroppedDuration) :-                      % bolus duration, also can be cropped due to max pump flow
-        shortcut_patient_bolus_flow_rate(CroppedBolusFlowRate),
+    patient_bolus_duration(CroppedDuration) :-                      % bolus duration, also can be cropped due to max pump flow
+        patient_bolus_only_flow_rate(CroppedBolusFlowRate),
         initiallyP(vtbi(VTBI)),
         CroppedDuration .=. VTBI / CroppedBolusFlowRate.
 
