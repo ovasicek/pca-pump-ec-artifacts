@@ -63,8 +63,7 @@
         TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.
 
     or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
-        % original trigger
-        happens(patient_bolus_denied_max_dose, T),
+        happens(patient_bolus_requested_valid, T),
         % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
         % find the last start button press
         TLast .<. T,
@@ -74,7 +73,9 @@
         initiallyP(vtbi_hard_limit_over_time(_, VtbiLimitTimePeriod)),
         shortcut_patient_bolus_duration(BolusDuration),
         WindowStartT .=. (T + BolusDuration) - VtbiLimitTimePeriod,
-        __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration).
+        __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration),
+        % original trigger
+        happens(patient_bolus_denied_max_dose, T).
 
     __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration) :-
         % either the start button happened outside of the window
