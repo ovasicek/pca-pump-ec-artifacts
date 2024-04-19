@@ -1,5 +1,6 @@
 %! a version which does not have any overdose protection measures (or rather they do not do anything usefull, to pretend that they dont exist)
 
+
 %----------------------------------------------------------------------------------------------------------------------%
 % used to deny an requested patient bolus
 shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, ResTotalDuringVtbiPeriodWithCurrentBolus) :-
@@ -7,6 +8,9 @@ shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_s
     % deny will not happen when ResTotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit
     % --> return exactly equal so that deny never happens
     ResTotalDuringVtbiPeriodWithCurrentBolus .=. VtbiLimit.
+
+or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    happens(patient_bolus_denied_max_dose, T).
 
 
 %----------------------------------------------------------------------------------------------------------------------%

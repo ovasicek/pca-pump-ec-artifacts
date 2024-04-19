@@ -1,6 +1,7 @@
 %! the original version which allowed basal overdose
 
 
+%----------------------------------------------------------------------------------------------------------------------%
 % used to deny an requested patient bolus
 shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, ResTotalDuringVtbiPeriodWithCurrentBolus) :-
     % check how much drug was delivered in the VTBI window up till now
@@ -12,6 +13,9 @@ shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_s
     initiallyP(vtbi(BolusToDeliver)),
     initiallyP(basal_flow_rate(BasalRate)),
     ResTotalDuringVtbiPeriodWithCurrentBolus .=. TotalDuringVtbiPeriod + BolusToDeliver + (BolusDuration * BasalRate).
+
+or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    happens(patient_bolus_denied_max_dose, T).
 
 
 %----------------------------------------------------------------------------------------------------------------------%
