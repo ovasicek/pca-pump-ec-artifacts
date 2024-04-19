@@ -45,6 +45,16 @@ __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration) :-
 
 %----------------------------------------------------------------------------------------------------------------------%
 % used to halt an in-progress clinician bolus
+
+or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    % original trigger
+    happens(clinician_bolus_halted_max_dose, T),
+    % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
+    initiallyP(vtbi_hard_limit_over_time(_, VtbiLimitTimePeriod)),
+    T2 .=. T - VtbiLimitTimePeriod,
+    max(T2, 0, CroppedT2),
+    not_happensIn(start_button_pressed_valid, CroppedT2, T).
+
 shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
     % split based on diference between T1 and T2 -- crucial to avoid non termination
     initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),

@@ -20,6 +20,10 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
 
 %----------------------------------------------------------------------------------------------------------------------%
 % used to halt an in-progress clinician bolus
+
+or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    happens(clinician_bolus_halted_max_dose, T).
+
 shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
     % split based on diference between T1 and T2 -- crucial to avoid non termination
     initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
