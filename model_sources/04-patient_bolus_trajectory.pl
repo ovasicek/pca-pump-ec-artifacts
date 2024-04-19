@@ -29,16 +29,19 @@
 % X5.2.0(1) -- starting or denying a patient requested bolus
 
     % if requested, will not exceed limit, and is not too soon; then start bolus 
-    or_happens(patient_bolus_delivery_started, T) :- happens(patient_bolus_requested_valid, T),
+    or_happens(patient_bolus_delivery_started, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_requested_valid, T),
         not_happens(patient_bolus_denied_too_soon, T),
         not__happens(patient_bolus_denied_max_dose, T). %! TODO needed instead of not_happens when using abduction (bc findall look in all worlds)
 
     % helper event, two reasons for denying a patient bolus
-    or_happens(patient_bolus_denied, T) :- happens(patient_bolus_denied_too_soon, T).
-    or_happens(patient_bolus_denied, T) :- happens(patient_bolus_denied_max_dose, T).
+    or_happens(patient_bolus_denied, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_denied_too_soon, T).
+    or_happens(patient_bolus_denied, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_denied_max_dose, T).
 
     % R5.2.0(3) -- if its too soon since last bolus; then deny bolus
-    or_happens(patient_bolus_denied_too_soon, T) :-
+    or_happens(patient_bolus_denied_too_soon, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(patient_bolus_requested_valid, T),
         initiallyP(min_t_between_patient_bolus(MinTimeBetween)),
         TLastBolus .>. 0,
@@ -47,7 +50,8 @@
         holdsAt(patient_bolus_delivery_enabled, TLastBolus).
 
     % R5.2.0(5) -- if hard limit would be exceeded; then deny bolus, and issue a warning, and switch to KVO
-    or_happens(patient_bolus_denied_max_dose, T) :- happens(patient_bolus_requested_valid, T),
+    or_happens(patient_bolus_denied_max_dose, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_requested_valid, T),
         initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
         shortcut_total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
         % trigger this rule if the VTBI limit was exceeded
@@ -58,14 +62,40 @@
         % trigger this rule if the VTBI limit was NOT exceeded
         TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.
 
-    or_happens(max_dose_warning, T) :- happens(patient_bolus_denied_max_dose, T).
+    or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        % original trigger
+        happens(patient_bolus_denied_max_dose, T),
+        % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
+        % find the last start button press
+        TLast .<. T,
+        happens(start_button_pressed_valid, TLast),
+        not_happensIn(start_button_pressed_valid, TLast, T),
+        % find the start of the max dose window when considering a patient bolus
+        initiallyP(vtbi_hard_limit_over_time(_, VtbiLimitTimePeriod)),
+        shortcut_patient_bolus_duration(BolusDuration),
+        WindowStartT .=. (T + BolusDuration) - VtbiLimitTimePeriod,
+        __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration).
+
+    __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration) :-
+        % either the start button happened outside of the window
+            TLast .=<. WindowStartT.
+    __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration) :-
+        % or it happened inside but would be triggered by the non-preemtive approach as well
+            TLast .>. WindowStartT,
+            initiallyP(basal_flow_rate(BasalRate)),
+            MissingBasalDuration .=. TLast - WindowStartT,
+            MissingBasal .=. MissingBasalDuration * BasalRate,
+            initiallyP(vtbi(BolusToDeliver)),
+            ToDeliver .=. BolusToDeliver + (BolusDuration * BasalRate),
+            ToDeliver .>. MissingBasal.
 
 
 % ----------------------------------------------------------------------------------------------------------------------
 % events on start of trajectory
 
     % stop basal on bolus start
-    or_happens(basal_delivery_stopped, T) :- happens(patient_bolus_delivery_started, T),
+    or_happens(basal_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_delivery_started, T),
         holdsAt(basal_delivery_enabled, T).
 
 
@@ -89,22 +119,25 @@
     
 
     % trigger self-terminating event when VTBI is delivered -- using a dedicated fluent combined with holdsAt/3
-    or_happens(patient_bolus_completed, T2) :-
+    or_happens(patient_bolus_completed, T2) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         initiallyP(vtbi(VTBI)),
         holdsAt(patient_bolus_drug_delivered(VTBI), T2, patient_bolus_delivery_enabled).
        
-    or_happens(patient_bolus_delivery_stopped, T) :- happens(patient_bolus_completed, T).
+    or_happens(patient_bolus_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_completed, T).
 
 
 % premature halt of the trajectory
-    or_happens(patient_bolus_delivery_stopped, T) :- happens(patient_bolus_halted, T).
+    or_happens(patient_bolus_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_halted, T).
 
     % R5.2.0(6) -- any alarm stops the bolus
-    or_happens(patient_bolus_halted, T) :-
+    or_happens(patient_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(any_alarm, T), holdsAt(patient_bolus_delivery_enabled, T).
 
     % R6.5.0(6) -- stop button stops everything
-    or_happens(patient_bolus_halted, T) :- happens(stop_button_pressed_valid, T),
+    or_happens(patient_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(stop_button_pressed_valid, T),
         holdsAt(patient_bolus_delivery_enabled, T).
 
     % more in drug reservoir reasoning
@@ -115,7 +148,8 @@
 % events on end of trajectory
 
     % restart basal on bolus complete (unless a clinician bolus is suspended)
-    or_happens(basal_delivery_started, T) :- happens(patient_bolus_completed, T),
+    or_happens(basal_delivery_started, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(patient_bolus_completed, T),
         not_holdsAt(clinician_bolus_is_suspended, T).
 
 
@@ -142,6 +176,6 @@
 % helper predicates
 
 % TODO should be automated preprocessing
-    can_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
-    can_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
-    can_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2).
+    can_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
+    can_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
+    can_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.

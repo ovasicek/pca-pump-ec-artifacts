@@ -32,17 +32,20 @@
 % X5.3.0(1) -- starting a clinician requested bolus
 
     % if requested, then start bolus with a given duration
-    or_happens(clinician_bolus_delivery_started(DurationMinutes), T) :- happens(clinician_bolus_requested_valid(DurationMinutes), T).
+    or_happens(clinician_bolus_delivery_started(DurationMinutes), T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_requested_valid(DurationMinutes), T).
 
     % helper event for not_happens
     event(clinician_bolus_delivery_started).
-    or_happens(clinician_bolus_delivery_started, T) :- happens(clinician_bolus_delivery_started(DurationMinutes), T).
+    or_happens(clinician_bolus_delivery_started, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_delivery_started(DurationMinutes), T).
 
 
 % ----------------------------------------------------------------------------------------------------------------------
 % events on start of trajectory
 
-    or_happens(basal_delivery_stopped, T) :- happens(clinician_bolus_delivery_started(DurationMinutes), T),
+    or_happens(basal_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_delivery_started(DurationMinutes), T),
         holdsAt(basal_delivery_enabled, T).
 
     % clean clinician_bolus_suspended related fluents after it is resumed
@@ -83,34 +86,37 @@
         initiallyP(vtbi(VTBI)),
         holdsAt(clinician_bolus_drug_delivered(VTBI), T2, clinician_bolus_delivery_enabled(_)).
     
-    or_happens(clinician_bolus_delivery_stopped, T) :- happens(clinician_bolus_completed, T).
+    or_happens(clinician_bolus_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_completed, T).
 
     fluent(clinician_bolus_total_drug_delivered(X)).
     initiallyR(clinician_bolus_total_drug_delivered(X)).
-    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_drug_delivered(TotalBolusDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_drug_delivered(TotalBolusDelivered), T2) :-
         trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalBolusDelivered), T2).
 
     fluent(clinician_bolus_total_bolus_drug_delivered(X)).
     initiallyR(clinician_bolus_total_bolus_drug_delivered(X)).
-    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_bolus_drug_delivered(TotalBolusDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
     or_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_bolus_drug_delivered(TotalBolusDelivered), T2) :-
         trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
 
 
 % premature halt of the trajectory
-    or_happens(clinician_bolus_delivery_stopped, T) :- happens(clinician_bolus_halted, T).
+    or_happens(clinician_bolus_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_halted, T).
 
     % R5.3.0(4) -- any alarm stops the bolus
-    or_happens(clinician_bolus_halted, T) :-
+    or_happens(clinician_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(any_alarm, T), holdsAt(clinician_bolus_delivery_enabled, T).
 
     % R6.5.0(6) -- stop button stops everything
-    or_happens(clinician_bolus_halted, T) :- happens(stop_button_pressed_valid, T),
+    or_happens(clinician_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(stop_button_pressed_valid, T),
         holdsAt(clinician_bolus_delivery_enabled, T).
 
     % halt due to max dose caused by a denied patient bolus request
-    or_happens(clinician_bolus_halted, T) :-
+    or_happens(clinician_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(patient_bolus_denied_max_dose, T), holdsAt(clinician_bolus_delivery_enabled, T).
 
     % more in drug reservoir reasoning
@@ -118,8 +124,9 @@
 
     %! self-ending premature halt
     % R5.3.0(7) -- if the total drug delivered exceeds the maximum vtbi over a period of time; then halt the clinician bolus, and issue a warning, and switch to KVO
-    or_happens(clinician_bolus_halted, T) :- happens(clinician_bolus_halted_max_dose, T).
-
+    or_happens(clinician_bolus_halted, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_halted_max_dose, T).
+        
     or_happens(clinician_bolus_halted_max_dose, T2) :-
         % need to tie to a start event to be able to split trigger into two situations based on T2-T1 compared to max dose time period size
         T1 .<. T2,
@@ -128,7 +135,14 @@
         % rest is in the rule below to be configurable for fixed and original version of the model
         shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, DurationMinutes, T2).
 
-    or_happens(max_dose_warning, T) :- happens(clinician_bolus_halted_max_dose, T).
+    or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        % original trigger
+        happens(clinician_bolus_halted_max_dose, T),
+        % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
+        initiallyP(vtbi_hard_limit_over_time(_, VtbiLimitTimePeriod)),
+        T2 .=. T - VtbiLimitTimePeriod,
+        max(T2, 0, CroppedT2),
+        not_happensIn(start_button_pressed_valid, CroppedT2, T).
 
 
 
@@ -137,7 +151,8 @@
 % events on end of trajectory
    
     % go back to basal rate delivery after completing the clinician bolus successfuly, unless a patient bolus is just starting
-    or_happens(basal_delivery_started, T) :- happens(clinician_bolus_completed, T),
+    or_happens(basal_delivery_started, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_completed, T),
         not_happens(patient_bolus_delivery_started, T). % treating events happening at the same time
 
 
@@ -169,15 +184,17 @@
 % helper predicates
 
 % TODO should be automated preprocessing
-    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2).
-    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
-    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
 
 
 % TODO just to make this model compatible with tests for the state based models
     fluent(resumed_clinician_bolus_drug_delivered(X)). 
     or_holdsAt(resumed_clinician_bolus_drug_delivered(X), T) :- /*holdsAt(resumed_clinician_bolus_delivery_enabled(_), T),*/ holdsAt(clinician_bolus_drug_delivered(X), T).
     event(resumed_clinician_bolus_completed).
-    or_happens(resumed_clinician_bolus_completed, T) :- /*holdsAt(resumed_clinician_bolus_delivery_enabled(_), T),*/ happens(clinician_bolus_completed, T).
+    or_happens(resumed_clinician_bolus_completed, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        /*holdsAt(resumed_clinician_bolus_delivery_enabled(_), T),*/ happens(clinician_bolus_completed, T).
     event(resumed_clinician_bolus_delivery_started(OriginalDuration)).
-    or_happens(resumed_clinician_bolus_delivery_started(OriginalDuration), T) :- happens(clinician_bolus_resumed(OriginalDuration), T).
+    or_happens(resumed_clinician_bolus_delivery_started(OriginalDuration), T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+        happens(clinician_bolus_resumed(OriginalDuration), T).
