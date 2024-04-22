@@ -18,36 +18,50 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                    60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,              70).    % Pre 2
-    ?- not_holdsAt(patient_bolus_delivery_enabled,  X1),    % Pre 3 no prior bolus
-       X1 .<. 120.
+
+    ?- T1 .>. 60, T1 .=<. 120,
+       holdsAt(basal_delivery_enabled,              T1).    % Pre 2
+
+    ?- initiallyP(min_t_between_patient_bolus(MinT)),       % Pre 3
+       X1 .>. 120 - MinT, X1 .<. 120,
+       not_holdsAt(patient_bolus_delivery_enabled,  X1).
 
 or_happens(patient_bolus_requested,                 120).   % Step 1
     
-    ?- not_happens(patient_bolus_denied_too_soon,   120).   % Step 2
+    ?- not_happens(patient_bolus_denied_too_soon,   120).   % Step 2, no EC1
     
-    ?- not_happens(patient_bolus_denied_max_dose,   120).   % Step 3, no EC
+    ?- not_happens(patient_bolus_denied_max_dose,   120).   % Step 3, no EC13
     ?- happens(patient_bolus_delivery_started,      120).   % Step 3
     
-    ?- initiallyP(vtbi(X2)),                                % Step 4
-       holdsAt(patient_bolus_drug_delivered(X3),    121),
-       X2 .=. X3.
-    ?- happens(patient_bolus_completed,             121).   % Step 4
-    ?- happens(basal_delivery_started,              121).   % Step 4 && Post 1
-    ?- holdsAt(basal_delivery_enabled,              122).   % Step 4 && Post 1
+    ?- happens(patient_bolus_completed,             T2),    % Step 4
+       initiallyP(vtbi(X2)),
+       holdsAt(patient_bolus_drug_delivered(X2),    T2).
+
+    ?- happens(patient_bolus_completed,             T2),    % Step 4 && Post 1
+       happens(basal_delivery_started,              T2).   
+    ?- happens(patient_bolus_completed,             T2),    % Step 4 && Post 1
+       T3 .>. T2,
+       holdsAt(basal_delivery_enabled,              T3).   
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                 70),
+?-  T1 .>. 60, T1 .=<. 120,
+    holdsAt(basal_delivery_enabled,                 T1),
+
+    initiallyP(min_t_between_patient_bolus(MinT)),
+    X1 .>. 120 - MinT, X1 .<. 120,
     not_holdsAt(patient_bolus_delivery_enabled,     X1),
-    X1 .<. 120,
+
     not_happens(patient_bolus_denied_too_soon,      120),
     not_happens(patient_bolus_denied_max_dose,      120),
     happens(patient_bolus_delivery_started,         120),
+
+    happens(patient_bolus_completed,                T2),
     initiallyP(vtbi(X2)),
-    holdsAt(patient_bolus_drug_delivered(X3),       121),
-    X2 .=. X3,
-    happens(patient_bolus_completed,                121),
-    happens(basal_delivery_started,                 121),
-    holdsAt(basal_delivery_enabled,                 122).
+    holdsAt(patient_bolus_drug_delivered(X2),       T2),
+
+    happens(basal_delivery_started,                 T2),
+    
+    T3 .>. T2,
+    holdsAt(basal_delivery_enabled,                 T3).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */
