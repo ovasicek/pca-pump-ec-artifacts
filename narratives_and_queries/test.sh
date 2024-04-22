@@ -6,13 +6,17 @@ cd "$ROOTDIR"
 # trap to kill all subprocesses
 trap "pkill -P $$; exit" SIGINT SIGTERM
 
+# cpu info
+Ncpus=$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
+cpuName=$(cat /proc/cpuinfo | grep "model name" | head -n1 | sed "s|.*: ||" | sed "s|  *| |g")
+
 # commandline arguments
 timeout="0"
 grepQueries=".*"
 vgrepQueries=".^"
 if [ $# -eq 0 ]; then
-    NcpusToUse="6"
-    NrunsToAvg="2"
+    NcpusToUse="$Ncpus"
+    NrunsToAvg="5"
 elif [ $# -eq 2 ]; then
     NcpusToUse="$1"
     NrunsToAvg="$2"
@@ -39,8 +43,6 @@ fi
 
 queries=$(cat makefile | grep ":" | sed "s|:||" | sed "s| |\n|g" | grep "$grepQueries" | grep -v "$vgrepQueries")
 Nqueries=$(echo "$queries" | wc -l)
-Ncpus=$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
-cpuName=$(cat /proc/cpuinfo | grep "model name" | head -n1 | sed "s|.*: ||" | sed "s|  *| |g")
 
 # clean last outputs and prep folder for new outputs
 rm -rf "./last_test_output/"
