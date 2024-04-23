@@ -55,19 +55,11 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
     max(T2, 0, CroppedT2),
     not_happensIn(start_button_pressed_valid, CroppedT2, T).
 
-shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
-    % split based on diference between T1 and T2 -- crucial to avoid non termination
-    initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
-    T2 .=<. T1 + VtbiLimitTimePeriod,
-    % this is the trigger itself
+total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     total_drug_in_vtbi_window_assume_basal(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),        %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                              %! <<< diff
-shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
-    % split based on diference between T1 and T2 -- crucial to avoid non termination
-    initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
-    T2 .>. T1 + VtbiLimitTimePeriod,
-    % this is the trigger itself
+total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsAfterT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % needs a different implementation of "total_drug_in_vtbi_window_assume_basal"
         initiallyP(basal_flow_rate(BasalRate)),                                                                         %! <<< diff
         % figure out total_bolus_drug_delivered at the start of the max dose window

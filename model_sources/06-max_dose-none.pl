@@ -19,5 +19,5 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
 or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
     happens(clinician_bolus_halted_max_dose, T).
 
-shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, BolusDurationMinutes, T2) :-
+total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(_, _, _, _) :-
     0 = 1. % will always fail

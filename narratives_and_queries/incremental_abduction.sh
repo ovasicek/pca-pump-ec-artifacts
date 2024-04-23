@@ -55,7 +55,7 @@ rm -f ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output
 rm -f ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # prep the output directory
-mkdir ./output 2>/dev/null
+mkdir ./abduction_output 2>/dev/null
 
 # copy over the query file for reference when looking at the outputs later
 cp "$QUERY" ./abduction_output/query.pl

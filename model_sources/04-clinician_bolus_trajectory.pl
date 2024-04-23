@@ -132,9 +132,18 @@
         T1 .<. T2,
         happens(clinician_bolus_delivery_started(DurationMinutes), T1),
         not_happensIn(clinician_bolus_delivery_started, T1, T2),
-        % rest is in the rule below to be configurable for fixed and original version of the model
-        shortcut_total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus(T1, DurationMinutes, T2).
-
+        % split based on diference between T1 and T2 -- crucial to avoid non termination
+        initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
+        __or_happens_cb_halted_max_dose(T1, T2, VtbiLimit, VtbiLimitTimePeriod).
+    __or_happens_cb_halted_max_dose(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
+        T2 .=<. T1 + VtbiLimitTimePeriod,
+        % rest is in the rule below to be configurable for fixed and original version of the model (located in 06-max_dose-original.pl and 06-max_dose-fixed.pl)
+        total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod).
+    __or_happens_cb_halted_max_dose(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
+        T2 .>. T1 + VtbiLimitTimePeriod,
+        % rest is in the rule below to be configurable for fixed and original version of the model (located in 06-max_dose-original.pl and 06-max_dose-fixed.pl)
+        total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsAfterT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod).
+    
     % in a separate file 06-max_dose-*
     % or_happens(max_dose_warning, T) :- 
 
