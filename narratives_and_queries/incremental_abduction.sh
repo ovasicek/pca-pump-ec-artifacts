@@ -41,7 +41,7 @@ else
 fi
 
 MODELNAME=$(echo "$MODEL" | sed "s|^.*[\\/]||")  # strip path to get filename
-LOGFILE=./output/output-$MODELNAME.log 2>&1
+LOGFILE=./abduction_output/output-$MODELNAME.log 2>&1
 SCASP_ARGS=""
 if $DEBUG; then SCASP_ARGS="--tree"; fi
 
@@ -50,15 +50,15 @@ if $DEBUG; then SCASP_ARGS="--tree"; fi
 echo -n "DATE: " > $LOGFILE; date >> $LOGFILE
 
 # clear certain files from the previous run just in case
-rm -f ./output/2D/tmp-$MODELNAME-executedBefore.tmp ./output/2D/output-$MODELNAME-consistentAbductions.log ./output/2D/output-$MODELNAME-consistentAbductionsSummary.log
-rm -f ./output/1D/tmp-$MODELNAME-executedBefore.tmp ./output/1D/output-$MODELNAME-consistentAbductions.log ./output/1D/output-$MODELNAME-consistentAbductionsSummary.log
-rm -f ./output/0D/tmp-$MODELNAME-executedBefore.tmp ./output/0D/output-$MODELNAME-consistentAbductions.log ./output/0D/output-$MODELNAME-consistentAbductionsSummary.log
+rm -f ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/2D/output-$MODELNAME-consistentAbductions.log ./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log
+rm -f ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/1D/output-$MODELNAME-consistentAbductions.log ./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log
+rm -f ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # prep the output directory
 mkdir ./output 2>/dev/null
 
 # copy over the query file for reference when looking at the outputs later
-cp "$QUERY" ./output/query.pl
+cp "$QUERY" ./abduction_output/query.pl
 
 # statistics variables
 CUR_PHASE_NUMBER_OF_MODELS=0
@@ -358,35 +358,35 @@ echo -e "#######################################################################
 ########################################################################################################################
 
 # prep the output directory
-mkdir ./output/2D 2>/dev/null
-mkdir ./output/2D/runs 2>/dev/null
-touch ./output/2D/tmp-$MODELNAME-executedBefore.tmp ./output/2D/output-$MODELNAME-consistentAbductions.log ./output/2D/output-$MODELNAME-consistentAbductionsSummary.log
+mkdir ./abduction_output/2D 2>/dev/null
+mkdir ./abduction_output/2D/runs 2>/dev/null
+touch ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/2D/output-$MODELNAME-consistentAbductions.log ./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # clear stat counters
 clearStatCounters
 
 # first run with 2D abduction
-echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./output/2D/tmp-$MODELNAME-addition.tmp
-echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./output/2D/tmp-$MODELNAME-addition.tmp
+echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./abduction_output/2D/tmp-$MODELNAME-addition.tmp
+echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/2D/tmp-$MODELNAME-addition.tmp
 if ! $NO_RUN; then
-    { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./output/2D/tmp-$MODELNAME-addition.tmp "$QUERY" ; } > ./output/2D/runs/output-$MODELNAME-run1-model2D.log 2>&1
+    { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./abduction_output/2D/tmp-$MODELNAME-addition.tmp "$QUERY" ; } > ./abduction_output/2D/runs/output-$MODELNAME-run1-model2D.log 2>&1
     CUR_PHASE_NUMBER_OF_EXECUTIONS=$((CUR_PHASE_NUMBER_OF_EXECUTIONS+1))
     echo -n "## execution time of run1-model2D: " >> $LOGFILE
-    grep "  real      " ./output/2D/runs/output-$MODELNAME-run1-model2D.log | sed "s|  real      ||" >> $LOGFILE
+    grep "  real      " ./abduction_output/2D/runs/output-$MODELNAME-run1-model2D.log | sed "s|  real      ||" >> $LOGFILE
 fi
 
 # check if no models in the very first query
-if [ $(cat "./output/2D/runs/output-$MODELNAME-run1-model2D.log" | grep -c "no models") -ge 1 ]; then
+if [ $(cat "./abduction_output/2D/runs/output-$MODELNAME-run1-model2D.log" | grep -c "no models") -ge 1 ]; then
     echo "The very first query has no models" >> $LOGFILE
     exit
 fi
 
 # start the 2D recursive runs
-anotherRun 2 "2D." ./output/2D/runs/output-$MODELNAME-run1-model2D.log "" "./output/2D" "$QUERY"
+anotherRun 2 "2D." ./abduction_output/2D/runs/output-$MODELNAME-run1-model2D.log "" "./abduction_output/2D" "$QUERY"
 
 # process output files at the end
-tmp=$(cat "./output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
-echo "$tmp" > "./output/2D/output-$MODELNAME-consistentAbductionsSummary.log"
+tmp=$(cat "./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
+echo "$tmp" > "./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log"
 
 # copy stat counters
 PHASE_2D_NUMBER_OF_MODELS=$CUR_PHASE_NUMBER_OF_MODELS
@@ -396,7 +396,7 @@ PHASE_2D_NUMBER_OF_DEPTH=$CUR_PHASE_NUMBER_OF_DEPTH
 PHASE_2D_NUMBER_OF_EXECUTIONS=$CUR_PHASE_NUMBER_OF_EXECUTIONS
 PHASE_2D_NUMBER_OF_DUPLICATES=$CUR_PHASE_NUMBER_OF_DUPLICATES
 PHASE_2D_NUMBER_OF_REFINED=$CUR_PHASE_NUMBER_OF_REFINED
-PHASE_2D_NUMBER_OF_RESULTS=$(cat "./output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
+PHASE_2D_NUMBER_OF_RESULTS=$(cat "./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
 
 echo >> $LOGFILE
 echo "2D phase stats" >> $LOGFILE
@@ -413,9 +413,9 @@ echo -e "#######################################################################
 ########################################################################################################################
 
 # prep the output directory
-mkdir ./output/1D 2>/dev/null
-mkdir ./output/1D/runs 2>/dev/null
-touch ./output/1D/tmp-$MODELNAME-executedBefore.tmp ./output/1D/output-$MODELNAME-consistentAbductions.log ./output/1D/output-$MODELNAME-consistentAbductionsSummary.log
+mkdir ./abduction_output/1D 2>/dev/null
+mkdir ./abduction_output/1D/runs 2>/dev/null
+touch ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/1D/output-$MODELNAME-consistentAbductions.log ./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # clear stat counters
 clearStatCounters
@@ -423,7 +423,7 @@ clearStatCounters
 # for each consistent abduction from the 2D phase, repeat the same process of forcing&checking consistent abductions
 # excepth with 1D abduction (sample/pick one value from the abduced interval for one parameter, and then only abduce
 # the other parameter --> abducing only one interval/variable ~~> one dimension)
-consistentlyAbduced2DvaluesToCheck=$(cat "./output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | sed "s|.*;||")
+consistentlyAbduced2DvaluesToCheck=$(cat "./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log" | sed "s|.*;||")
 i=0
 for valuesToCheck in $consistentlyAbduced2DvaluesToCheck; do
     i=$((i+1))
@@ -454,22 +454,22 @@ for valuesToCheck in $consistentlyAbduced2DvaluesToCheck; do
     echo "$samplefact" >> $extendedQuery
 
     # first run with 1D abduction
-    echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./output/1D/tmp-$MODELNAME-addition.tmp
-    echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./output/1D/tmp-$MODELNAME-addition.tmp
+    echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./abduction_output/1D/tmp-$MODELNAME-addition.tmp
+    echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/1D/tmp-$MODELNAME-addition.tmp
     if ! $NO_RUN; then
-        { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./output/1D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./output/1D/runs/output-$MODELNAME-run1-model1D$i.log 2>&1
+        { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./abduction_output/1D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./abduction_output/1D/runs/output-$MODELNAME-run1-model1D$i.log 2>&1
         CUR_PHASE_NUMBER_OF_EXECUTIONS=$((CUR_PHASE_NUMBER_OF_EXECUTIONS+1))
         echo -n "## execution time of run1-model1D$i: " >> $LOGFILE
-        grep "  real      " ./output/1D/runs/output-$MODELNAME-run1-model1D$i.log | sed "s|  real      ||" >> $LOGFILE
+        grep "  real      " ./abduction_output/1D/runs/output-$MODELNAME-run1-model1D$i.log | sed "s|  real      ||" >> $LOGFILE
     fi
 
     # start the 1D recursive runs
-    anotherRun 2 "1D$i." ./output/1D/runs/output-$MODELNAME-run1-model1D$i.log "    " "./output/1D" "$QUERY $extendedQuery"
+    anotherRun 2 "1D$i." ./abduction_output/1D/runs/output-$MODELNAME-run1-model1D$i.log "    " "./abduction_output/1D" "$QUERY $extendedQuery"
 done
 
 # process output files at the end
-tmp=$(cat "./output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
-echo "$tmp" > "./output/1D/output-$MODELNAME-consistentAbductionsSummary.log"
+tmp=$(cat "./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
+echo "$tmp" > "./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log"
 
 # copy stat counters and print
 PHASE_1D_NUMBER_OF_MODELS=$CUR_PHASE_NUMBER_OF_MODELS
@@ -479,7 +479,7 @@ PHASE_1D_NUMBER_OF_DEPTH=$CUR_PHASE_NUMBER_OF_DEPTH
 PHASE_1D_NUMBER_OF_EXECUTIONS=$CUR_PHASE_NUMBER_OF_EXECUTIONS
 PHASE_1D_NUMBER_OF_DUPLICATES=$CUR_PHASE_NUMBER_OF_DUPLICATES
 PHASE_1D_NUMBER_OF_REFINED=$CUR_PHASE_NUMBER_OF_REFINED
-PHASE_1D_NUMBER_OF_RESULTS=$(cat "./output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
+PHASE_1D_NUMBER_OF_RESULTS=$(cat "./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
 
 echo >> $LOGFILE
 echo "1D phase stats" >> $LOGFILE
@@ -496,9 +496,9 @@ echo -e "#######################################################################
 ########################################################################################################################
 
 # prep the output directory
-mkdir ./output/0D 2>/dev/null
-mkdir ./output/0D/runs 2>/dev/null
-touch ./output/0D/tmp-$MODELNAME-executedBefore.tmp ./output/0D/output-$MODELNAME-consistentAbductions.log ./output/0D/output-$MODELNAME-consistentAbductionsSummary.log
+mkdir ./abduction_output/0D 2>/dev/null
+mkdir ./abduction_output/0D/runs 2>/dev/null
+touch ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # clear stat counters
 clearStatCounters
@@ -507,7 +507,7 @@ clearStatCounters
 # excepth with 0D abduction, i.e., without abduction... (sample/pick a value out the abduced interval for the abduced
 # parameter --> both parameters now have one specific constant value)
 # running a query like this will guarantee that all models are actually valid/consistent (if there are any)
-consistentlyAbduced1DvaluesToCheck=$(cat "./output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | sed "s|.*;||")
+consistentlyAbduced1DvaluesToCheck=$(cat "./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | sed "s|.*;||")
 i=0
 for valuesToCheck in $consistentlyAbduced1DvaluesToCheck; do
     i=$((i+1))
@@ -538,22 +538,22 @@ for valuesToCheck in $consistentlyAbduced1DvaluesToCheck; do
     echo "$samplefact" >> $extendedQuery
 
     # first run with 0D abduction
-    echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./output/0D/tmp-$MODELNAME-addition.tmp
-    echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./output/0D/tmp-$MODELNAME-addition.tmp
+    echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
+    echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
     if ! $NO_RUN; then
-        { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./output/0D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./output/0D/runs/output-$MODELNAME-run1-model0D$i.log 2>&1
+        { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./abduction_output/0D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log 2>&1
         CUR_PHASE_NUMBER_OF_EXECUTIONS=$((CUR_PHASE_NUMBER_OF_EXECUTIONS+1))
         echo -n "## execution time of run1-model0D$i: " >> $LOGFILE
-        grep "  real      " ./output/0D/runs/output-$MODELNAME-run1-model0D$i.log | sed "s|  real      ||" >> $LOGFILE
+        grep "  real      " ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log | sed "s|  real      ||" >> $LOGFILE
     fi
 
     # start the 0D recursive runs
-    anotherRun 2 "0D$i." ./output/0D/runs/output-$MODELNAME-run1-model0D$i.log "    " "./output/0D" "$QUERY $extendedQuery"
+    anotherRun 2 "0D$i." ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log "    " "./abduction_output/0D" "$QUERY $extendedQuery"
 done
 
 # process output files at the end
-tmp=$(cat "./output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
-echo "$tmp" > "./output/0D/output-$MODELNAME-consistentAbductionsSummary.log"
+tmp=$(cat "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
+echo "$tmp" > "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log"
 
 # copy stat counters and print
 PHASE_0D_NUMBER_OF_MODELS=$CUR_PHASE_NUMBER_OF_MODELS
@@ -563,7 +563,7 @@ PHASE_0D_NUMBER_OF_DEPTH=$CUR_PHASE_NUMBER_OF_DEPTH
 PHASE_0D_NUMBER_OF_EXECUTIONS=$CUR_PHASE_NUMBER_OF_EXECUTIONS
 PHASE_0D_NUMBER_OF_DUPLICATES=$CUR_PHASE_NUMBER_OF_DUPLICATES
 PHASE_0D_NUMBER_OF_REFINED=$CUR_PHASE_NUMBER_OF_REFINED
-PHASE_0D_NUMBER_OF_RESULTS=$(cat "./output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
+PHASE_0D_NUMBER_OF_RESULTS=$(cat "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
 
 echo >> $LOGFILE
 echo "0D phase stats" >> $LOGFILE
@@ -592,32 +592,32 @@ printStatCounters "$TOTAL_NUMBER_OF_MODELS" "$TOTAL_NUMBER_OF_SPURIOUS" "$TOTAL_
 
 
 # create the results files
-cp ./output/0D/output-$MODELNAME-consistentAbductionsSummary.log ./output/result-$MODELNAME-summary.log
-cp ./output/0D/output-$MODELNAME-consistentAbductions.log ./output/result-$MODELNAME-detail.log
+cp ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log ./abduction_output/result-$MODELNAME-summary.log
+cp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/result-$MODELNAME-detail.log
 
 # print the actual result of the initial query
 echo "Number of valid model witnesses for the initial query: $PHASE_0D_NUMBER_OF_RESULTS" >> $LOGFILE
 
 # output the final models in scasp style
-rm -f ./output/result-$MODELNAME-models.log
+rm -f ./abduction_output/result-$MODELNAME-models.log
 if [ $PHASE_0D_NUMBER_OF_RESULTS -ge 1 ]; then
     # look up each model in its corresponding output file
-    modelNumInFilePerLine=$(cat ./output/result-$MODELNAME-detail.log | sed "s|.*model number: [^;]*\([0-9][0-9]*\);|\1;|" | sed "s| from: ||")
+    modelNumInFilePerLine=$(cat ./abduction_output/result-$MODELNAME-detail.log | sed "s|.*model number: [^;]*\([0-9][0-9]*\);|\1;|" | sed "s| from: ||")
     for modelNumInFile in $modelNumInFilePerLine; do
         modelNumber=$(echo "$modelNumInFile" | sed "s|;.*$||")
         modelFile=$(echo "$modelNumInFile" | sed "s|.*;||")
-        cat "$modelFile" | grep -A4 -m$modelNumber MODEL: | tail -n5 | tee -a ./output/result-$MODELNAME-models.log
+        cat "$modelFile" | grep -A4 -m$modelNumber MODEL: | tail -n5 | tee -a ./abduction_output/result-$MODELNAME-models.log
         echo
     done
 else
-    echo -e "\nno models\n" | tee -a ./output/result-$MODELNAME-models.log
+    echo -e "\nno models\n" | tee -a ./abduction_output/result-$MODELNAME-models.log
 fi
 
 # clean up and exit
 if $DEBUG; then exit
 else 
-    rm -f ./output/2D/tmp-$MODELNAME-addition.tmp ./output/2D/tmp-$MODELNAME-executedBefore.tmp
-    rm -f ./output/1D/tmp-$MODELNAME-addition.tmp ./output/1D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor1D.tmp
-    rm -f ./output/0D/tmp-$MODELNAME-addition.tmp ./output/0D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor0D.tmp
+    rm -f ./abduction_output/2D/tmp-$MODELNAME-addition.tmp ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp
+    rm -f ./abduction_output/1D/tmp-$MODELNAME-addition.tmp ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor1D.tmp
+    rm -f ./abduction_output/0D/tmp-$MODELNAME-addition.tmp ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor0D.tmp
     exit;
 fi
