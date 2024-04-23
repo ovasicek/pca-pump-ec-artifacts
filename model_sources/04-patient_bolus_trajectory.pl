@@ -53,11 +53,13 @@
     or_happens(patient_bolus_denied_max_dose, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
         happens(patient_bolus_requested_valid, T),
         initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
+        % code is in the rule below to be configurable for fixed and original version of the model (located in 06-max_dose-original.pl and 06-max_dose-fixed.pl)
         total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
         % trigger this rule if the VTBI limit was exceeded
         TotalDuringVtbiPeriodWithCurrentBolus .>. VtbiLimit.
     or_not__happens(patient_bolus_denied_max_dose, T) :- happens(patient_bolus_requested_valid, T),
         initiallyP(vtbi_hard_limit_over_time(VtbiLimit, VtbiLimitTimePeriod)),
+        % code is in the rule below to be configurable for fixed and original version of the model (located in 06-max_dose-original.pl and 06-max_dose-fixed.pl)
         total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_at_T(T, VtbiLimitTimePeriod, TotalDuringVtbiPeriodWithCurrentBolus),
         % trigger this rule if the VTBI limit was NOT exceeded
         TotalDuringVtbiPeriodWithCurrentBolus .=<. VtbiLimit.

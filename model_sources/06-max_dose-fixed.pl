@@ -9,6 +9,7 @@ total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_a
     patient_bolus_duration(BolusDuration),
     VtbiLimitTimePeriodMinusBolus .=. VtbiLimitTimePeriod - BolusDuration,  % prediction of VTBI window contents will be added with the bolus
     holdsAt(total_bolus_drug_delivered(CurrentTotalBolusDrug), T),                                                                      %! <<< diff
+    % below rules is located in (06-total_drug_in_time_window.pl)
     total_drug_in_vtbi_window_assume_basal(T, CurrentTotalBolusDrug, VtbiLimitTimePeriodMinusBolus, TotalDuringVtbiPeriod),    %! <<< diff
     % add portion of VTBI window during the patient bolus
     initiallyP(vtbi(BolusToDeliver)),
@@ -56,6 +57,7 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
     not_happensIn(start_button_pressed_valid, CroppedT2, T).
 
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
+    % below rules is located in (06-total_drug_in_time_window.pl)
     total_drug_in_vtbi_window_assume_basal(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),        %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                              %! <<< diff
