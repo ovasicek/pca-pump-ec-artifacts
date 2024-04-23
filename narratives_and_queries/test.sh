@@ -11,11 +11,11 @@ Ncpus=$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l)
 cpuName=$(cat /proc/cpuinfo | grep "model name" | head -n1 | sed "s|.*: ||" | sed "s|  *| |g")
 
 # commandline arguments
+NcpusToUse=$(awk "BEGIN{ print int($Ncpus / 2) }")  # use 50% cores by default
 timeout="0"
 grepQueries=".*"
 vgrepQueries=".^"
 if [ $# -eq 0 ]; then
-    NcpusToUse="$Ncpus"
     NrunsToAvg="5"
 elif [ $# -eq 2 ]; then
     NcpusToUse="$1"
