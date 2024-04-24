@@ -46,6 +46,9 @@ SCASP_ARGS=""
 if $DEBUG; then SCASP_ARGS="--tree"; fi
 
 
+# prep the output directory
+mkdir ./abduction_output 2>/dev/null
+
 # mark start of script in the output
 echo -n "DATE: " > $LOGFILE; date >> $LOGFILE
 
@@ -53,9 +56,6 @@ echo -n "DATE: " > $LOGFILE; date >> $LOGFILE
 rm -f ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/2D/output-$MODELNAME-consistentAbductions.log ./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log
 rm -f ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/1D/output-$MODELNAME-consistentAbductions.log ./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log
 rm -f ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
-
-# prep the output directory
-mkdir ./abduction_output 2>/dev/null
 
 # copy over the query file for reference when looking at the outputs later
 cp "$QUERY" ./abduction_output/query.pl
@@ -539,7 +539,8 @@ for valuesToCheck in $consistentlyAbduced1DvaluesToCheck; do
 
     # first run with 0D abduction
     echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
-    echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
+    #echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
+    echo "$ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp      # abducible predicate as a fact in 0D run (no use of #abducible)
     if ! $NO_RUN; then
         { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./abduction_output/0D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log 2>&1
         CUR_PHASE_NUMBER_OF_EXECUTIONS=$((CUR_PHASE_NUMBER_OF_EXECUTIONS+1))
