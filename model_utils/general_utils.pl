@@ -110,7 +110,7 @@ holdsAfter(F, T1) :-
 
 
 % not_clipped (not_stoppedIn includign events at T1)
-or_not_clipped(T1, Fluent, T2) :-
+not_clipped(T1, Fluent, T2) :-
     %T1 .>=. 0,
     max_time(T3), T2 .=<. T3,
     findall(E, can_terminatesOrReleases(E, Fluent), EventList),
@@ -167,7 +167,7 @@ no_terminate_IncT1([], _, _).
 
 
 % not_declipped (not_stoppedIn includign events at T1)
-or_not_declipped(T1, Fluent, T2) :-
+not_declipped(T1, Fluent, T2) :-
     %T1 .>=. 0,
     max_time(T3), T2 .=<. T3,
     findall(E, can_initiatesOrReleases(E, Fluent), EventList),
