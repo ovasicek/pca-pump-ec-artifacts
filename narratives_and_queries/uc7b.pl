@@ -34,7 +34,6 @@ or_happens(start_button_pressed,                    240).   % Step 1
     ?- holdsAfter(basal_delivery_enabled,           240).   % Post 1 
 
 % check all queries in one:
-
 ?-  holdsIn(basal_delivery_enabled,           60, 239/2),
 
     happens(patient_bolus_delivery_started,       239/2),
