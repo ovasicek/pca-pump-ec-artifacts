@@ -23,7 +23,7 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                  70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,              60, 118).   % Pre 1
 
 or_happens(clinician_bolus_requested(30),               118).   % Pre 1
     ?- happens(clinician_bolus_delivery_started(30),    118).   % Pre 1
@@ -31,27 +31,27 @@ or_happens(clinician_bolus_requested(30),               118).   % Pre 1
 or_happens(pump_has_gone_into_free_flow,                120).   % Step 1f
     ?- happens(clinician_bolus_over_infusion_alarm,     120).   % Step 2 && Post 1
 
-    ?- happens(clinician_bolus_halted_alarm,            120).   % Step 3
     ?- happens(alarm_to_kvo,                            120).   % Step 3
+    ?- happens(clinician_bolus_halted,                  120).   % Step 3
     ?- happens(kvo_delivery_started,                    120).   % Step 3
-    ?- holdsAt(kvo_delivery_enabled,                    121).   % Step 3
+    ?- holdsAfter(kvo_delivery_enabled,                 120).   % Step 3
 
-    ?- holdsAt(alarm_active,                            121).   % Post 1
-    
-    ?- holdsAt(pump_not_running,                        121).   % Post 2    %! failure
- %?%?- holdsAt(kvo_delivery_enabled,                    121).   % Post 2    % TODO fix
+    ?- holdsAfter(alarm_active,                         120).   % Post 1
+
+    ?- not_holdsAfter(pump_running,                     120).   % Post 2    %! failure
+ %?%?- holdsAfter(kvo_delivery_enabled,                 120).   % Post 2    % TODO fix
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                     70),
+?-  holdsIn(basal_delivery_enabled,                 60, 118),
     happens(clinician_bolus_delivery_started(30),       118),
     happens(clinician_bolus_over_infusion_alarm,        120),
-    happens(clinician_bolus_halted_alarm,               120),
     happens(alarm_to_kvo,                               120),
+    happens(clinician_bolus_halted,                     120),
     happens(kvo_delivery_started,                       120),
-    holdsAt(kvo_delivery_enabled,                       121),
-    holdsAt(alarm_active,                               121),
+    holdsAfter(kvo_delivery_enabled,                    120),
+    holdsAfter(alarm_active,                            120),
     
-    holdsAt(pump_not_running,                           121).
- %?%holdsAt(kvo_delivery_enabled,                       121).
+    not_holdsAfter(pump_running,                        120).
+ %?%holdsAfter(kvo_delivery_enabled,                    120).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

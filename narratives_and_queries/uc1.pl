@@ -35,28 +35,29 @@
 #include './init-default.pl'.
 
 % narrative                     ----------------------------------------------------------------------------------------
-    ?- not_holdsAt(pump_running,                    50).    % Pre 6
-or_happens(start_button_pressed,                    60).    % Step 14
-    ?- happens(pump_started,                        60).    % Step 14
-    ?- happens(basal_delivery_started,              60).    % Step 14
+    ?- not_holdsIn(pump_running,             0, 60).    % Pre 6
+       
+or_happens(start_button_pressed,                60).    % Step 14
+    ?- happens(pump_started,                    60).    % Step 14
+    ?- happens(basal_delivery_started,          60).    % Step 14
 
-    ?- holdsAt(pump_running,                        70).
-    ?- holdsAt(basal_delivery_enabled,              70).
+    ?- holdsIn(pump_running,                60, 6000).
+    ?- holdsIn(basal_delivery_enabled,      60, 6000).
 
-or_happens(stop_button_pressed,                     6000).  % Step 16
-    ?- happens(pump_stopped,                        6000).  % Step 16
-    ?- happens(basal_delivery_stopped,              6000).  % Step 16
+or_happens(stop_button_pressed,                 6000).  % Step 16
+    ?- happens(pump_stopped,                    6000).  % Step 16
+    ?- happens(basal_delivery_stopped,          6000).  % Step 16
                                                 
-    ?- not_holdsAt(pump_running,                    6010).  % Post 1
+    ?- not_holdsAfter(pump_running,             6000).  % Post 1
 
 % check all queries in one:
-?-  not_holdsAt(pump_running,                       50),
-    happens(pump_started,                           60),
-    happens(basal_delivery_started,                 60),
-    holdsAt(pump_running,                           70),
-    holdsAt(basal_delivery_enabled,                 70),
-    happens(pump_stopped,                           6000),
-    happens(basal_delivery_stopped,                 6000),
-    not_holdsAt(pump_running,                       6010).
+?-  not_holdsIn(pump_running,                0, 60),
+    happens(pump_started,                       60),
+    happens(basal_delivery_started,             60),
+    holdsIn(pump_running,                   60, 6000),
+    holdsIn(basal_delivery_enabled,         60, 6000),
+    happens(pump_stopped,                       6000),
+    happens(basal_delivery_stopped,             6000),
+    not_holdsAfter(pump_running,                6000).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

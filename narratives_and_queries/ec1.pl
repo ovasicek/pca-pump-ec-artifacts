@@ -15,7 +15,7 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                    60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,              70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,          60, 120).   % Pre 1
 
 or_happens(patient_bolus_requested,                 120).   % Pre 1
     ?- happens(patient_bolus_delivery_started,      120).   % Pre 1
@@ -28,7 +28,7 @@ or_happens(patient_bolus_requested,                 123).   % Step 1
     ?- not_happens(patient_bolus_delivery_started,  123).   % Post 1
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                 70),
+?-  holdsIn(basal_delivery_enabled,             60, 120),
     happens(patient_bolus_delivery_started,         120),
     happens(patient_bolus_completed,                121),
     happens(patient_bolus_denied_too_soon,          123),

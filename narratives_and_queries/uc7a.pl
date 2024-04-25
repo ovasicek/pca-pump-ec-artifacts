@@ -14,30 +14,28 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                    60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,              70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,          60, 120).   % Pre 1   
 or_happens(stop_button_pressed,                     120).   % Pre 1
     ?- happens(pump_stopped,                        120).   % Pre 1
     ?- happens(basal_delivery_stopped,              120).   % Pre 1
-    ?- not_holdsAt(basal_delivery_enabled,          121).   % Pre 1
-
-
+    ?- not_holdsIn(pump_running,               120, 240).   % Pre 1
 
 or_happens(start_button_pressed,                    240).   % Step 1
 
     ?- happens(pump_started,                        240).   % Step 2
     ?- happens(basal_delivery_started,              240).   % Step 2
 
-    ?- holdsAt(pump_running,                        241).   % Post 1 
-    ?- holdsAt(basal_delivery_enabled,              241).   % Post 1 
+    ?- holdsAfter(pump_running,                     240).   % Post 1  
+    ?- holdsAfter(basal_delivery_enabled,           240).   % Post 1 
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                 70),
+?-  holdsIn(basal_delivery_enabled,             60, 120),
     happens(pump_stopped,                           120),
     happens(basal_delivery_stopped,                 120),
-    not_holdsAt(basal_delivery_enabled,             121),
+    not_holdsIn(pump_running,                  120, 240),
     happens(pump_started,                           240),
     happens(basal_delivery_started,                 240),
-    holdsAt(pump_running,                           241),
-    holdsAt(basal_delivery_enabled,                 241).
+    holdsAfter(pump_running,                        240),
+    holdsAfter(basal_delivery_enabled,              240).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

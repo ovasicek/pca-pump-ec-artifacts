@@ -23,28 +23,29 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                  70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,              60, 120).   % Pre 1
 
 or_happens(basal_rate_over_tolerance,                   120).   % Step 1a
-    ?- happens(basal_over_infusion_alarm,               420).   % Step 2 && Post 1
+    ?- happens(basal_over_infusion_alarm,               125).   % Step 2 && Post 1
 
-    ?- happens(alarm_to_kvo,                            420).   % Step 3
-    ?- happens(kvo_delivery_started,                    420).   % Step 3
+    ?- happens(alarm_to_kvo,                            125).   % Step 3
+    ?- happens(kvo_delivery_started,                    125).   % Step 3
+    ?- holdsAfter(kvo_delivery_enabled,                 125).   % Step 3
 
-    ?- holdsAt(alarm_active,                            121).   % Post 1
+    ?- holdsAfter(alarm_active,                         125).   % Post 1
     
-    ?- holdsAt(pump_not_running,                        421).   % Post 2    %! failure
- %?%?- holdsAt(kvo_delivery_enabled,                    421).   % Post 2    % TODO fix
+    ?- not_holdsAfter(pump_running,                     125).   % Post 2    %! failure
+ %?%?- holdsAfter(kvo_delivery_enabled,                 125).   % Post 2    % TODO fix
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                      70),
-    happens(basal_over_infusion_alarm,                  420),
-    happens(alarm_to_kvo,                               420),
-    happens(kvo_delivery_started,                       420),
-    holdsAt(kvo_delivery_enabled,                       421),
-    holdsAt(alarm_active,                               421),
+?-  holdsIn(basal_delivery_enabled,                 60, 120),
+    happens(basal_over_infusion_alarm,                  125),
+    happens(alarm_to_kvo,                               125),
+    happens(kvo_delivery_started,                       125),
+    holdsAfter(kvo_delivery_enabled,                    125),
+    holdsAfter(alarm_active,                            125),
 
-    holdsAt(pump_not_running,                           421).
- %?%holdsAt(kvo_delivery_enabled,                       421).
+    not_holdsAfter(pump_running,                        125).
+ %?%holdsAfter(kvo_delivery_enabled,                    125).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

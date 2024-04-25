@@ -40,4 +40,8 @@ sed -i "s|^  mem  \[KB\] [0-9\.]*$|  mem  [MB] $avgMemoryMB (avg of $N_AVG runs)
 # check output and print the result
 Nmodels=$( cat ./last_test_output/"$query".txt | grep -c "MODEL:" )
 
-printf "%-40s  %+4s models  %+10ss  %+10sMB\n" "$query" "${Nmodels}" "${avgRuntime}" "${avgMemoryMB}" | tee -a "./last_test_output/test_run.log"
+if [ "0" -eq "$Nmodels" ]; then
+    printf "%-40s  no models     %+10ss  %+10sMB\n" "$query" "${avgRuntime}" "${avgMemoryMB}" | tee -a "./last_test_output/test_run.log"
+else
+    printf "%-40s  models found  %+10ss  %+10sMB\n" "$query" "${avgRuntime}" "${avgMemoryMB}" | tee -a "./last_test_output/test_run.log"
+fi

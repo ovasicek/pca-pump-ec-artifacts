@@ -31,7 +31,6 @@ startedIn(T1, Fluent, T2) :- or_startedIn(T1, Fluent, T2).
 not_stoppedIn(T1, Fluent, T2) :- or_not_stoppedIn(T1, Fluent, T2).
 not_startedIn(T1, Fluent, T2) :- or_not_startedIn(T1, Fluent, T2).
 trajectory(Fluent1, T1, Fluent2, T2) :- or_trajectory(Fluent1, T1, Fluent2, T2).
-selfend_trajectory(Fluent1, T1, Event, T2) :- or_selfend_trajectory(Fluent1, T1, Event, T2).
 initiates(Event, Fluent, T) :- or_initiates(Event, Fluent, T).
 terminates(Event, Fluent, T) :- or_terminates(Event, Fluent, T).
 releases(Event, Fluent, T) :- or_releases(Event, Fluent, T).

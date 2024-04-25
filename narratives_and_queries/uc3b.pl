@@ -19,43 +19,55 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                                60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                          70).    % Pre 2
+
+    ?- holdsIn(basal_delivery_enabled,                      60, 120).   % Pre 2
 
 or_happens(clinician_bolus_requested(30),                       120).   % Step 3 && 4
 
     ?- happens(clinician_bolus_delivery_started(30),            120).   % Step 5
 
-or_happens(patient_bolus_requested,                             123).   % Step 5
-    ?- happens(patient_bolus_delivery_started,                  123).   % Step 5
-    ?- happens(clinician_bolus_suspended(30),                   123).   % Step 5 -- interrupted
-    ?- happens(patient_bolus_completed,                         124).   % Step 5
-    ?- happens(resumed_clinician_bolus_delivery_started(30),    124).   % Step 5 -- resumed
 
-    ?- not_happensInInc(clinician_bolus_halted_max_dose,   120, 151).   % Step 5, no EC
-    ?- initiallyP(vtbi(X1)),                                            % Step 5
-       holdsAt(clinician_bolus_drug_delivered(X2),              151),
-       30 .=. 151 - 120 + 1,
-       X1 = X2.
+or_happens(patient_bolus_requested,                             130).   % Step 5
 
-    ?- happens(clinician_bolus_completed,                       151).   % Step 5 && 6
-    
-    ?- happens(basal_delivery_started,                          151).   % Step 6 && Post 1
-    ?- holdsAt(basal_delivery_enabled,                          152).   % Step 6 && Post 1
+    ?- happens(patient_bolus_delivery_started,                  130).   % Step 5
+
+    ?- happens(clinician_bolus_suspended(30),                   130).   % Step 5 -- interrupted
+
+    ?- happens(patient_bolus_completed,                         T2),    % Step 5 -- resumed
+       happens(resumed_clinician_bolus_delivery_started(30),    T2).
+
+
+    ?- happens(clinician_bolus_completed,                       T3),    % Step 5
+       initiallyP(vtbi(X1)),                                            
+       holdsAt(clinician_bolus_drug_delivered(X1),              T3),
+       happens(resumed_clinician_bolus_delivery_started(30),    T2),
+       30 .=. T3 - 120 + (T2 - 130).
+
+    ?- happens(clinician_bolus_completed,                       T3),   % Step 5, no EC
+       not_happensInInc(clinician_bolus_halted_max_dose,   120, T3).
+
+    ?- happens(clinician_bolus_completed,                       T3),   % Step 6 && Post 1
+       happens(basal_delivery_started,                          T3).
+
+    ?- happens(clinician_bolus_completed,                       T3),   % Step 6 && Post 1
+       holdsAfter(basal_delivery_enabled,                       T3).
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                             70),
+?-  holdsIn(basal_delivery_enabled,                         60, 120),
     happens(clinician_bolus_delivery_started(30),               120),
-    happens(patient_bolus_delivery_started,                     123),
-    happens(clinician_bolus_suspended(30),                      123),
-    happens(patient_bolus_completed,                            124),
-    happens(resumed_clinician_bolus_delivery_started(30),       124),
-    not_happensInInc(clinician_bolus_halted_max_dose,      120, 151),     
-    initiallyP(vtbi(X1)),
-    holdsAt(clinician_bolus_drug_delivered(X2),                 151),
-    30 .=. 151 - 120 + 1,
-    X1 = X2,
-    happens(clinician_bolus_completed,                          151),
-    happens(basal_delivery_started,                             151),
-    holdsAt(basal_delivery_enabled,                             152).
+
+    happens(patient_bolus_delivery_started,                     130),
+    happens(clinician_bolus_suspended(30),                      130),
+    happens(patient_bolus_completed,                            T2),
+    happens(resumed_clinician_bolus_delivery_started(30),       T2),
+
+    happens(clinician_bolus_completed,                          T3),
+    initiallyP(vtbi(X1)),                                            
+    holdsAt(clinician_bolus_drug_delivered(X1),                 T3),
+    30 .=. T3 - 120 + (T2 - 130),
+
+    not_happensInInc(clinician_bolus_halted_max_dose,      120, T3),
+    happens(basal_delivery_started,                             T3),
+    holdsAfter(basal_delivery_enabled,                          T3).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

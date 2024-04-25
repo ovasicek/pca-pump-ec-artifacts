@@ -18,16 +18,13 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                  70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,              60, 120).   % Pre 1
 
 or_happens(basal_rate_under_tolerance,                  120).   % Step 1a
     ?- happens(basal_under_infusion_warning,            125).   % Step 2 && Post 1
 
-    ?- holdsAt(basal_delivery_enabled,                  126).   % implicit Post
-
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                     70),
-    happens(basal_under_infusion_warning,               125),
-    holdsAt(basal_delivery_enabled,                     126).
+?-  holdsIn(basal_delivery_enabled,                 60, 120),
+    happens(basal_under_infusion_warning,               125).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

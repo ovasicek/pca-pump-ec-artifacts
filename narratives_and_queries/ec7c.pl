@@ -23,7 +23,7 @@
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).                    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                  70).                    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,              60, T),   T .=. 119 + 1/2.  % Pre 1
 
 or_happens(patient_bolus_requested,                     T) :- T .=. 119 + 1/2.  % Pre 1
     ?- happens(patient_bolus_delivery_started,          T),   T .=. 119 + 1/2.  % Pre 1
@@ -31,27 +31,28 @@ or_happens(patient_bolus_requested,                     T) :- T .=. 119 + 1/2.  
 or_happens(patient_bolus_rate_over_tolerance,           120).                   % Step 1c
     ?- happens(bolus_over_infusion_alarm,               T),   T .=. 120 + 1/6.  % Step 2 && Post 1  %! failure 1
 
-    ?- happens(patient_bolus_halted_alarm,              T),   T .=. 120 + 1/6.  % Step 3            %! failure 1
     ?- happens(alarm_to_kvo,                            T),   T .=. 120 + 1/6.  % Step 3            %! failure 1
+    ?- happens(patient_bolus_halted,                    T),   T .=. 120 + 1/6.  % Step 3            %! failure 1
     ?- happens(kvo_delivery_started,                    T),   T .=. 120 + 1/6.  % Step 3            %! failure 1
-    ?- holdsAt(kvo_delivery_enabled,                    121).                   % Step 3            %! failure 1
+    ?- holdsAfter(kvo_delivery_enabled,                 T),   T .=. 120 + 1/6.  % Step 3            %! failure 1
 
-    ?- holdsAt(alarm_active,                            121).                   % Post 1            %! failure 1
+    ?- holdsAfter(alarm_active,                         T),   T .=. 120 + 1/6.  % Post 1            %! failure 1
 
-    ?- holdsAt(pump_not_running,                        121).                   % Post 2            %! failure 2
- %?%?- holdsAt(kvo_delivery_enabled,                    121).                   % Post 2            % TODO fix 2
+    ?- not_holdsAfter(pump_running,                     T),   T .=. 120 + 1/6.  % Post 2            %! failure 2
+ %?%?- holdsAfter(kvo_delivery_enabled,                 T),   T .=. 120 + 1/6.  % Post 2            % TODO fix 2
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                     70),
-    happens(patient_bolus_delivery_started,             T1), T1 .=. 119 + 1/2,
-    happens(bolus_over_infusion_alarm,                  T2), T2 .=. 120 + 1/6,
-    happens(patient_bolus_halted_alarm,                 T3), T3 .=. 120 + 1/6,
-    happens(alarm_to_kvo,                               T4), T4 .=. 120 + 1/6,
-    happens(kvo_delivery_started,                       T5), T5 .=. 120 + 1/6,
-    holdsAt(kvo_delivery_enabled,                       121),
-    holdsAt(alarm_active,                               121),
+?-  holdsIn(basal_delivery_enabled,                 60, T1), T1 .=. 119 + 1/2,
+    happens(patient_bolus_delivery_started,             T1),
 
-    holdsAt(pump_not_running,                           121).
- %?%holdsAt(kvo_delivery_enabled,                       121).
+    happens(bolus_over_infusion_alarm,                  T2), T2 .=. 120 + 1/6,
+    happens(alarm_to_kvo,                               T2),
+    happens(patient_bolus_halted,                       T2),
+    happens(kvo_delivery_started,                       T2),
+    holdsAfter(kvo_delivery_enabled,                    T2),
+    holdsAfter(alarm_active,                            T2),
+
+    not_holdsAfter(pump_running,                        T2).
+ %?%holdsAfter(kvo_delivery_enabled,                    T2).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */

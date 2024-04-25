@@ -42,12 +42,3 @@ or_happens(patient_bolus_requested,                         180).   % Step 1 -- 
     happens(kvo_delivery_started,                           T).
 
 /* --------------------------------- END OF FILE -------------------------------------------------------------------- */
-
-
-%//    ?- initiallyP(vtbi_hard_limit_over_time(MaxDoseVolume, MaxDosePeriod)), 
-%//       total_drug_delivered_over_period(TotalInPeriod, MaxDosePeriod, 295),
-%//       TotalInPeriod .>. MaxDoseVolume.
-%//
-%//    ?- vtbi_hard_limit_exceeded(T).
-%//
-%//    ?- initiallyP(vtbi(VTBI)), X .=. VTBI / 2, vtbi_hard_limit_exceeded_at_T_by_X(T, X).

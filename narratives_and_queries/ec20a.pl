@@ -17,38 +17,38 @@
 #include './init-partial-maxdose.pl'.
 
 initiallyP(initial_drug_reservoir_contents(7)).     % set contents so that it runs out at the right time
-low_reservoir_reasoning_enabled.                    % enable drug reservoir reasoning
+low_reservoir_reasoning_enabled.                    % enable low drug reservoir reasoning
 
 % narrative                     ----------------------------------------------------------------------------------------
 or_happens(start_button_pressed,                        60).    % Pre 1
-    ?- holdsAt(basal_delivery_enabled,                  70).    % Pre 1
+    ?- holdsIn(basal_delivery_enabled,              60, 120).   % Pre 1
 
     ?- initiallyP(low_reservoir_treshold(Low)),
        holdsAt(drug_reservoir_contents(Low),            120).   % Step 1
 
     ?- happens(low_reservoir_warning,                   120).   % Step 2 && Post 1
 
-    ?- holdsAt(basal_delivery_enabled,                  121).   % Step 3 && Post 2  %! failure
+    ?- holdsAfter(basal_delivery_enabled,               120).   % Step 3 && Post 2  %! failure
     ?- initiallyP(basal_flow_rate(F)),
        holdsAt(drug_flow_rate(F),                       121).   % Step 3 && Post 2  %! failure
  %?%?- happens(basal_delivery_stopped,                  120).   % Step 3            % TODO fix
  %?%?- happens(kvo_delivery_started,                    120).   % Step 3            % TODO fix
- %?%?- holdsAt(kvo_delivery_enabled,                    121).   % Step 3 && Post 2  % TODO fix
+ %?%?- holdsAfter(kvo_delivery_enabled,                 120).   % Step 3 && Post 2  % TODO fix
  %?%?- initiallyP(kvo_flow_rate(F)),                            
  %?%   holdsAt(drug_flow_rate(F),                       121).   % Step 3 && Post 2  % TODO fix
 
 % check all queries in one:
-?-  holdsAt(basal_delivery_enabled,                      70),
+?-  holdsIn(basal_delivery_enabled,             60, 120),
     initiallyP(low_reservoir_treshold(Low)),
     holdsAt(drug_reservoir_contents(Low),               120),
     happens(low_reservoir_warning,                      120),
 
-    holdsAt(basal_delivery_enabled,                     121),
+    holdsAfter(basal_delivery_enabled,                  120),
     initiallyP(basal_flow_rate(F)),
     holdsAt(drug_flow_rate(F),                          121).
  %?%happens(basal_delivery_stopped,                     120),
  %?%happens(kvo_delivery_started,                       120),
- %?%holdsAt(kvo_delivery_enabled,                       121),
+ %?%holdsAfter(kvo_delivery_enabled,                    120),
  %?%initiallyP(kvo_flow_rate(F)),                            
  %?%holdsAt(drug_flow_rate(F),                          121).
 
