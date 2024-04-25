@@ -37,5 +37,6 @@
 #show not_happens/2, not_holdsAt/2, not_happensIn/3, not_happensInInc/3.
 #show trajectory/4.
 #show selfend_trajectory/4.
-%#show stoppedIn/3, startedIn/3, trajectory/4.
-%#show initiates/3, terminates/3, releases/3.
+#show stoppedIn/3, startedIn/3, trajectory/4.
+#show not_stoppedIn/3, not_startedIn/3.
+#show initiates/3, terminates/3, releases/3.

@@ -8,18 +8,6 @@ min(A,B,B) :- B .<. A.
 max(A,B,A) :- A .>=. B.
 max(A,B,B) :- B .>. A.
 
-length([], 0).
-length([H|T], Res) :- length(T, TRes), Res .=. TRes + 1.
-
-
-countHappensIn(E, T1, T2, Res) :- 
-    findall(T, countHappensInFindall(E, T, T1, T2), List),
-    length(List, Res).
-
-    countHappensInFindall(E, T, T1, T2) :-
-        T .>. T1, T .<. T2,
-        happens(E, T).
-
 
 or_not_happensIn(E, T1, T2) :-  
     %T1 .>. 0,
@@ -43,9 +31,7 @@ or_not_happensIn(E, T1, T2) :-
 or_not_happens(E, T) :- not_happensInInc(E, T, T).
 
 
-or_not_happensInInc(E, T1, T2) :-     % TODO check the inequalities
-    %T1 .>. 0,
-    %T1 .<. T2,
+or_not_happensInInc(E, T1, T2) :-
     findall(T, not_happensInIncFindall(E, T, T1, T2), List),
     outsideInc(List, T1, T2).
 
@@ -62,13 +48,46 @@ or_not_happensInInc(E, T1, T2) :-     % TODO check the inequalities
     outsideInc([], _, _).
 
 
+not_holdsIn(F, T1, T2) :-  
+    not_holdsAt(F, T1),
+    not_startedIn(T1, F, T2).
 
-% Shotcut for copying all initiates/terminates/releases of one fluent to another fluent
-% e.g. use like this: copy_fluent_manipulators(fluent_with_a_specific_value(_), fluent_that_says_there_is_a_value).
-%      usefull for not_holdsAt queries of the flag fluent with a parameter
-%initiates(E, FluentCopyTo, T) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), initiates(E, FluentCopyFrom, T).
-%terminates(E, FluentCopyTo, T) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), terminates(E, FluentCopyFrom, T).
-%releases(E, FluentCopyTo, T) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), releases(E, FluentCopyFrom, T).
-%can_initiates(E, FluentCopyTo) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), can_initiates(E, FluentCopyFrom).
-%can_terminates(E, FluentCopyTo) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), can_terminates(E, FluentCopyFrom).
-%can_releases(E, FluentCopyTo) :- copy_fluent_manipulators(FluentCopyFrom, FluentCopyTo), can_releases(E, FluentCopyFrom).
+not_holdsIn(F, T1, T2) :-  
+    can_terminates(Event, F),
+    happens(Event, T1),
+    terminates(Event, F, T1),
+    not_startedIn(T1, F, T2).
+
+not_holdsAfter(F, T1) :-
+    max_time(T2),
+    not_holdsAt(F, T1),
+    not_startedIn(T1, F, T2).
+
+not_holdsAfter(F, T1) :-  
+    max_time(T2),
+    can_terminates(Event, F),
+    happens(Event, T1),
+    terminates(Event, F, T1),
+    not_startedIn(T1, F, T2).
+
+holdsIn(F, T1, T2) :-  
+    holdsAt(F, T1),
+    not_stoppedIn(T1, F, T2).
+
+holdsIn(F, T1, T2) :-  
+    can_initiates(Event, F),
+    happens(Event, T1),
+    initiates(Event, F, T1),
+    not_stoppedIn(T1, F, T2).
+
+holdsAfter(F, T1) :-  
+    max_time(T2),
+    holdsAt(F, T1),
+    not_stoppedIn(T1, F, T2).
+
+holdsAfter(F, T1) :-  
+    max_time(T2),
+    can_initiates(Event, F),
+    happens(Event, T1),
+    initiates(Event, F, T1),
+    not_stoppedIn(T1, F, T2).

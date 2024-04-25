@@ -39,14 +39,14 @@ releases(Event, Fluent, T) :- or_releases(Event, Fluent, T).
 %% BEC1 - StoppedIn(t1,f,t2)
 or_stoppedIn(T1, Fluent, T2) :-
     T1 .<. T, T .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_terminates(Event, Fluent),
     happens(Event, T),
     terminates(Event, Fluent, T).
 
 or_stoppedIn(T1, Fluent, T2) :-
     T1 .<. T, T .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_releases(Event, Fluent),
     happens(Event, T),
     releases(Event, Fluent, T).
@@ -55,13 +55,13 @@ or_stoppedIn(T1, Fluent, T2) :-
 %% BEC2 - StartedIn(t1,f,t2)
 or_startedIn(T1, Fluent, T2) :-
     T1 .<. T, T .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_initiates(Event, Fluent),
     happens(Event, T),
     initiates(Event, Fluent, T).
     
 or_startedIn(T1, Fluent, T2) :-
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     T1 .<. T, T .<. T2,
     can_releases(Event, Fluent),
     happens(Event, T),
@@ -78,7 +78,7 @@ or_holdsAt(Fluent, T) :-
 % NEW AXIOM -- initiallyR
 or_holdsAt(Fluent2, T2) :-
     T2 .>=. 0,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_trajectory(Fluent1, 0, Fluent2, T2),
     initiallyP(Fluent1),
     initiallyR(Fluent2),
@@ -88,7 +88,7 @@ or_holdsAt(Fluent2, T2) :-
 %% BEC3 - holdsAt(f,t)
 or_holdsAt(Fluent2, T2) :-
     T1 .>. 0, T1 .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_trajectory(Fluent1, T1, Fluent2, T2),
     can_initiates(Event, Fluent1),
     happens(Event, T1),
@@ -100,7 +100,7 @@ or_holdsAt(Fluent2, T2) :-
 % - third parameter Fluent1 tries to say to only ever consider a specified trajectory
 holdsAt(Fluent2, T2, Fluent1) :-
     T1 .>. 0, T1 .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_trajectory(Fluent1, T1, Fluent2, T2),
     can_initiates(Event, Fluent1),
     happens(Event, T1),
@@ -112,7 +112,7 @@ holdsAt(Fluent2, T2, Fluent1) :-
 %% BEC6 - holdsAt(f,t)
 or_holdsAt(Fluent, T2) :-
     T1 .>. 0, T1 .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_initiates(Event, Fluent),
     happens(Event, T1),
     initiates(Event, Fluent, T1),
@@ -131,7 +131,7 @@ or_not_holdsAt(Fluent, T) :-
 or_not_holdsAt(Fluent, T2) :-
     T1 .>. 0,
     T1 .<. T2,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     can_terminates(Event, Fluent),
     happens(Event, T1),
     terminates(Event, Fluent, T1),
@@ -142,7 +142,7 @@ or_not_holdsAt(Fluent, T2) :-
 %% Helper for BEC1
 or_not_stoppedIn(T1, Fluent, T2) :-
     %T1 .>=. 0,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     findall(E, can_terminatesOrReleases(E, Fluent), EventList),
     not_terminated(Fluent, EventList, T1, T2),
     not_released(Fluent, EventList, T1, T2).
@@ -199,7 +199,7 @@ no_terminate([], _, _).
 %% Helper for BEC2
 or_not_startedIn(T1, Fluent, T2) :-
     %T1 .>=. 0,
-    max_time(T3), T2 .<. T3,
+    max_time(T3), T2 .=<. T3,
     findall(E, can_initiatesOrReleases(E, Fluent), EventList),
     not_initiated(Fluent, EventList, T1, T2),
     not_released(Fluent, EventList, T1, T2).
