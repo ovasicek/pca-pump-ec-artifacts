@@ -1,11 +1,11 @@
 % R5.3.0(3) -- patient bolus has priority over clinician requested bolus (suspend the clinician bolus, and then resume after)
 
     % suspending a clinician bolus as a result of an allowed patient bolus request
-    or_happens(clinician_bolus_suspended(OriginalDuration), T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(clinician_bolus_suspended(OriginalDuration), T) :-
         happens(patient_bolus_delivery_started, T), holdsAt(clinician_bolus_delivery_enabled(OriginalDuration), T),
         not_happens(clinician_bolus_completed, T).    % treating events happening at the same time
 
-    or_happens(clinician_bolus_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(clinician_bolus_delivery_stopped, T) :-
         happens(clinician_bolus_suspended(_), T).
 
 
@@ -24,8 +24,8 @@
     or_terminates(patient_bolus_halted, clinician_bolus_suspended_drug_delivered(_), T) :- holdsAt(clinician_bolus_is_suspended(_), T).
 
     % resuming a clinician bolus when the patient bolus completed without any alarms etc.
-    or_happens(clinician_bolus_delivery_started(OriginalDuration), T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
-        happens(clinician_bolus_resumed(OriginalDuration), T). % TODO just renaming
-    or_happens(clinician_bolus_resumed(OriginalDuration), T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(clinician_bolus_delivery_started(OriginalDuration), T) :-
+        happens(clinician_bolus_resumed(OriginalDuration), T).
+    or_happens(clinician_bolus_resumed(OriginalDuration), T) :-
         happens(patient_bolus_completed, T),
         holdsAt(clinician_bolus_is_suspended(OriginalDuration), T).

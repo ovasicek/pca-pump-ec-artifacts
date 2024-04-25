@@ -24,12 +24,3 @@
 
 #table_once selfend_trajectory/4.
 #table_once holdsAt/3.
-
-% useful oneliners to make sure that each predicate is only implied by up to one rule or one fact.
-%   for rules
-%     X=happens; grep -r "^[ ]*$X(.*:-" | sed "s|:-.*$||" | sed "s|^[^:]*: *||" | sed "s| T[0-9]| T|g" | sort | uniq -c | sort -nr
-%
-%   maybe for facts (not working well)
-%     X=initiates; grep -r "^[ ]*$X([^.:]*)[ ]*\." | sed "s|^[^:]*: *||" | sed "s|\..*$|.|" | sed "s| T[0-9]| T|g" | sort | uniq
-%     X=initiates; grep -r "^[ ]*$X([^.:]*)[ ]*\." | sed "s|^[^:]*: *||" | sed "s|\..*$|.|" | sed "s| T[0-9]| T|g" | sort | uniq | uniq -c | sort -nr
-%     grep -ro "initiates([^,(]*" | sed "s|^[^:]*:||" | sort | uniq -c | sort -nr

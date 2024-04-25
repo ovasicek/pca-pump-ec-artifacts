@@ -41,7 +41,6 @@ initiallyP(empty_reservoir_treshold(1/2)).
     fluent(initial_drug_reservoir_contents(X)).
     fluent(drug_reservoir_contents(X)).
 
-% TODO
     fluent(low_reservoir_treshold(X)).
     fluent(empty_reservoir_treshold(X)).
 

@@ -2,7 +2,7 @@
 %   - important for abduction of input events (otherwise multiple will happen at the same time)
 %   - otherwise only usefull as a validation of user narrative
 
-% user inputs can never happen at the same time     %! TODO my own addition (not from the specification)
+% user inputs can never happen at the same time    
 :- happens(start_button_pressed, T), happens(stop_button_pressed, T).
 :- happens(start_button_pressed, T), happens(patient_bolus_requested, T).
 :- happens(start_button_pressed, T), happens(clinician_bolus_requested(_), T).

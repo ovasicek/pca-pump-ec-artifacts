@@ -8,17 +8,17 @@ total_drug_in_max_dose_window_if_the_patient_bolus_would_be_delivered_starting_a
     % check how much drug was delivered in the VTBI window up till now
     patient_bolus_duration(BolusDuration),
     VtbiLimitTimePeriodMinusBolus .=. VtbiLimitTimePeriod - BolusDuration,  % prediction of VTBI window contents will be added with the bolus
-    holdsAt(total_bolus_drug_delivered(CurrentTotalBolusDrug), T),                                                                      %! <<< diff
+    holdsAt(total_bolus_drug_delivered(CurrentTotalBolusDrug), T),                                                          %! <<< diff
     % below rules is located in (06-total_drug_in_time_window.pl)
-    total_drug_in_vtbi_window_assume_basal(T, CurrentTotalBolusDrug, VtbiLimitTimePeriodMinusBolus, TotalDuringVtbiPeriod),    %! <<< diff
+    total_drug_in_vtbi_window_assume_basal(T, CurrentTotalBolusDrug, VtbiLimitTimePeriodMinusBolus, TotalDuringVtbiPeriod), %! <<< diff
     % add portion of VTBI window during the patient bolus
     initiallyP(vtbi(BolusToDeliver)),
     initiallyP(basal_flow_rate(BasalRate)),
     ResTotalDuringVtbiPeriodWithCurrentBolus .=. TotalDuringVtbiPeriod + BolusToDeliver + (BolusDuration * BasalRate).
 
-or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+or_happens(max_dose_warning, T) :-
     happens(patient_bolus_requested_valid, T),
-    % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
+    % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate)
     % find the last start button press
     TLast .<. T,
     happens(start_button_pressed_valid, TLast),
@@ -47,10 +47,10 @@ __or_happens_max_dose_warning_pbolus(TLast, WindowStartT, BolusDuration) :-
 %----------------------------------------------------------------------------------------------------------------------%
 % used to halt an in-progress clinician bolus
 
-or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+or_happens(max_dose_warning, T) :-
     % original trigger
     happens(clinician_bolus_halted_max_dose, T),
-    % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate) % TODO
+    % preemptive boluse denials due to max dose, dont need to trigger max dose becasue overdose would have been in the future (not immediate)
     initiallyP(vtbi_hard_limit_over_time(_, VtbiLimitTimePeriod)),
     T2 .=. T - VtbiLimitTimePeriod,
     max(T2, 0, CroppedT2),
@@ -58,9 +58,9 @@ or_happens(max_dose_warning, T) :- %incremental_start_time(INCREMENT_T), T .>=. 
 
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % below rules is located in (06-total_drug_in_time_window.pl)
-    total_drug_in_vtbi_window_assume_basal(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),        %! <<< diff
+    total_drug_in_vtbi_window_assume_basal(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),                 %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
-    holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                              %! <<< diff
+    holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                           %! <<< diff
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsAfterT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % needs a different implementation of "total_drug_in_vtbi_window_assume_basal"
         initiallyP(basal_flow_rate(BasalRate)),                                                                         %! <<< diff
@@ -74,4 +74,4 @@ total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowSta
         TotalDuringVtbiPeriod .=. TotalBolusDuringVtbiPeriod + AssumedBasalDeliveredInVtbiPeriod,                       %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_bolus_drug_delivered(TotalBolusDrugAtStartPeriod), TstartVtbiPeriodCropped, clinician_bolus_delivery_enabled(_)), %! <<< diff
-    holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                              %! <<< diff
+    holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                           %! <<< diff

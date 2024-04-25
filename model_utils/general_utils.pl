@@ -11,8 +11,6 @@ max(A,B,B) :- B .>. A.
 
 % prove that E did not happen in a time interval (excluding the edges)
 or_not_happensIn(E, T1, T2) :-  
-    %T1 .>. 0,
-    %T1 .<. T2,
     findall(T, not_happensInFindall(E, T, T1, T2), List),
     outside(List, T1, T2).
 

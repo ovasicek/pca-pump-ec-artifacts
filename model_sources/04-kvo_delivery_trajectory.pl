@@ -33,11 +33,11 @@
 % ending the trajectory
 
     % alarms to off stop the delivery
-    or_happens(kvo_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(kvo_delivery_stopped, T) :-
         happens(alarm_to_off, T), holdsAt(kvo_delivery_enabled, T).
 
     % R6.5.0(6) -- stop button stops everything
-    or_happens(kvo_delivery_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(kvo_delivery_stopped, T) :-
         happens(stop_button_pressed_valid, T),
         holdsAt(kvo_delivery_enabled, T).
 
@@ -50,10 +50,3 @@
 
     % n/a
 
-
-% ----------------------------------------------------------------------------------------------------------------------
-% helper predicates
-
-% TODO should be automated preprocessing
-    can_trajectory(kvo_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
-    can_trajectory(kvo_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.

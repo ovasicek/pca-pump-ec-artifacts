@@ -8,11 +8,11 @@
     or_initiates(pump_stopped, pump_not_running, T).
 
     % start button starts the pump
-    or_happens(pump_started, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(pump_started, T) :-
         happens(start_button_pressed_valid, T).
 
     % stop button stops the pump R6.2.0(2)
-    or_happens(pump_stopped, T) :- %incremental_start_time(INCREMENT_T), T .>=. INCREMENT_T,
+    or_happens(pump_stopped, T) :-
         happens(stop_button_pressed_valid, T),
         holdsAt(pump_running, T).
 
@@ -44,10 +44,3 @@
     % while the pump is not running
     or_holdsAt(drug_flow_rate(Rate), T) :- holdsAt(pump_not_running, T), initiallyP(initial_drug_flow_rate(Rate)).
 
-
-% ----------------------------------------------------------------------------------------------------------------------
-% helper predicates
-
-% TODO should be automated preprocessing
-    can_trajectory(pump_not_running, T1, total_drug_delivered(X), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.
-    can_trajectory(pump_not_running, T1, total_bolus_drug_delivered(X), T2) . %:- /*tr*/ incremental_start_time(INCREMENT_T), T1 .>=. INCREMENT_T, T2 .>=. INCREMENT_T.

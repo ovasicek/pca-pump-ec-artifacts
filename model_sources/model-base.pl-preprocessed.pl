@@ -26,3 +26,17 @@
     can_terminates(pump_started, pump_not_running).
     can_terminates(pump_stopped, pump_running).
     can_terminates(stop_button_pressed_valid, alarm_active).
+    can_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
+    can_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2).
+    can_trajectory(basal_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
+    can_trajectory(basal_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_drug_delivered(TotalDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(clinician_bolus_delivery_enabled(DurationMinutes), T1, clinician_bolus_drug_delivered(VtbiDrugRes), T2).
+    can_trajectory(kvo_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
+    can_trajectory(kvo_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
+    can_trajectory(pump_not_running, T1, total_drug_delivered(X), T2).
+    can_trajectory(pump_not_running, T1, total_bolus_drug_delivered(X), T2).
