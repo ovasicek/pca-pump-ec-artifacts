@@ -38,7 +38,7 @@ or_happens(start_button_pressed,                        60).    % Pre 1
  %?%   holdsAt(drug_flow_rate(F),                       121).   % Step 3 && Post 2  % TODO fix
 
 % check all queries in one:
-?-  holdsIn(basal_delivery_enabled,             60, 120),
+?-  holdsIn(basal_delivery_enabled,                 60, 120),
     initiallyP(low_reservoir_treshold(Low)),
     holdsAt(drug_reservoir_contents(Low),               120),
     happens(low_reservoir_warning,                      120),

@@ -34,6 +34,8 @@ trajectory(Fluent1, T1, Fluent2, T2) :- or_trajectory(Fluent1, T1, Fluent2, T2).
 initiates(Event, Fluent, T) :- or_initiates(Event, Fluent, T).
 terminates(Event, Fluent, T) :- or_terminates(Event, Fluent, T).
 releases(Event, Fluent, T) :- or_releases(Event, Fluent, T).
+not_clipped(T1, Fluent, T2) :- or_not_clipped(T1, Fluent, T2).
+not_declipped(T1, Fluent, T2) :- or_not_declipped(T1, Fluent, T2).
 
 %% BEC1 - StoppedIn(t1,f,t2)
 or_stoppedIn(T1, Fluent, T2) :-
