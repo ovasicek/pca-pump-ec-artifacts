@@ -55,7 +55,6 @@ echo -n "DATE: " > $LOGFILE; date >> $LOGFILE
 # clear certain files from the previous run just in case
 rm -f ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/2D/output-$MODELNAME-consistentAbductions.log ./abduction_output/2D/output-$MODELNAME-consistentAbductionsSummary.log
 rm -f ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/1D/output-$MODELNAME-consistentAbductions.log ./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log
-rm -f ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
 
 # copy over the query file for reference when looking at the outputs later
 cp "$QUERY" ./abduction_output/query.pl
@@ -64,41 +63,33 @@ cp "$QUERY" ./abduction_output/query.pl
 CUR_PHASE_NUMBER_OF_MODELS=0
 PHASE_2D_NUMBER_OF_MODELS=0
 PHASE_1D_NUMBER_OF_MODELS=0
-PHASE_0D_NUMBER_OF_MODELS=0
 
 CUR_PHASE_NUMBER_OF_SPURIOUS=0
 PHASE_2D_NUMBER_OF_SPURIOUS=0
 PHASE_1D_NUMBER_OF_SPURIOUS=0
-PHASE_0D_NUMBER_OF_SPURIOUS=0
 
 CUR_PHASE_NUMBER_OF_CONSISTENT=0
 PHASE_2D_NUMBER_OF_CONSISTENT=0
 PHASE_1D_NUMBER_OF_CONSISTENT=0
-PHASE_0D_NUMBER_OF_CONSISTENT=0
 
 PHASE_2D_NUMBER_OF_RESULTS=0
 PHASE_1D_NUMBER_OF_RESULTS=0
-PHASE_0D_NUMBER_OF_RESULTS=0
 
 CUR_PHASE_NUMBER_OF_DEPTH=0
 PHASE_2D_NUMBER_OF_DEPTH=0
 PHASE_1D_NUMBER_OF_DEPTH=0
-PHASE_0D_NUMBER_OF_DEPTH=0
 
 CUR_PHASE_NUMBER_OF_EXECUTIONS=0
 PHASE_2D_NUMBER_OF_EXECUTIONS=0
 PHASE_1D_NUMBER_OF_EXECUTIONS=0
-PHASE_0D_NUMBER_OF_EXECUTIONS=0
 
 CUR_PHASE_NUMBER_OF_DUPLICATES=0
 PHASE_2D_NUMBER_OF_DUPLICATES=0
 PHASE_1D_NUMBER_OF_DUPLICATES=0
-PHASE_0D_NUMBER_OF_DUPLICATES=0
 
 CUR_PHASE_NUMBER_OF_REFINED=0
 PHASE_2D_NUMBER_OF_REFINED=0
 PHASE_1D_NUMBER_OF_REFINED=0
-PHASE_0D_NUMBER_OF_REFINED=0
 
 
 # recursive function used to force&check consistent abduction values
@@ -109,7 +100,7 @@ PHASE_0D_NUMBER_OF_REFINED=0
 #   - extract all the abduced values of $ABDUCIBLE_PRED_W2PARAMS from that model (predicate with two parameters, each
 #     parameter will likely have an interval of values as a result of abduction)
 #   - if all the abduced values/intervals across the whole model are the exact same, then the model is as consistent
-#     as possible in the current phase (phases are 2D, 1D, 0D ~~> meaning how many parameters are being abduced)
+#     as possible in the current phase (phases are 2D and 1D ~~> meaning how many parameters are being abduced)
 #     - save the abduced values as a result and dont further process this model
 #   - merge all the abduced values together (intersection of intervals)
 #     - currently done by simply taking all the constraints and putting them in one rule (so all constraints apply)
@@ -490,102 +481,17 @@ echo -n "DATE: " >> $LOGFILE; date >> $LOGFILE
 
 
 ########################################################################################################################
-echo -e "\n\n##########################################################################" >> $LOGFILE
-echo "  0D abduction phase" >> $LOGFILE
-echo -e "##########################################################################\n" >> $LOGFILE
-########################################################################################################################
-
-# prep the output directory
-mkdir ./abduction_output/0D 2>/dev/null
-mkdir ./abduction_output/0D/runs 2>/dev/null
-touch ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log
-
-# clear stat counters
-clearStatCounters
-
-# for each consistent abduction from the 1D phase, repeat the same process of forcing&checking consistent abductions
-# excepth with 0D abduction, i.e., without abduction... (sample/pick a value out the abduced interval for the abduced
-# parameter --> both parameters now have one specific constant value)
-# running a query like this will guarantee that all models are actually valid/consistent (if there are any)
-consistentlyAbduced1DvaluesToCheck=$(cat "./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log" | sed "s|.*;||")
-i=0
-for valuesToCheck in $consistentlyAbduced1DvaluesToCheck; do
-    i=$((i+1))
-
-    # extract variable constraints for X1 and X2
-    if $DEBUG; then echo "## 0D check of: $valuesToCheck" >> $LOGFILE; fi
-    varX1=$(echo "$valuesToCheck" | sed "s|,X2.*$||")
-    varX2=$(echo "$valuesToCheck" | sed "s|^.*X1[^X]*X2|X2|")
-
-    # sample a value from X1 (can be any value within the interval) --> lets take the middle of the interval
-    sampledX1fact=""
-    if [ $(echo "$varX1" | sed "s|[#\.]|\n|" | grep -c "X1") -eq 2 ]; then # 2x X2 means there is an interval
-        lowBound=$(echo "$varX1" | sed "s|^X1#>=*\([^,]*\),.*$|\1|")
-        rigtBound=$(echo "$varX1" | sed "s|^.*X1#=*<\(.*\)$|\1|")
-        sampledX1fact=$(echo "sampledX1(X1):-X1.=.((($rigtBound) - ($lowBound)) / 2) + ($lowBound).")
-
-    else    # 1x X2 means there is one constant
-        sampledX1fact=$(echo "sampledX1(X1):-$varX1.")
-    fi
-
-    # make a new fact to restrict abduction to the sampled value of X2
-    samplefact=$(echo "sample(X1,X2):-sampledX1(X1),$varX2.")
-
-    # extend the query to force 0D abduction instead of 2D abduction
-    extendedQuery="./tmp-query-$MODELNAME-extendedfor0D.tmp"
-    echo "conf_ENABLED_SAMPLING." > $extendedQuery
-    echo "$sampledX1fact" >> $extendedQuery
-    echo "$samplefact" >> $extendedQuery
-
-    # first run with 0D abduction
-    echo "#show $ABDUCIBLE_PRED_W2PARAMS/2." > ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
-    #echo "#abducible $ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp
-    echo "$ABDUCIBLE_PRED_W2PARAMS(X,Y)." >> ./abduction_output/0D/tmp-$MODELNAME-addition.tmp      # abducible predicate as a fact in 0D run (no use of #abducible)
-    if ! $NO_RUN; then
-        { /usr/bin/time -f "\n  real      %E\n  real [s]  %e\n  user [s]  %U\n  sys  [s]  %S\n  mem  [KB] %M\n  avgm [KB] %K" scasp -s0 --dcc $SCASP_ARGS "$MODEL" $INCLUDE_FILES ./abduction_output/0D/tmp-$MODELNAME-addition.tmp $QUERY $extendedQuery ; } > ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log 2>&1
-        CUR_PHASE_NUMBER_OF_EXECUTIONS=$((CUR_PHASE_NUMBER_OF_EXECUTIONS+1))
-        echo -n "## execution time of run1-model0D$i: " >> $LOGFILE
-        grep "  real      " ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log | sed "s|  real      ||" >> $LOGFILE
-    fi
-
-    # start the 0D recursive runs
-    anotherRun 2 "0D$i." ./abduction_output/0D/runs/output-$MODELNAME-run1-model0D$i.log "    " "./abduction_output/0D" "$QUERY $extendedQuery"
-done
-
-# process output files at the end
-tmp=$(cat "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | LC_ALL=C.UTF-8 sort | uniq -c | LC_ALL=C.UTF-8 sort -nr | sed "s|\([0-9]\) |\1;|" | sed "s| *||" )
-echo "$tmp" > "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log"
-
-# copy stat counters and print
-PHASE_0D_NUMBER_OF_MODELS=$CUR_PHASE_NUMBER_OF_MODELS
-PHASE_0D_NUMBER_OF_SPURIOUS=$CUR_PHASE_NUMBER_OF_SPURIOUS
-PHASE_0D_NUMBER_OF_CONSISTENT=$CUR_PHASE_NUMBER_OF_CONSISTENT
-PHASE_0D_NUMBER_OF_DEPTH=$CUR_PHASE_NUMBER_OF_DEPTH
-PHASE_0D_NUMBER_OF_EXECUTIONS=$CUR_PHASE_NUMBER_OF_EXECUTIONS
-PHASE_0D_NUMBER_OF_DUPLICATES=$CUR_PHASE_NUMBER_OF_DUPLICATES
-PHASE_0D_NUMBER_OF_REFINED=$CUR_PHASE_NUMBER_OF_REFINED
-PHASE_0D_NUMBER_OF_RESULTS=$(cat "./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log" | grep -v "^$" | wc -l)
-
-echo >> $LOGFILE
-echo "0D phase stats" >> $LOGFILE
-printStatCounters "$PHASE_0D_NUMBER_OF_MODELS" "$PHASE_0D_NUMBER_OF_SPURIOUS" "$PHASE_0D_NUMBER_OF_CONSISTENT" "$PHASE_0D_NUMBER_OF_DEPTH" "$PHASE_0D_NUMBER_OF_EXECUTIONS" "$PHASE_0D_NUMBER_OF_DUPLICATES" "$PHASE_0D_NUMBER_OF_RESULTS"
-
-# mark end of the script in the output
-echo -n "DATE: " >> $LOGFILE; date >> $LOGFILE
-
-
-########################################################################################################################
 
 
 # sum all stat counters and print
-TOTAL_NUMBER_OF_MODELS=$((PHASE_2D_NUMBER_OF_MODELS+PHASE_1D_NUMBER_OF_MODELS+PHASE_0D_NUMBER_OF_MODELS))
-TOTAL_NUMBER_OF_SPURIOUS=$((PHASE_2D_NUMBER_OF_SPURIOUS+PHASE_1D_NUMBER_OF_SPURIOUS+PHASE_0D_NUMBER_OF_SPURIOUS))
-TOTAL_NUMBER_OF_CONSISTENT=$((PHASE_2D_NUMBER_OF_CONSISTENT+PHASE_1D_NUMBER_OF_CONSISTENT+PHASE_0D_NUMBER_OF_CONSISTENT))
-TOTAL_NUMBER_OF_DEPTH=$((PHASE_2D_NUMBER_OF_DEPTH+PHASE_1D_NUMBER_OF_DEPTH+PHASE_0D_NUMBER_OF_DEPTH))
-TOTAL_NUMBER_OF_EXECUTIONS=$((PHASE_2D_NUMBER_OF_EXECUTIONS+PHASE_1D_NUMBER_OF_EXECUTIONS+PHASE_0D_NUMBER_OF_EXECUTIONS))
-TOTAL_NUMBER_OF_DUPLICATES=$((PHASE_2D_NUMBER_OF_DUPLICATES+PHASE_1D_NUMBER_OF_DUPLICATES+PHASE_0D_NUMBER_OF_DUPLICATES))
-TOTAL_NUMBER_OF_RESULTS=$((PHASE_2D_NUMBER_OF_RESULTS+PHASE_1D_NUMBER_OF_RESULTS+PHASE_0D_NUMBER_OF_RESULTS))
-TOTAL_NUMBER_OF_REFINED=$((PHASE_2D_NUMBER_OF_REFINED+PHASE_1D_NUMBER_OF_REFINED+PHASE_0D_NUMBER_OF_REFINED))
+TOTAL_NUMBER_OF_MODELS=$((PHASE_2D_NUMBER_OF_MODELS+PHASE_1D_NUMBER_OF_MODELS))
+TOTAL_NUMBER_OF_SPURIOUS=$((PHASE_2D_NUMBER_OF_SPURIOUS+PHASE_1D_NUMBER_OF_SPURIOUS))
+TOTAL_NUMBER_OF_CONSISTENT=$((PHASE_2D_NUMBER_OF_CONSISTENT+PHASE_1D_NUMBER_OF_CONSISTENT))
+TOTAL_NUMBER_OF_DEPTH=$((PHASE_2D_NUMBER_OF_DEPTH+PHASE_1D_NUMBER_OF_DEPTH))
+TOTAL_NUMBER_OF_EXECUTIONS=$((PHASE_2D_NUMBER_OF_EXECUTIONS+PHASE_1D_NUMBER_OF_EXECUTIONS))
+TOTAL_NUMBER_OF_DUPLICATES=$((PHASE_2D_NUMBER_OF_DUPLICATES+PHASE_1D_NUMBER_OF_DUPLICATES))
+TOTAL_NUMBER_OF_RESULTS=$((PHASE_2D_NUMBER_OF_RESULTS+PHASE_1D_NUMBER_OF_RESULTS))
+TOTAL_NUMBER_OF_REFINED=$((PHASE_2D_NUMBER_OF_REFINED+PHASE_1D_NUMBER_OF_REFINED))
 
 echo >> $LOGFILE
 echo "Total stats" >> $LOGFILE
@@ -593,15 +499,15 @@ printStatCounters "$TOTAL_NUMBER_OF_MODELS" "$TOTAL_NUMBER_OF_SPURIOUS" "$TOTAL_
 
 
 # create the results files
-cp ./abduction_output/0D/output-$MODELNAME-consistentAbductionsSummary.log ./abduction_output/result-$MODELNAME-summary.log
-cp ./abduction_output/0D/output-$MODELNAME-consistentAbductions.log ./abduction_output/result-$MODELNAME-detail.log
+cp ./abduction_output/1D/output-$MODELNAME-consistentAbductionsSummary.log ./abduction_output/result-$MODELNAME-summary.log
+cp ./abduction_output/1D/output-$MODELNAME-consistentAbductions.log ./abduction_output/result-$MODELNAME-detail.log
 
 # print the actual result of the initial query
-echo "Number of valid model witnesses for the initial query: $PHASE_0D_NUMBER_OF_RESULTS" >> $LOGFILE
+echo "Number of valid model witnesses for the initial query: $PHASE_1D_NUMBER_OF_RESULTS" >> $LOGFILE
 
 # output the final models in scasp style
 rm -f ./abduction_output/result-$MODELNAME-models.log
-if [ $PHASE_0D_NUMBER_OF_RESULTS -ge 1 ]; then
+if [ $PHASE_1D_NUMBER_OF_RESULTS -ge 1 ]; then
     # look up each model in its corresponding output file
     modelNumInFilePerLine=$(cat ./abduction_output/result-$MODELNAME-detail.log | sed "s|.*model number: [^;]*\([0-9][0-9]*\);|\1;|" | sed "s| from: ||")
     for modelNumInFile in $modelNumInFilePerLine; do
@@ -619,6 +525,5 @@ if $DEBUG; then exit
 else 
     rm -f ./abduction_output/2D/tmp-$MODELNAME-addition.tmp ./abduction_output/2D/tmp-$MODELNAME-executedBefore.tmp
     rm -f ./abduction_output/1D/tmp-$MODELNAME-addition.tmp ./abduction_output/1D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor1D.tmp
-    rm -f ./abduction_output/0D/tmp-$MODELNAME-addition.tmp ./abduction_output/0D/tmp-$MODELNAME-executedBefore.tmp ./tmp-query-$MODELNAME-extendedfor0D.tmp
     exit;
 fi
