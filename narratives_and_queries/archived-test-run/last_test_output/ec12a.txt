@@ -1,0 +1,17 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec12a.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(airinline_alarm,120),happens(alarm_to_off,120),happens(pump_stopped,120),holdsAfter(alarm_active,120),not_holdsAfter(pump_running,120).
+
+	ANSWER:	1 (in 286.053 ms)
+
+MODEL:
+{ happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(airinline_alarm,120),  happens(airinline_embolism_detected_valid,120),  happens(airinline_embolism_detected,120),  holdsAt(pump_running,120),  happens(pump_started,60),  initiates(pump_started,pump_running,60),  not_stoppedIn(60,pump_running,120),  happens(alarm_to_off,120),  happens(pump_stopped,120),  happens(any_alarm,120),  initiates(any_alarm,alarm_active,120),  not_stoppedIn(120,alarm_active,100000),  terminates(pump_stopped,pump_running,120),  not_startedIn(120,pump_running,100000) }
+BINDINGS:
+
+
+  real [m]  0.03 (avg of 5 runs)
+  real [s]  1.66 (avg of 5 runs)
+  user [s]  1.65
+  sys  [s]  0.01
+  mem  [MB] 27.66 (avg of 5 runs)
+  mem  [KB] 27663.20 (avg of 5 runs)

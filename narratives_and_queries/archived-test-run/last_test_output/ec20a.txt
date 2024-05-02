@@ -1,0 +1,13 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec20a.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,120),initiallyP(low_reservoir_treshold(Low)),holdsAt(drug_reservoir_contents(Low),120),happens(low_reservoir_warning,120),holdsAfter(basal_delivery_enabled,120),initiallyP(basal_flow_rate(F)),holdsAt(drug_flow_rate(F),121).
+
+no models
+
+
+  real [m]  0.03 (avg of 5 runs)
+  real [s]  2.00 (avg of 5 runs)
+  user [s]  1.96
+  sys  [s]  0.03
+  mem  [MB] 27.65 (avg of 5 runs)
+  mem  [KB] 27652 (avg of 5 runs)

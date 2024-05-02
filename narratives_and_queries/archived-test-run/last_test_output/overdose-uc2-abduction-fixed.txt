@@ -1,0 +1,11 @@
+./incremental_abduction.sh ../model-fixed.pl abducible_initiallyP_vtbi_hard_limit_V_P "" ./overdose-uc2-abduction.pl
+
+no models
+
+
+  real [m]  47.72 (avg of 5 runs)
+  real [s]  2863.14 (avg of 5 runs)
+  user [s]  2876.46
+  sys  [s]  22.13
+  mem  [MB] 35.73 (avg of 5 runs)
+  mem  [KB] 35727.20 (avg of 5 runs)

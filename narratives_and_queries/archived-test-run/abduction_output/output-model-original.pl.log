@@ -1,0 +1,419 @@
+DATE: Tue Apr 30 16:13:29 UTC 2024
+
+
+##########################################################################
+  2D abduction phase
+##########################################################################
+
+## execution time of run1-model2D: 4:59.95
+#2D.# Number of models:35
+#2D.# Model 2D.1 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.3 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.5 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.10 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.11 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.12 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.13 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.14 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.16 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.17 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.18 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.19 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.20 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.21 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.22 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.23 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.24 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.25 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.26 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.27 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.28 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.29 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.31 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.33 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.34 is spurious (failed to intersect abduction intervals)
+#2D.# Model 2D.35 is spurious (failed to intersect abduction intervals)
+
+#2D.# Model 2D.30 has already been executed before (or is about to be ex.) as Model 2D.15
+#2D.# Model 2D.32 has already been executed before (or is about to be ex.) as Model 2D.15
+
+#2D.# Initial models (renamed & internaly unique & globaly unique):
+#2D.# 2D.2:X1#>6,X1#<71/10,X2#>60,X2#<61
+#2D.# 2D.4:X1#>=71/10,X1#<595,X2#>61,X2#=<121
+#2D.# 2D.6:X1#>121/10,X1#<595,X2#>121,X2#<5950
+#2D.# 2D.7:X1#>=71/10,X1#<589,X2#>=61,X2#=<121
+#2D.# 2D.8:X1#>11/10,X1#<589,X2#>1,X2#<61
+#2D.# 2D.9:X1#>121/10,X1#<589,X2#>121,X2#<5880
+#2D.# 2D.15:X1#>11/10,X1#<71/10,X2#>1,X2#<61
+#2D.# execution time of run2-model2D.2: 1:21.98
+#2D.# Further refining model 2D.2
+    #2D.2.# Number of models:7
+
+    #2D.2.# Model 2D.2.2 has already been executed before (or is about to be ex.) as Model 2D.2.1
+    #2D.2.# Model 2D.2.3 has already been executed before (or is about to be ex.) as Model 2D.2.1
+    #2D.2.# Model 2D.2.4 has already been executed before (or is about to be ex.) as Model 2D.2.1
+    #2D.2.# Model 2D.2.5 has already been executed before (or is about to be ex.) as Model 2D.2.1
+    #2D.2.# Model 2D.2.6 has already been executed before (or is about to be ex.) as Model 2D.2.1
+    #2D.2.# Model 2D.2.7 has already been executed before (or is about to be ex.) as Model 2D.2.1
+
+    #2D.2.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.2.# 2D.2.1:X1#>7,X1#<71/10,X2#>60,X2#<61
+    #2D.2.# execution time of run3-model2D.2.1: 1:22.58
+    #2D.2.# Further refining model 2D.2.1
+        #2D.2.1.# Number of models:7
+        #2D.2.1.# Model 2D.2.1.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+        #2D.2.1.# Model 2D.2.1.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+        #2D.2.1.# Model 2D.2.1.4 is already consistent (see Model 4 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+        #2D.2.1.# Model 2D.2.1.5 is already consistent (see Model 5 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+        #2D.2.1.# Model 2D.2.1.6 is already consistent (see Model 6 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+        #2D.2.1.# Model 2D.2.1.7 is already consistent (see Model 7 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.2.1.log")
+
+
+        #2D.2.1.# Initial models (renamed & internaly unique & globaly unique):
+        #2D.2.1.# 2D.2.1.1:X1#>7,X1#<71/10,X2#>670/11,X2#<61
+        #2D.2.1.# execution time of run4-model2D.2.1.1: 1:19.23
+        #2D.2.1.# Further refining model 2D.2.1.1
+            #2D.2.1.1.# Number of models:7
+
+            #2D.2.1.1.# Model 2D.2.1.1.2 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+            #2D.2.1.1.# Model 2D.2.1.1.3 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+            #2D.2.1.1.# Model 2D.2.1.1.4 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+            #2D.2.1.1.# Model 2D.2.1.1.5 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+            #2D.2.1.1.# Model 2D.2.1.1.6 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+            #2D.2.1.1.# Model 2D.2.1.1.7 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1
+
+            #2D.2.1.1.# Initial models (renamed & internaly unique & globaly unique):
+            #2D.2.1.1.# 2D.2.1.1.1:X1#>78/11,X1#<71/10,X2#>670/11,X2#<61
+            #2D.2.1.1.# execution time of run5-model2D.2.1.1.1: 1:23.67
+            #2D.2.1.1.# Further refining model 2D.2.1.1.1
+                #2D.2.1.1.1.# Number of models:7
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.4 is already consistent (see Model 4 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.5 is already consistent (see Model 5 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.6 is already consistent (see Model 6 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+                #2D.2.1.1.1.# Model 2D.2.1.1.1.7 is already consistent (see Model 7 in "./abduction_output/2D/runs/output-model-original.pl-run5-model2D.2.1.1.1.log")
+
+
+                #2D.2.1.1.1.# Initial models (renamed & internaly unique & globaly unique):
+                #2D.2.1.1.1.# 2D.2.1.1.1.1:X1#>78/11,X1#<71/10,X2#>7380/121,X2#<61
+                #2D.2.1.1.1.# execution time of run6-model2D.2.1.1.1.1: 1:19.44
+                #2D.2.1.1.1.# Further refining model 2D.2.1.1.1.1
+                    #2D.2.1.1.1.1.# Number of models:7
+
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.2 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.3 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.4 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.5 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.6 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+                    #2D.2.1.1.1.1.# Model 2D.2.1.1.1.1.7 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1
+
+                    #2D.2.1.1.1.1.# Initial models (renamed & internaly unique & globaly unique):
+                    #2D.2.1.1.1.1.# 2D.2.1.1.1.1.1:X1#>859/121,X1#<71/10,X2#>7380/121,X2#<61
+                    #2D.2.1.1.1.1.# execution time of run7-model2D.2.1.1.1.1.1: 1:23.40
+                    #2D.2.1.1.1.1.# Further refining model 2D.2.1.1.1.1.1
+                        #2D.2.1.1.1.1.1.# Number of models:7
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.4 is already consistent (see Model 4 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.5 is already consistent (see Model 5 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.6 is already consistent (see Model 6 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+                        #2D.2.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.7 is already consistent (see Model 7 in "./abduction_output/2D/runs/output-model-original.pl-run7-model2D.2.1.1.1.1.1.log")
+
+
+                        #2D.2.1.1.1.1.1.# Initial models (renamed & internaly unique & globaly unique):
+                        #2D.2.1.1.1.1.1.# 2D.2.1.1.1.1.1.1:X1#>859/121,X1#<71/10,X2#>81190/1331,X2#<61
+                        #2D.2.1.1.1.1.1.# execution time of run8-model2D.2.1.1.1.1.1.1: 1:20.44
+                        #2D.2.1.1.1.1.1.# Further refining model 2D.2.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Number of models:7
+
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.2 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.3 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.4 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.5 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.6 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+                            #2D.2.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.7 has already been executed before (or is about to be ex.) as Model 2D.2.1.1.1.1.1.1.1
+
+                            #2D.2.1.1.1.1.1.1.# Initial models (renamed & internaly unique & globaly unique):
+                            #2D.2.1.1.1.1.1.1.# 2D.2.1.1.1.1.1.1.1:X1#>9450/1331,X1#<71/10,X2#>81190/1331,X2#<61
+                            #2D.2.1.1.1.1.1.1.# execution time of run9-model2D.2.1.1.1.1.1.1.1: 1:23.40
+                            #2D.2.1.1.1.1.1.1.# Further refining model 2D.2.1.1.1.1.1.1.1
+                                #2D.2.1.1.1.1.1.1.1.# Number of models:7
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.4 is already consistent (see Model 4 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.5 is already consistent (see Model 5 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.6 is already consistent (see Model 6 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+                                #2D.2.1.1.1.1.1.1.1.# Model 2D.2.1.1.1.1.1.1.1.7 is already consistent (see Model 7 in "./abduction_output/2D/runs/output-model-original.pl-run9-model2D.2.1.1.1.1.1.1.1.log")
+
+
+                                #2D.2.1.1.1.1.1.1.1.# Initial models (renamed & internaly unique & globaly unique):
+                                #2D.2.1.1.1.1.1.1.1.# 2D.2.1.1.1.1.1.1.1.1:X1#>9450/1331,X1#<71/10,X2#>893100/14641,X2#<61
+                                #2D.2.1.1.1.1.1.1.1.# execution time of run10-model2D.2.1.1.1.1.1.1.1.1: 1:20.90
+                                #2D.2.1.1.1.1.1.1.1.# Depth limit (10) reached on refinement of model 2D.2.1.1.1.1.1.1.1.1
+#2D.# execution time of run2-model2D.4: 0:49.17
+#2D.# Further refining model 2D.4
+    #2D.4.# Number of models:3
+
+    #2D.4.# Model 2D.4.2 has already been executed before (or is about to be ex.) as Model 2D.4.1
+    #2D.4.# Model 2D.4.3 has already been executed before (or is about to be ex.) as Model 2D.4.1
+
+    #2D.4.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.4.# 2D.4.1:X1#>=71/10,X1#<131/10,X2#>61,X2#=<121
+    #2D.4.# execution time of run3-model2D.4.1: 0:49.53
+    #2D.4.# Further refining model 2D.4.1
+        #2D.4.1.# Number of models:3
+        #2D.4.1.# Model 2D.4.1.1 is already consistent (see Model 1 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.4.1.log")
+        #2D.4.1.# Model 2D.4.1.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.4.1.log")
+        #2D.4.1.# Model 2D.4.1.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.4.1.log")
+
+
+        #2D.4.1.# Initial models (renamed & internaly unique & globaly unique):
+        #2D.4.1.# 
+#2D.# execution time of run2-model2D.6: 0:42.98
+#2D.# Further refining model 2D.6
+    #2D.6.# Number of models:3
+    #2D.6.# Model 2D.6.1 is already consistent (see Model 1 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.6.log")
+
+    #2D.6.# Model 2D.6.2 has already been executed before (or is about to be ex.) as Model 2D.9
+
+    #2D.6.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.6.# 2D.6.3:X1#>121/10,X1#<595,X2#>121,X2#<5940
+    #2D.6.# execution time of run3-model2D.6.3: 0:43.06
+    #2D.6.# Further refining model 2D.6.3
+        #2D.6.3.# Number of models:3
+        #2D.6.3.# Model 2D.6.3.1 is already consistent (see Model 1 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.6.3.log")
+        #2D.6.3.# Model 2D.6.3.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run3-model2D.6.3.log")
+
+        #2D.6.3.# Model 2D.6.3.2 has already been executed before (or is about to be ex.) as Model 2D.9
+
+        #2D.6.3.# Initial models (renamed & internaly unique & globaly unique):
+        #2D.6.3.# 
+#2D.# execution time of run2-model2D.7: 0:50.50
+#2D.# Further refining model 2D.7
+    #2D.7.# Number of models:3
+
+    #2D.7.# Model 2D.7.1 has already been executed before (or is about to be ex.) as Model 2D.4.1
+    #2D.7.# Model 2D.7.2 has already been executed before (or is about to be ex.) as Model 2D.4.1
+    #2D.7.# Model 2D.7.3 has already been executed before (or is about to be ex.) as Model 2D.4.1
+
+    #2D.7.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.7.# 
+#2D.# execution time of run2-model2D.8: 1:21.74
+#2D.# Further refining model 2D.8
+    #2D.8.# Number of models:7
+
+    #2D.8.# Model 2D.8.1 has already been executed before (or is about to be ex.) as Model 2D.2
+    #2D.8.# Model 2D.8.2 has already been executed before (or is about to be ex.) as Model 2D.15
+    #2D.8.# Model 2D.8.3 has already been executed before (or is about to be ex.) as Model 2D.15
+    #2D.8.# Model 2D.8.4 has already been executed before (or is about to be ex.) as Model 2D.15
+    #2D.8.# Model 2D.8.5 has already been executed before (or is about to be ex.) as Model 2D.15
+    #2D.8.# Model 2D.8.6 has already been executed before (or is about to be ex.) as Model 2D.15
+    #2D.8.# Model 2D.8.7 has already been executed before (or is about to be ex.) as Model 2D.15
+
+    #2D.8.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.8.# 
+#2D.# execution time of run2-model2D.9: 0:44.31
+#2D.# Further refining model 2D.9
+    #2D.9.# Number of models:3
+    #2D.9.# Model 2D.9.1 is already consistent (see Model 1 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.9.log")
+    #2D.9.# Model 2D.9.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.9.log")
+    #2D.9.# Model 2D.9.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.9.log")
+
+
+    #2D.9.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.9.# 
+#2D.# execution time of run2-model2D.15: 1:26.54
+#2D.# Further refining model 2D.15
+    #2D.15.# Number of models:7
+    #2D.15.# Model 2D.15.2 is already consistent (see Model 2 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+    #2D.15.# Model 2D.15.3 is already consistent (see Model 3 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+    #2D.15.# Model 2D.15.4 is already consistent (see Model 4 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+    #2D.15.# Model 2D.15.5 is already consistent (see Model 5 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+    #2D.15.# Model 2D.15.6 is already consistent (see Model 6 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+    #2D.15.# Model 2D.15.7 is already consistent (see Model 7 in "./abduction_output/2D/runs/output-model-original.pl-run2-model2D.15.log")
+
+    #2D.15.# Model 2D.15.1 has already been executed before (or is about to be ex.) as Model 2D.2
+
+    #2D.15.# Initial models (renamed & internaly unique & globaly unique):
+    #2D.15.# 
+
+2D phase stats
+  N models
+      total:        123
+      refined:      18
+      duplicates:   41
+      spurions:     26
+      consistent:   39
+  depth limit
+      set to:       10
+      N reached:    1
+  N results:    9
+
+DATE: Tue Apr 30 16:38:39 UTC 2024
+
+
+##########################################################################
+  1D abduction phase
+##########################################################################
+
+## execution time of run1-model1D1: 1:15.69
+    #1D1.# Number of models:6
+    #1D1.# Model 1D1.1 is spurious (failed to intersect abduction intervals)
+    #1D1.# Model 1D1.2 is spurious (failed to intersect abduction intervals)
+    #1D1.# Model 1D1.3 is spurious (failed to intersect abduction intervals)
+    #1D1.# Model 1D1.4 is spurious (failed to intersect abduction intervals)
+    #1D1.# Model 1D1.5 is spurious (failed to intersect abduction intervals)
+    #1D1.# Model 1D1.6 is spurious (failed to intersect abduction intervals)
+
+
+    #1D1.# Initial models (renamed & internaly unique & globaly unique):
+    #1D1.# 
+## execution time of run1-model1D2: 1:16.44
+    #1D2.# Number of models:6
+    #1D2.# Model 1D2.1 is spurious (failed to intersect abduction intervals)
+    #1D2.# Model 1D2.2 is spurious (failed to intersect abduction intervals)
+    #1D2.# Model 1D2.3 is spurious (failed to intersect abduction intervals)
+    #1D2.# Model 1D2.4 is spurious (failed to intersect abduction intervals)
+    #1D2.# Model 1D2.5 is spurious (failed to intersect abduction intervals)
+    #1D2.# Model 1D2.6 is spurious (failed to intersect abduction intervals)
+
+
+    #1D2.# Initial models (renamed & internaly unique & globaly unique):
+    #1D2.# 
+## execution time of run1-model1D3: 1:18.15
+    #1D3.# Number of models:6
+    #1D3.# Model 1D3.1 is spurious (failed to intersect abduction intervals)
+    #1D3.# Model 1D3.2 is spurious (failed to intersect abduction intervals)
+    #1D3.# Model 1D3.3 is spurious (failed to intersect abduction intervals)
+    #1D3.# Model 1D3.4 is spurious (failed to intersect abduction intervals)
+    #1D3.# Model 1D3.5 is spurious (failed to intersect abduction intervals)
+    #1D3.# Model 1D3.6 is spurious (failed to intersect abduction intervals)
+
+
+    #1D3.# Initial models (renamed & internaly unique & globaly unique):
+    #1D3.# 
+## execution time of run1-model1D4: 1:21.96
+    #1D4.# Number of models:6
+    #1D4.# Model 1D4.1 is spurious (failed to intersect abduction intervals)
+    #1D4.# Model 1D4.2 is spurious (failed to intersect abduction intervals)
+    #1D4.# Model 1D4.3 is spurious (failed to intersect abduction intervals)
+    #1D4.# Model 1D4.4 is spurious (failed to intersect abduction intervals)
+    #1D4.# Model 1D4.5 is spurious (failed to intersect abduction intervals)
+    #1D4.# Model 1D4.6 is spurious (failed to intersect abduction intervals)
+
+
+    #1D4.# Initial models (renamed & internaly unique & globaly unique):
+    #1D4.# 
+## execution time of run1-model1D5: 1:12.26
+    #1D5.# Number of models:6
+    #1D5.# Model 1D5.1 is spurious (failed to intersect abduction intervals)
+    #1D5.# Model 1D5.2 is spurious (failed to intersect abduction intervals)
+    #1D5.# Model 1D5.3 is spurious (failed to intersect abduction intervals)
+    #1D5.# Model 1D5.4 is spurious (failed to intersect abduction intervals)
+    #1D5.# Model 1D5.5 is spurious (failed to intersect abduction intervals)
+    #1D5.# Model 1D5.6 is spurious (failed to intersect abduction intervals)
+
+
+    #1D5.# Initial models (renamed & internaly unique & globaly unique):
+    #1D5.# 
+## execution time of run1-model1D6: 0:41.85
+    #1D6.# Number of models:3
+
+    #1D6.# Model 1D6.2 has already been executed before (or is about to be ex.) as Model 1D6.1
+    #1D6.# Model 1D6.3 has already been executed before (or is about to be ex.) as Model 1D6.1
+
+    #1D6.# Initial models (renamed & internaly unique & globaly unique):
+    #1D6.# 1D6.1:X1#>=91/10,X1#<101/10,X2=91
+    #1D6.# execution time of run2-model1D6.1: 0:41.56
+    #1D6.# Further refining model 1D6.1
+        #1D6.1.# Number of models:3
+        #1D6.1.# Model 1D6.1.1 is already consistent (see Model 1 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log")
+        #1D6.1.# Model 1D6.1.2 is already consistent (see Model 2 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log")
+        #1D6.1.# Model 1D6.1.3 is already consistent (see Model 3 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log")
+
+
+        #1D6.1.# Initial models (renamed & internaly unique & globaly unique):
+        #1D6.1.# 
+## execution time of run1-model1D7: 0:45.04
+    #1D7.# Number of models:3
+
+    #1D7.# Model 1D7.2 has already been executed before (or is about to be ex.) as Model 1D7.1
+    #1D7.# Model 1D7.3 has already been executed before (or is about to be ex.) as Model 1D7.1
+
+    #1D7.# Initial models (renamed & internaly unique & globaly unique):
+    #1D7.# 1D7.1:X1#>=6001/20,X1#<6021/20,X2=6001/2
+    #1D7.# execution time of run2-model1D7.1: 0:44.55
+    #1D7.# Further refining model 1D7.1
+        #1D7.1.# Number of models:3
+        #1D7.1.# Model 1D7.1.1 is already consistent (see Model 1 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log")
+        #1D7.1.# Model 1D7.1.2 is already consistent (see Model 2 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log")
+        #1D7.1.# Model 1D7.1.3 is already consistent (see Model 3 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log")
+
+
+        #1D7.1.# Initial models (renamed & internaly unique & globaly unique):
+        #1D7.1.# 
+## execution time of run1-model1D8: 0:45.75
+    #1D8.# Number of models:3
+
+    #1D8.# Model 1D8.2 has already been executed before (or is about to be ex.) as Model 1D8.1
+    #1D8.# Model 1D8.3 has already been executed before (or is about to be ex.) as Model 1D8.1
+
+    #1D8.# Initial models (renamed & internaly unique & globaly unique):
+    #1D8.# 1D8.1:X1#>=6061/20,X1#<6081/20,X2=6061/2
+    #1D8.# execution time of run2-model1D8.1: 0:43.71
+    #1D8.# Further refining model 1D8.1
+        #1D8.1.# Number of models:3
+        #1D8.1.# Model 1D8.1.1 is already consistent (see Model 1 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log")
+        #1D8.1.# Model 1D8.1.2 is already consistent (see Model 2 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log")
+        #1D8.1.# Model 1D8.1.3 is already consistent (see Model 3 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log")
+
+
+        #1D8.1.# Initial models (renamed & internaly unique & globaly unique):
+        #1D8.1.# 
+## execution time of run1-model1D9: 0:43.01
+    #1D9.# Number of models:3
+
+    #1D9.# Model 1D9.2 has already been executed before (or is about to be ex.) as Model 1D9.1
+    #1D9.# Model 1D9.3 has already been executed before (or is about to be ex.) as Model 1D9.1
+
+    #1D9.# Initial models (renamed & internaly unique & globaly unique):
+    #1D9.# 1D9.1:X1#>=6071/20,X1#<6091/20,X2=6071/2
+    #1D9.# execution time of run2-model1D9.1: 0:45.47
+    #1D9.# Further refining model 1D9.1
+        #1D9.1.# Number of models:3
+        #1D9.1.# Model 1D9.1.1 is already consistent (see Model 1 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log")
+        #1D9.1.# Model 1D9.1.2 is already consistent (see Model 2 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log")
+        #1D9.1.# Model 1D9.1.3 is already consistent (see Model 3 in "./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log")
+
+
+        #1D9.1.# Initial models (renamed & internaly unique & globaly unique):
+        #1D9.1.# 
+
+1D phase stats
+  N models
+      total:        54
+      refined:      13
+      duplicates:   8
+      spurions:     30
+      consistent:   12
+  depth limit
+      set to:       10
+      N reached:    0
+  N results:    4
+
+DATE: Tue Apr 30 16:51:07 UTC 2024
+
+Total stats
+  N models
+      total:        177
+      refined:      31
+      duplicates:   49
+      spurions:     56
+      consistent:   51
+  depth limit
+      set to:       10
+      N reached:    1
+  N results:    13
+
+Number of valid model witnesses for the initial query: 4

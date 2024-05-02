@@ -1,0 +1,12 @@
+abduction: X1#>=91/10,X1#<101/10,X2.=.91; model number: 1D6.1.1; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log
+abduction: X1#>=91/10,X1#<101/10,X2.=.91; model number: 1D6.1.2; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log
+abduction: X1#>=91/10,X1#<101/10,X2.=.91; model number: 1D6.1.3; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D6.1.log
+abduction: X1#>=6001/20,X1#<6021/20,X2.=.6001/2; model number: 1D7.1.1; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log
+abduction: X1#>=6001/20,X1#<6021/20,X2.=.6001/2; model number: 1D7.1.2; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log
+abduction: X1#>=6001/20,X1#<6021/20,X2.=.6001/2; model number: 1D7.1.3; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D7.1.log
+abduction: X1#>=6061/20,X1#<6081/20,X2.=.6061/2; model number: 1D8.1.1; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log
+abduction: X1#>=6061/20,X1#<6081/20,X2.=.6061/2; model number: 1D8.1.2; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log
+abduction: X1#>=6061/20,X1#<6081/20,X2.=.6061/2; model number: 1D8.1.3; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D8.1.log
+abduction: X1#>=6071/20,X1#<6091/20,X2.=.6071/2; model number: 1D9.1.1; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log
+abduction: X1#>=6071/20,X1#<6091/20,X2.=.6071/2; model number: 1D9.1.2; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log
+abduction: X1#>=6071/20,X1#<6091/20,X2.=.6071/2; model number: 1D9.1.3; from: ./abduction_output/1D/runs/output-model-original.pl-run2-model1D9.1.log

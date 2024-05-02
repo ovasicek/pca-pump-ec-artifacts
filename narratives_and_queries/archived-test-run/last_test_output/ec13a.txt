@@ -1,0 +1,13 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec13a.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- happens(max_dose_warning,T),happens(kvo_delivery_started,T).
+
+no models
+
+
+  real [m]  0.30 (avg of 5 runs)
+  real [s]  17.96 (avg of 5 runs)
+  user [s]  18.15
+  sys  [s]  0.04
+  mem  [MB] 28.64 (avg of 5 runs)
+  mem  [KB] 28638.40 (avg of 5 runs)

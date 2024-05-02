@@ -1,0 +1,12 @@
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- T #> 60,T #< 6000,X #> 0,vtbi_hard_limit_exceeded_at_T_by_X(T,X).
+
+no models
+
+
+  real      0:37.74
+  real [s]  37.74
+  user [s]  37.67
+  sys  [s]  0.05
+  mem  [KB] 30224
+  avgm [KB] 0

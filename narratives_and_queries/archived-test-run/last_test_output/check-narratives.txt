@@ -1,0 +1,437 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./uc1.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.488 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc2.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.453 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc3a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.424 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc3b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.443 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc7a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.412 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc7b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.296 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./uc7c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.359 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec1.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.302 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.365 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.376 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.373 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7d.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.317 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7e.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.326 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7f.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.494 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec8a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.378 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec8b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.337 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec8c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.369 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec9a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.359 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec9b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.413 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec9c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.429 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec10a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.375 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec10b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.388 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec10c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.481 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec11a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.409 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec11b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.392 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec11c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.327 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec12a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.358 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec12b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.382 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec12c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.479 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec13a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.403 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec13b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.582 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec13c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.514 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec20a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.291 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(7)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec20b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.404 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(7.5)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec20c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.489 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(7.5)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./ec21.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.388 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(7)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./overdose-ec13a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.402 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-fixed-wcache.pl ./overdose-ec13a.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.578 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./overdose-ec13b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.515 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-nomaxdose-wcache.pl ./overdose-ec13b.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.456 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./overdose-ec13c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.894 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-nomaxdose-wcache.pl ./overdose-ec13c.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.391 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(100)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+scasp -s0 --dcc ../model-original-wcache.pl ./empty_reserv-uc2-onerun.pl ./check_narrative.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- query_check_narrative_fluents.
+
+	ANSWER:	1 (in 5.502 ms)
+
+MODEL:
+{ initiallyP(pump_flow_rate_max_MlperHour(100)),  initiallyP(basal_flow_rate_min_MlperHour(1)),  initiallyP(basal_flow_rate_max_MlperHour(10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(kvo_flow_rate_MlperHour(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(min_t_between_patient_bolus(30)),  initiallyP(vtbi_hard_max(60)),  initiallyP(vtbi(1)),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(initial_drug_reservoir_contents(8.5)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(initial_total_drug_delivered(0)),  initiallyP(initial_total_bolus_drug_delivered(0)),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS:
+
+
+  real [m]  0.99 (avg of 5 runs)
+  real [s]  59.38 (avg of 5 runs)
+  user [s]  57.98
+  sys  [s]  1.33
+  mem  [MB] 27.77 (avg of 5 runs)
+  mem  [KB] 27772.80 (avg of 5 runs)

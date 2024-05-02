@@ -1,0 +1,18 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec9b.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,T1),T1 #= 119+1/2,happens(patient_bolus_delivery_started,T1),happens(pump_overheated_alarm,120),happens(alarm_to_off,120),happens(pump_stopped,120),holdsAfter(alarm_active,120),not_holdsAfter(pump_running,120).
+
+	ANSWER:	1 (in 1460.179 ms)
+
+MODEL:
+{ happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,239/2),  happens(basal_delivery_stopped,239/2),  happens(patient_bolus_delivery_started,239/2),  happens(patient_bolus_requested_valid,239/2),  happens(patient_bolus_requested,239/2),  holdsAt(basal_delivery_enabled,239/2),  not_happens(patient_bolus_denied_too_soon,239/2),  terminates(basal_delivery_stopped,basal_delivery_enabled,239/2),  happens(pump_overheated_alarm,120),  happens(pump_temperature_over_55C_valid,120),  happens(pump_temperature_over_55C,120),  holdsAt(pump_running,120),  happens(alarm_to_off,120),  happens(pump_stopped,120),  happens(any_alarm,120),  initiates(any_alarm,alarm_active,120),  not_stoppedIn(120,alarm_active,100000),  terminates(pump_stopped,pump_running,120),  not_startedIn(120,pump_running,100000) }
+BINDINGS: 
+T1 = 239/2
+
+
+  real [m]  0.05 (avg of 5 runs)
+  real [s]  2.87 (avg of 5 runs)
+  user [s]  2.83
+  sys  [s]  0.03
+  mem  [MB] 27.94 (avg of 5 runs)
+  mem  [KB] 27936 (avg of 5 runs)

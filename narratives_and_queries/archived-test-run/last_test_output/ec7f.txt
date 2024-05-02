@@ -1,0 +1,13 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec7f.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,118),happens(clinician_bolus_delivery_started(30),118),happens(clinician_bolus_over_infusion_alarm,120),happens(alarm_to_kvo,120),happens(clinician_bolus_halted,120),happens(kvo_delivery_started,120),holdsAfter(kvo_delivery_enabled,120),holdsAfter(alarm_active,120),not_holdsAfter(pump_running,120).
+
+no models
+
+
+  real [m]  0.07 (avg of 5 runs)
+  real [s]  3.99 (avg of 5 runs)
+  user [s]  3.98
+  sys  [s]  0.01
+  mem  [MB] 27.91 (avg of 5 runs)
+  mem  [KB] 27908 (avg of 5 runs)

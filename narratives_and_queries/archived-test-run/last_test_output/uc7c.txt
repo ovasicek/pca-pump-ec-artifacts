@@ -1,0 +1,17 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./uc7c.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,118),happens(clinician_bolus_requested(30),118),holdsIn(clinician_bolus_delivery_enabled,118,120),happens(pump_stopped,120),happens(clinician_bolus_delivery_stopped,120),not_holdsIn(pump_running,120,240),happens(pump_started,240),happens(basal_delivery_started,240),holdsAfter(pump_running,240),holdsAfter(basal_delivery_enabled,240).
+
+	ANSWER:	1 (in 2157.562 ms)
+
+MODEL:
+{ happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,118),  happens(clinician_bolus_requested(30),118),  happens(clinician_bolus_delivery_started(30),118),  happens(clinician_bolus_requested_valid(30),118),  initiallyP(min_t_between_patient_bolus(30)),  holdsAt(basal_delivery_enabled,118),  initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled,118),  not_stoppedIn(118,clinician_bolus_delivery_enabled,120),  happens(pump_stopped,120),  happens(stop_button_pressed_valid,120),  happens(stop_button_pressed,120),  holdsAt(pump_running,120),  happens(pump_started,60),  initiates(pump_started,pump_running,60),  not_stoppedIn(60,pump_running,120),  happens(clinician_bolus_delivery_stopped,120),  happens(clinician_bolus_halted,120),  holdsAt(clinician_bolus_delivery_enabled,120),  terminates(pump_stopped,pump_running,120),  not_startedIn(120,pump_running,240),  happens(pump_started,240),  happens(start_button_pressed_valid,240),  happens(start_button_pressed,240),  not_holdsAt(pump_running,240),  not_holdsAt(alarm_active,240),  not_startedIn(0,alarm_active,240),  happens(basal_delivery_started,240),  initiates(pump_started,pump_running,240),  not_stoppedIn(240,pump_running,100000),  initiates(basal_delivery_started,basal_delivery_enabled,240),  not_stoppedIn(240,basal_delivery_enabled,100000) }
+BINDINGS:
+
+
+  real [m]  0.06 (avg of 5 runs)
+  real [s]  3.56 (avg of 5 runs)
+  user [s]  3.52
+  sys  [s]  0.01
+  mem  [MB] 27.92 (avg of 5 runs)
+  mem  [KB] 27915.20 (avg of 5 runs)

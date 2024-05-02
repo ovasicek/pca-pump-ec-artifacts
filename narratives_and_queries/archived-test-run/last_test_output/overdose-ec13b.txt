@@ -1,0 +1,13 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./overdose-ec13b.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- vtbi_hard_limit_exceeded_at_T_by_X(T,X).
+
+no models
+
+
+  real [m]  13.92 (avg of 5 runs)
+  real [s]  835.45 (avg of 5 runs)
+  user [s]  829.26
+  sys  [s]  0.06
+  mem  [MB] 31.60 (avg of 5 runs)
+  mem  [KB] 31600 (avg of 5 runs)

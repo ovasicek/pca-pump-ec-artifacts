@@ -1,0 +1,25 @@
+scasp -s0 ./cn1.pl
+% QUERY:?- not initiallyP(flow_rate(X)).
+
+	ANSWER:	1 (in 1.514 ms)
+
+MODEL:
+{ not initiallyP(flow_rate(X | {X #< 1/10})),  not initiallyP(flow_rate_PerHour(Var1 | {Var1 \= 6})),  initiallyP(flow_rate_PerHour(6)) }
+BINDINGS: 
+X #< 1/10
+
+
+	ANSWER:	2 (in 11.958 ms)
+
+MODEL:
+{ not initiallyP(flow_rate(X | {X #> 1/10})),  initiallyP(flow_rate_PerHour(6)),  not initiallyP(flow_rate_PerHour(Var1 | {Var1 \= 6})) }
+BINDINGS: 
+X #> 1/10
+
+
+  real [m]  0.00 (avg of 5 runs)
+  real [s]  0.18 (avg of 5 runs)
+  user [s]  0.16
+  sys  [s]  0.02
+  mem  [MB] 23.85 (avg of 5 runs)
+  mem  [KB] 23848 (avg of 5 runs)

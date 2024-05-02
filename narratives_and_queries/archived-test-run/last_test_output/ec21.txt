@@ -1,0 +1,19 @@
+scasp -s0 --dcc ../model-original-wcache.pl ./ec21.pl
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,120),initiallyP(low_reservoir_treshold(Low)),holdsAt(drug_reservoir_contents(Low),120),happens(low_reservoir_warning,120),initiallyP(empty_reservoir_treshold(Empty)),holdsAt(drug_reservoir_contents(Empty),150),happens(empty_reservoir_alarm,150),holdsAfter(alarm_active,150),not_holdsAfter(pump_running,150),holdsAt(drug_flow_rate(0),151).
+
+	ANSWER:	1 (in 38227.572 ms)
+
+MODEL:
+{ happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  initiallyP(low_reservoir_treshold(1)),  holdsAt(drug_reservoir_contents(1),120),  initiallyP(initial_drug_reservoir_contents(7)),  holdsAt(total_drug_delivered(6),120),  trajectory(basal_delivery_enabled,60,total_drug_delivered(6),120),  initiallyP(basal_flow_rate(1/10)),  initiallyP(basal_flow_rate_MlperHour(6)),  holdsAt(total_drug_delivered(0),60),  initiallyP(pump_not_running),  trajectory(pump_not_running,0,total_drug_delivered(0),60),  initiallyP(initial_total_drug_delivered(0)),  not_stoppedIn(0,pump_not_running,60),  happens(low_reservoir_warning,120),  happens(basal_halted_low_reservoir,120),  initiallyP(empty_reservoir_treshold(1/2)),  holdsAt(drug_reservoir_contents(1/2),150),  holdsAt(total_drug_delivered(13/2),150),  happens(kvo_delivery_started,120),  happens(basal_halted_low_reservoir_EFFECT,120),  initiates(kvo_delivery_started,kvo_delivery_enabled,120),  trajectory(kvo_delivery_enabled,120,total_drug_delivered(13/2),150),  initiallyP(kvo_flow_rate(1/60)),  initiallyP(kvo_flow_rate_MlperHour(1)),  not_stoppedIn(120,kvo_delivery_enabled,150),  happens(empty_reservoir_alarm,150),  happens(kvo_halted_empty_reservoir,150),  happens(low_reservoir_warning_EFFECT,120),  happens(empty_reservoir_alarm_EFFECT,150),  initiates(empty_reservoir_alarm_EFFECT,alarm_active,150),  not_stoppedIn(150,alarm_active,100000),  happens(pump_stopped,150),  terminates(pump_stopped,pump_running,150),  not_startedIn(150,pump_running,100000),  holdsAt(drug_flow_rate(0),151),  holdsAt(pump_not_running,151),  initiates(pump_stopped,pump_not_running,150),  not_stoppedIn(150,pump_not_running,151),  initiallyP(initial_drug_flow_rate(0)) }
+BINDINGS: 
+Low = 1 
+Empty = 1/2
+
+
+  real [m]  0.68 (avg of 5 runs)
+  real [s]  40.67 (avg of 5 runs)
+  user [s]  39.61
+  sys  [s]  0.03
+  mem  [MB] 28.05 (avg of 5 runs)
+  mem  [KB] 28053.60 (avg of 5 runs)
