@@ -18,13 +18,13 @@
 
 
 % constant trajectories for pump_not_running
-    or_trajectory(pump_not_running, 0, total_drug_delivered(TotalDelivered), T2) :-
+    or_trajectory(pump_not_running, 0, total_drug_delivered(TotalDelivered), T2) :- %//NO_PREPROCESS
         initiallyP(initial_total_drug_delivered(TotalDelivered)).  % constant
     or_trajectory(pump_not_running, T1, total_drug_delivered(TotalDelivered), T2) :-
         T1 .>. 0,
         holdsAt(total_drug_delivered(TotalDelivered), T1).  % constant
 
-    or_trajectory(pump_not_running, 0, total_bolus_drug_delivered(TotalBolusDelivered), T2) :-
+    or_trajectory(pump_not_running, 0, total_bolus_drug_delivered(TotalBolusDelivered), T2) :- %//NO_PREPROCESS
         initiallyP(initial_total_bolus_drug_delivered(TotalBolusDelivered)).
     or_trajectory(pump_not_running, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2) :-
         T1 .>. 0,

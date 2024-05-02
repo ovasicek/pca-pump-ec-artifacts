@@ -38,7 +38,5 @@
     can_trajectory(patient_bolus_delivery_enabled, T1, patient_bolus_drug_delivered(VtbiDrugRes), T2).
     can_trajectory(patient_bolus_delivery_enabled, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
     can_trajectory(patient_bolus_delivery_enabled, T1, total_drug_delivered(TotalDelivered), T2).
-    can_trajectory(pump_not_running, 0, total_bolus_drug_delivered(TotalBolusDelivered), T2).
-    can_trajectory(pump_not_running, 0, total_drug_delivered(TotalDelivered), T2).
     can_trajectory(pump_not_running, T1, total_bolus_drug_delivered(TotalBolusDelivered), T2).
     can_trajectory(pump_not_running, T1, total_drug_delivered(TotalDelivered), T2).
