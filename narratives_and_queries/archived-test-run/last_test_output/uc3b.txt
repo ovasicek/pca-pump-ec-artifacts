@@ -1,6 +1,6 @@
 scasp -s0 --dcc ../model-original-wcache.pl ./uc3b.pl
 NOTE: DCC activates the use of the --prev_forall implementation
-% QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(clinician_bolus_delivery_started(30),120),happens(patient_bolus_delivery_started,130),happens(clinician_bolus_suspended(30),130),happens(patient_bolus_completed,T2),happens(resumed_clinician_bolus_delivery_started(30),T2),happens(clinician_bolus_completed,T3),initiallyP(vtbi(X1)),holdsAt(clinician_bolus_drug_delivered(X1),T3),30 #= T3-(120+(T2-130)),not_happensInInc(clinician_bolus_halted_max_dose,120,T3),happens(basal_delivery_started,T3),holdsAfter(basal_delivery_enabled,T3).
+% QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(clinician_bolus_delivery_started(30),120),happens(patient_bolus_delivery_started,130),happens(clinician_bolus_suspended(30),130),happens(patient_bolus_completed,T2),happens(clinician_bolus_resumed(30),T2),happens(clinician_bolus_completed,T3),initiallyP(vtbi(X1)),holdsAt(clinician_bolus_drug_delivered(X1),T3),30 #= T3-(120+(T2-130)),not_happensInInc(clinician_bolus_halted_max_dose,120,T3),happens(basal_delivery_started,T3),holdsAfter(basal_delivery_enabled,T3).
 
 no models
 
