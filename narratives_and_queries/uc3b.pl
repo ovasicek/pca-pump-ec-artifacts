@@ -34,7 +34,7 @@ or_happens(patient_bolus_requested,                             130).   % Step 5
     ?- happens(clinician_bolus_suspended(30),                   130).   % Step 5 -- interrupted
 
     ?- happens(patient_bolus_completed,                         T2),    % Step 5 -- resumed
-       happens(clinician_bolus_resumed(30),    T2).
+       happens(clinician_bolus_resumed(30),                     T2).
 
 
     ?- happens(clinician_bolus_completed,                       T3),    % Step 5
@@ -59,7 +59,7 @@ or_happens(patient_bolus_requested,                             130).   % Step 5
     happens(patient_bolus_delivery_started,                     130),
     happens(clinician_bolus_suspended(30),                      130),
     happens(patient_bolus_completed,                            T2),
-    happens(clinician_bolus_resumed(30),       T2)./*,
+    happens(clinician_bolus_resumed(30),                        T2),
 
     happens(clinician_bolus_completed,                          T3),
     initiallyP(vtbi(X1)),                                            
