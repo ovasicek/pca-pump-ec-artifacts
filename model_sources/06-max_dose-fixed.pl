@@ -61,6 +61,7 @@ total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowSta
     total_drug_in_vtbi_window_assume_basal(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),                 %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                           %! <<< diff
+    %%%holdsAt(total_bolus_drug_delivered(TotalBolus), T2).                           % this would cause non-termination
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsAfterT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % needs a different implementation of "total_drug_in_vtbi_window_assume_basal"
         initiallyP(basal_flow_rate(BasalRate)),                                                                         %! <<< diff
@@ -75,3 +76,4 @@ total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowSta
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_bolus_drug_delivered(TotalBolusDrugAtStartPeriod), TstartVtbiPeriodCropped, clinician_bolus_delivery_enabled(_)), %! <<< diff
     holdsAt(total_bolus_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                           %! <<< diff
+    %%%holdsAt(total_bolus_drug_delivered(TotalBolus), T2).                           % this would cause non-termination

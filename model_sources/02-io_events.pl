@@ -57,6 +57,7 @@ event(clinician_bolus_completed).               % automatic end of bolus after d
 event(clinician_bolus_halted).                  % premature end of bolus 
     event(clinician_bolus_halted_max_dose).     %   - due to reaching max dose
 event(clinician_bolus_suspended(OriginalDuration)).
+event(clinician_bolus_resumed(OriginalDuration)).
 
 % alarms caused by the logic of the system (deducible by the model)
 event(max_dose_warning).

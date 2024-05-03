@@ -1,0 +1,49 @@
+NOTE: DCC activates the use of the --prev_forall implementation
+% QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(clinician_bolus_delivery_started(30),120),happens(clinician_bolus_completed,T2),initiallyP(vtbi(VTBI)),holdsAt(clinician_bolus_drug_delivered(VTBI),T2),30 #= T2-120,not_happensInInc(clinician_bolus_halted_max_dose,120,T2),happens(basal_delivery_started,T2),holdsAfter(basal_delivery_enabled,T2).
+
+
+--------------------- Calling:  builtin(!spy) -------------
+happens(clinician_bolus_completed,150)
+    proved(initiallyP(vtbi(1)))
+    holdsAt(clinician_bolus_drug_delivered(1),150,clinician_bolus_delivery_enabled(30))
+        happens(clinician_bolus_delivery_started(30),120)
+        initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled(30),120)
+        trajectory(clinician_bolus_delivery_enabled(30),120,clinician_bolus_drug_delivered(1),150)
+        not_stoppedIn(120,clinician_bolus_delivery_enabled(30),150)
+            not_terminated(clinician_bolus_delivery_enabled(30),[clinician_bolus_delivery_stopped],120,150)
+                term(clinician_bolus_delivery_stopped,clinician_bolus_delivery_enabled(30), {_8135~[_8135 > 120, _8135 < 150]} ,120,150)
+                    happens(clinician_bolus_delivery_stopped, {_8135~[_8135 > 120, _8135 < 150]} )
+                        happens(clinician_bolus_halted, {_8135~[_8135 > 120, _8135 < 150]} )
+
+# loop 1 #                  happens(clinician_bolus_halted_max_dose, {_8135~[_8135 > 120, _8135 < 150]} )
+                                happens(clinician_bolus_delivery_started(30),120)
+                                not_happensIn(clinician_bolus_delivery_started,120, {_8135~[_8135 > 120, _8135 < 150]} )
+                                initiallyP(vtbi_hard_limit_over_time(,240))
+                                    total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(120, {_8135~[_8135 > 120, _8135 < 150]} ,,240)
+                                        total_drug_in_vtbi_window( {_8135~[_8135 > 120, _8135 < 150]} ,,240,)
+                                        holdsAt(total_drug_delivered(), {_8135~[_8135 > 120, _8135 < 150]} )
+                                            happens(kvo_delivery_started, {_9916~[_9916 > 120, _9916 < 150]} )
+                                                happens(max_dose_warning, {_9916~[_9916 > 120, _9916 < 150]} )
+                                                
+# loop 2 #                                          happens(clinician_bolus_halted_max_dose, {_9916~[_9916 > 120, _9916 < 150]} )
+                                                        happens(clinician_bolus_delivery_started(30),120)
+                                                        not_happensIn(clinician_bolus_delivery_started,120, {_9916~[_9916 > 120, _9916 < 150]} )
+                                                        initiallyP(vtbi_hard_limit_over_time(,240))
+                                                            total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(120, {_9916~[_9916 > 120, _9916 < 150]} ,,240)
+                                                                total_drug_in_vtbi_window( {_9916~[_9916 > 120, _9916 < 150]} ,,240,)
+                                                                holdsAt(total_drug_delivered(), {_9916~[_9916 > 120, _9916 < 150]} )
+                                                                    happens(kvo_delivery_started, {_11606~[_11606 > 120, _11606 < 150]} )
+                                                                        happens(max_dose_warning, {_11606~[_11606 > 120, _11606 < 150]} )
+
+# loop 3 #                                                                  happens(clinician_bolus_halted_max_dose, {_11606~[_11606 > 120, _11606 < 150]} )
+                                                                                happens(clinician_bolus_delivery_started(30),120)
+                                                                                not_happensIn(clinician_bolus_delivery_started,120, {_11606~[_11606 > 120, _11606 < 150]} )
+                                                                                initiallyP(vtbi_hard_limit_over_time(,240))
+                                                                                    total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(120, {_11606~[_11606 > 120, _11606 < 150]} ,,240)
+                                                                                        total_drug_in_vtbi_window( {_11606~[_11606 > 120, _11606 < 150]} ,,240,)
+                                                                                        holdsAt(total_drug_delivered(), {_11606~[_11606 > 120, _11606 < 150]} )
+                                                                                            happens(kvo_delivery_started, {_13325~[_13325 > 120, _13325 < 150]} )
+                                                                                                happens(max_dose_warning, {_13325~[_13325 > 120, _13325 < 150]} )
+
+# loop 4 #                                                                                          happens(clinician_bolus_halted_max_dose, {_13325~[_13325 > 120, _13325 < 150]} )
+                                                                                                        ...
