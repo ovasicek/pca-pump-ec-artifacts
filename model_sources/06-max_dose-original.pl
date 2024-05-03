@@ -27,10 +27,10 @@ or_happens(max_dose_warning, T) :-
 
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsBeforeT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % below rules is located in (06-total_drug_in_time_window.pl)
-    total_drug_in_vtbi_window(T2, TotalBolus, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),                              %! <<< diff
+    total_drug_in_vtbi_window(T2, Total, VtbiLimitTimePeriod, TotalDuringVtbiPeriod),                              %! <<< diff
     TotalDuringVtbiPeriod .=. VtbiLimit,
-    holdsAt(total_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                                 %! <<< diff
-    %%%!spy, holdsAt(total_drug_delivered(TotalBolus), T2).                     % this would cause non-termination
+    holdsAt(total_drug_delivered(Total), T2, clinician_bolus_delivery_enabled(_)).                                 %! <<< diff
+    %%%!spy, holdsAt(total_drug_delivered(Total), T2).                     % this would cause non-termination
 total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowStartsAfterT1(T1, T2, VtbiLimit, VtbiLimitTimePeriod) :-
     % needs a different implementation of "total_drug_in_vtbi_window"
         % figure out total_drug_delivered at the start of the max dose window
@@ -39,5 +39,5 @@ total_drug_in_max_dose_window_reaches_max_dose_during_clinician_bolus__windowSta
         TotalDuringVtbiPeriod .=. Total - TotalDrugAtStartPeriod,
     TotalDuringVtbiPeriod .=. VtbiLimit,
     holdsAt(total_drug_delivered(TotalDrugAtStartPeriod), TstartVtbiPeriodCropped, clinician_bolus_delivery_enabled(_)),%! <<< diff
-    holdsAt(total_drug_delivered(TotalBolus), T2, clinician_bolus_delivery_enabled(_)).                                 %! <<< diff
-    %%%holdsAt(total_drug_delivered(TotalBolus), T2).                           % this would cause non-termination
+    holdsAt(total_drug_delivered(Total), T2, clinician_bolus_delivery_enabled(_)).                                 %! <<< diff
+    %%%holdsAt(total_drug_delivered(Total), T2).                           % this would cause non-termination
