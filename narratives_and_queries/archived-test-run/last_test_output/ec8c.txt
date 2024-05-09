@@ -5,9 +5,9 @@ NOTE: DCC activates the use of the --prev_forall implementation
 no models
 
 
-  real [m]  0.03 (avg of 5 runs)
-  real [s]  1.54 (avg of 5 runs)
-  user [s]  1.48
-  sys  [s]  0.02
-  mem  [MB] 27.63 (avg of 5 runs)
-  mem  [KB] 27632 (avg of 5 runs)
+  real [m]  0.04 (avg of 5 runs)
+  real [s]  2.15 (avg of 5 runs)
+  user [s]  1.57
+  sys  [s]  0.01
+  mem  [MB] 27.66 (avg of 5 runs)
+  mem  [KB] 27655.20 (avg of 5 runs)

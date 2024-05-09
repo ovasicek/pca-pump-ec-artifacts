@@ -1,7 +1,7 @@
 scasp -s0 ./cn2.pl
 % QUERY:?- -initiallyP(flow_rate(X)).
 
-	ANSWER:	1 (in 9.478 ms)
+	ANSWER:	1 (in 9.458 ms)
 
 MODEL:
 { -initiallyP(flow_rate(X | {X #< 1/10})),  initiallyP(flow_rate_PerHour(6)),  -initiallyP(flow_rate(Var1 | {Var1 #< 1/10})),  not initiallyP(flow_rate(Var1 | {Var1 #< 1/10})),  not -initiallyP(flow_rate(1/10)),  not initiallyP(flow_rate_PerHour(Var2 | {Var2 \= 6})) }
@@ -9,7 +9,7 @@ BINDINGS:
 X #< 1/10
 
 
-	ANSWER:	2 (in 9.274 ms)
+	ANSWER:	2 (in 6.509 ms)
 
 MODEL:
 { -initiallyP(flow_rate(X | {X #> 1/10})),  initiallyP(flow_rate_PerHour(6)),  -initiallyP(flow_rate(Var1 | {Var1 #< 1/10})),  not initiallyP(flow_rate(Var1 | {Var1 #< 1/10})),  not -initiallyP(flow_rate(1/10)),  not initiallyP(flow_rate_PerHour(Var2 | {Var2 \= 6})) }
@@ -17,9 +17,9 @@ BINDINGS:
 X #> 1/10
 
 
-  real [m]  0.00 (avg of 5 runs)
-  real [s]  0.19 (avg of 5 runs)
-  user [s]  0.16
+  real [m]  0.01 (avg of 5 runs)
+  real [s]  0.38 (avg of 5 runs)
+  user [s]  0.15
   sys  [s]  0.03
-  mem  [MB] 23.88 (avg of 5 runs)
-  mem  [KB] 23880.80 (avg of 5 runs)
+  mem  [MB] 23.83 (avg of 5 runs)
+  mem  [KB] 23828 (avg of 5 runs)

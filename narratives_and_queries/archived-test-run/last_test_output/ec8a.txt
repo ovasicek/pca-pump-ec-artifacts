@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./ec8a.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(basal_under_infusion_warning,125).
 
-	ANSWER:	1 (in 192.311 ms)
+	ANSWER:	1 (in 188.496 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(basal_under_infusion_warning,125),  happens(basal_rate_under_tolerance_valid,120),  happens(basal_rate_under_tolerance,120),  holdsAt(basal_delivery_enabled,120),  not_happensInInc(basal_rate_within_tolerance_valid,120,125),  not_happensInInc(basal_delivery_stopped,120,125) }
@@ -11,7 +11,7 @@ BINDINGS:
 
   real [m]  0.03 (avg of 5 runs)
   real [s]  1.56 (avg of 5 runs)
-  user [s]  1.53
-  sys  [s]  0.03
-  mem  [MB] 27.60 (avg of 5 runs)
-  mem  [KB] 27603.20 (avg of 5 runs)
+  user [s]  1.55
+  sys  [s]  0.01
+  mem  [MB] 27.59 (avg of 5 runs)
+  mem  [KB] 27585.60 (avg of 5 runs)

@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./uc7a.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(pump_stopped,120),happens(basal_delivery_stopped,120),not_holdsIn(pump_running,120,240),happens(pump_started,240),happens(basal_delivery_started,240),holdsAfter(pump_running,240),holdsAfter(basal_delivery_enabled,240).
 
-	ANSWER:	1 (in 524.141 ms)
+	ANSWER:	1 (in 559.867 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(pump_stopped,120),  happens(stop_button_pressed_valid,120),  happens(stop_button_pressed,120),  holdsAt(pump_running,120),  happens(pump_started,60),  initiates(pump_started,pump_running,60),  not_stoppedIn(60,pump_running,120),  happens(basal_delivery_stopped,120),  holdsAt(basal_delivery_enabled,120),  terminates(pump_stopped,pump_running,120),  not_startedIn(120,pump_running,240),  happens(pump_started,240),  happens(start_button_pressed_valid,240),  happens(start_button_pressed,240),  not_holdsAt(pump_running,240),  not_holdsAt(alarm_active,240),  not_startedIn(0,alarm_active,240),  happens(basal_delivery_started,240),  initiates(pump_started,pump_running,240),  not_stoppedIn(240,pump_running,100000),  initiates(basal_delivery_started,basal_delivery_enabled,240),  not_stoppedIn(240,basal_delivery_enabled,100000) }
@@ -11,7 +11,7 @@ BINDINGS:
 
   real [m]  0.03 (avg of 5 runs)
   real [s]  1.92 (avg of 5 runs)
-  user [s]  1.88
-  sys  [s]  0.02
-  mem  [MB] 27.63 (avg of 5 runs)
-  mem  [KB] 27634.40 (avg of 5 runs)
+  user [s]  1.91
+  sys  [s]  0.03
+  mem  [MB] 27.65 (avg of 5 runs)
+  mem  [KB] 27647.20 (avg of 5 runs)

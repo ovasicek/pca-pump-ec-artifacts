@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./ec10c.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,118),happens(clinician_bolus_delivery_started(30),118),happens(downstream_occlusion_alarm,120),happens(alarm_to_off,120),happens(pump_stopped,120),holdsAfter(alarm_active,120),not_holdsAfter(pump_running,120).
 
-	ANSWER:	1 (in 622.599 ms)
+	ANSWER:	1 (in 619.801 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,118),  happens(clinician_bolus_delivery_started(30),118),  happens(clinician_bolus_requested_valid(30),118),  happens(clinician_bolus_requested(30),118),  initiallyP(min_t_between_patient_bolus(30)),  holdsAt(basal_delivery_enabled,118),  happens(downstream_occlusion_alarm,120),  happens(downstream_occlusion_detected_valid,120),  happens(downstream_occlusion_detected,120),  holdsAt(pump_running,120),  happens(pump_started,60),  initiates(pump_started,pump_running,60),  not_stoppedIn(60,pump_running,120),  happens(alarm_to_off,120),  happens(pump_stopped,120),  happens(any_alarm,120),  initiates(any_alarm,alarm_active,120),  not_stoppedIn(120,alarm_active,100000),  terminates(pump_stopped,pump_running,120),  not_startedIn(120,pump_running,100000) }
@@ -10,8 +10,8 @@ BINDINGS:
 
 
   real [m]  0.04 (avg of 5 runs)
-  real [s]  2.31 (avg of 5 runs)
+  real [s]  2.32 (avg of 5 runs)
   user [s]  2.27
-  sys  [s]  0.02
-  mem  [MB] 27.95 (avg of 5 runs)
-  mem  [KB] 27945.60 (avg of 5 runs)
+  sys  [s]  0.03
+  mem  [MB] 27.90 (avg of 5 runs)
+  mem  [KB] 27900.80 (avg of 5 runs)

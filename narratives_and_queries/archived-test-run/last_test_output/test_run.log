@@ -4,57 +4,57 @@ Running queries for the PCA pump specification:
   timeout per run    : 0
   CPU model          : Intel(R) Xeon(R) CPU X5650 @ 2.67GHz
 
-check-narratives                          models found       59.38s       27.77MB
-cn-example1                               models found        0.18s       23.85MB
-cn-example2                               models found        0.19s       23.88MB
-ec1                                       models found        2.68s       27.89MB
-ec10a                                     models found        1.67s       27.63MB
-ec10b                                     models found        2.87s       27.94MB
-ec10c                                     models found        2.31s       27.95MB
-ec11a                                     models found        1.67s       27.69MB
-ec11b                                     models found        2.87s       27.89MB
-ec11c                                     models found        2.30s       27.88MB
-ec12a                                     models found        1.66s       27.66MB
-ec12b                                     models found        2.91s       27.88MB
-ec12c                                     models found        2.31s       27.92MB
-ec13a                                     no models          17.96s       28.64MB
-ec13b                                     models found       22.68s       28.73MB
-ec13c                                     models found       51.31s       30.00MB
-ec20a                                     no models           2.00s       27.65MB
-ec20b                                     no models           5.53s       27.93MB
-ec20c                                     no models           5.06s       27.94MB
-ec21                                      models found       40.67s       28.05MB
-ec7a                                      no models           1.89s       27.89MB
-ec7b                                      no models           1.87s       27.88MB
-ec7c                                      no models           2.16s       27.87MB
-ec7d                                      no models           3.79s       27.94MB
-ec7e                                      no models           1.52s       27.66MB
-ec7f                                      no models           3.99s       27.91MB
-ec8a                                      models found        1.56s       27.60MB
-ec8b                                      no models           2.13s       27.66MB
-ec8c                                      no models           1.54s       27.63MB
-ec9a                                      models found        1.66s       27.64MB
-ec9b                                      models found        2.87s       27.94MB
-ec9c                                      models found        2.29s       27.92MB
-empty_reserv-uc2-3run_reasoning           models found       11.34s       27.99MB
-empty_reserv-uc2-full_reasoning           models found     2086.44s       34.37MB
-overdose-ec13a                            models found      882.79s       31.49MB
-overdose-ec13a-fixed                      no models         192.53s       32.88MB
-overdose-ec13b                            no models         835.45s       31.60MB
-overdose-ec13b-nomaxdose                  models found      120.12s       30.03MB
-overdose-ec13c                            no models        1252.77s       34.92MB
-overdose-ec13c-nomaxdose                  models found       83.23s       28.98MB
-overdose-uc2-abduction                    models found     2262.62s       34.30MB
-overdose-uc2-abduction-fixed              no models        2863.14s       35.73MB
-uc1                                       models found        1.67s       27.64MB
-uc2                                       models found        3.15s       27.87MB
-uc3a                                      models found        2.80s       27.92MB
-uc3b                                      no models           3.03s       27.89MB
-uc7a                                      models found        1.92s       27.63MB
-uc7b                                      models found        3.79s       27.90MB
-uc7c                                      models found        3.56s       27.92MB
+check-narratives                          models found       59.54s       27.76MB
+cn-example1                               models found        0.18s       23.84MB
+cn-example2                               models found        0.38s       23.83MB
+ec1                                       models found        2.72s       27.91MB
+ec10a                                     models found        1.67s       27.64MB
+ec10b                                     models found        3.15s       27.89MB
+ec10c                                     models found        2.32s       27.90MB
+ec11a                                     models found        1.66s       27.60MB
+ec11b                                     models found        3.10s       27.90MB
+ec11c                                     models found        2.35s       27.90MB
+ec12a                                     models found        1.66s       27.62MB
+ec12b                                     models found        2.91s       27.92MB
+ec12c                                     models found        2.31s       27.90MB
+ec13a                                     no models          25.62s       28.62MB
+ec13b                                     models found       31.61s       28.74MB
+ec13c                                     models found       53.45s       30.05MB
+ec20a                                     no models           1.99s       27.58MB
+ec20b                                     no models           7.95s       27.92MB
+ec20c                                     no models           5.07s       27.91MB
+ec21                                      models found       40.99s       28.04MB
+ec7a                                      no models           1.87s       27.91MB
+ec7b                                      no models           1.87s       27.82MB
+ec7c                                      no models           2.17s       27.89MB
+ec7d                                      no models           4.62s       27.90MB
+ec7e                                      no models           1.53s       27.60MB
+ec7f                                      no models           4.24s       27.90MB
+ec8a                                      models found        1.56s       27.59MB
+ec8b                                      no models           2.19s       27.67MB
+ec8c                                      no models           2.15s       27.66MB
+ec9a                                      models found        1.68s       27.61MB
+ec9b                                      models found        2.88s       27.93MB
+ec9c                                      models found        2.31s       27.90MB
+empty_reserv-uc2-3run_reasoning           models found       12.39s       27.94MB
+empty_reserv-uc2-full_reasoning           models found     2094.48s       34.29MB
+overdose-ec13a                            models found      917.36s       34.11MB
+overdose-ec13a-fixed                      no models         200.23s       30.19MB
+overdose-ec13b                            no models         846.89s       32.98MB
+overdose-ec13b-nomaxdose                  models found      121.48s       30.01MB
+overdose-ec13c                            no models        1250.77s       33.50MB
+overdose-ec13c-nomaxdose                  models found       87.48s       28.99MB
+overdose-uc2-abduction                    models found     2280.36s       34.09MB
+overdose-uc2-abduction-fixed              no models        2886.76s       33.02MB
+uc1                                       models found        1.69s       27.63MB
+uc2                                       models found        3.17s       27.92MB
+uc3a                                      models found        2.84s       27.91MB
+uc3b                                      models found       37.13s       29.69MB
+uc7a                                      models found        1.92s       27.65MB
+uc7b                                      models found        3.83s       27.88MB
+uc7c                                      models found        3.56s       27.91MB
 
 
-real	238m47.403s
-user	904m1.088s
-sys	3m19.886s
+real	252m21.054s
+user	917m30.675s
+sys	3m40.604s

@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./uc3a.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(clinician_bolus_delivery_started(30),120),happens(clinician_bolus_completed,T2),initiallyP(vtbi(VTBI)),holdsAt(clinician_bolus_drug_delivered(VTBI),T2),30 #= T2-120,not_happensInInc(clinician_bolus_halted_max_dose,120,T2),happens(basal_delivery_started,T2),holdsAfter(basal_delivery_enabled,T2).
 
-	ANSWER:	1 (in 1422.603 ms)
+	ANSWER:	1 (in 1405.946 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(clinician_bolus_delivery_started(30),120),  happens(clinician_bolus_requested_valid(30),120),  happens(clinician_bolus_requested(30),120),  initiallyP(min_t_between_patient_bolus(30)),  holdsAt(basal_delivery_enabled,120),  happens(clinician_bolus_completed,150),  initiallyP(vtbi(1)),  initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled(30),120),  trajectory(clinician_bolus_delivery_enabled(30),120,clinician_bolus_drug_delivered(1),150),  initiallyP(basal_flow_rate(1/10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(pump_flow_rate_max_MlperHour(100)),  not_holdsAt(clinician_bolus_is_suspended,120),  initiallyN(clinician_bolus_is_suspended),  not_startedIn(0,clinician_bolus_is_suspended,120),  not_stoppedIn(120,clinician_bolus_delivery_enabled(30),150),  holdsAt(clinician_bolus_drug_delivered(1),150),  not_happensInInc(clinician_bolus_halted_max_dose,120,150),  happens(basal_delivery_started,150),  not_happens(patient_bolus_delivery_started,150),  not_happensInInc(patient_bolus_delivery_started,150,150),  initiates(basal_delivery_started,basal_delivery_enabled,150),  not_stoppedIn(150,basal_delivery_enabled,100000) }
@@ -12,8 +12,8 @@ VTBI = 1
 
 
   real [m]  0.05 (avg of 5 runs)
-  real [s]  2.80 (avg of 5 runs)
-  user [s]  2.77
+  real [s]  2.84 (avg of 5 runs)
+  user [s]  2.78
   sys  [s]  0.03
-  mem  [MB] 27.92 (avg of 5 runs)
-  mem  [KB] 27920.80 (avg of 5 runs)
+  mem  [MB] 27.91 (avg of 5 runs)
+  mem  [KB] 27908 (avg of 5 runs)

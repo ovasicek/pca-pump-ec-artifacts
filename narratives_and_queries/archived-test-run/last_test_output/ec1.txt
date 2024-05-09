@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./ec1.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(patient_bolus_delivery_started,120),happens(patient_bolus_completed,121),happens(patient_bolus_denied_too_soon,123),initiallyP(min_t_between_patient_bolus(X)),X #> 123-121,not_happens(patient_bolus_delivery_started,123).
 
-	ANSWER:	1 (in 1276.029 ms)
+	ANSWER:	1 (in 1329.709 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(patient_bolus_delivery_started,120),  happens(patient_bolus_requested_valid,120),  happens(patient_bolus_requested,120),  holdsAt(basal_delivery_enabled,120),  not_happens(patient_bolus_denied_too_soon,120),  not_happensInInc(patient_bolus_denied_too_soon,120,120),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(vtbi(1)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(pump_flow_rate_max_MlperHour(100)),  holdsAt(total_drug_delivered(6),120),  trajectory(basal_delivery_enabled,60,total_drug_delivered(6),120),  holdsAt(total_drug_delivered(0),60),  initiallyP(pump_not_running),  trajectory(pump_not_running,0,total_drug_delivered(0),60),  initiallyP(initial_total_drug_delivered(0)),  not_stoppedIn(0,pump_not_running,60),  holdsAt(total_drug_delivered(0),0),  trajectory(pump_not_running,0,total_drug_delivered(0),0),  not_stoppedIn(0,pump_not_running,0),  happens(patient_bolus_completed,121),  initiates(patient_bolus_delivery_started,patient_bolus_delivery_enabled,120),  trajectory(patient_bolus_delivery_enabled,120,patient_bolus_drug_delivered(1),121),  not_stoppedIn(120,patient_bolus_delivery_enabled,121),  happens(patient_bolus_denied_too_soon,123),  happens(patient_bolus_requested_valid,123),  happens(patient_bolus_requested,123),  holdsAt(basal_delivery_enabled,123),  happens(basal_delivery_started,121),  not_holdsAt(clinician_bolus_is_suspended,121),  initiallyN(clinician_bolus_is_suspended),  not_startedIn(0,clinician_bolus_is_suspended,121),  initiates(basal_delivery_started,basal_delivery_enabled,121),  not_stoppedIn(121,basal_delivery_enabled,123),  initiallyP(min_t_between_patient_bolus(30)),  holdsAt(patient_bolus_delivery_enabled,Var2 | {Var2 #> 120,Var2 #=< 121}),  not_stoppedIn(120,patient_bolus_delivery_enabled,Var2 | {Var2 #> 120,Var2 #=< 121}),  happens(patient_bolus_delivery_stopped,121),  terminates(patient_bolus_delivery_stopped,patient_bolus_delivery_enabled,121),  not_happens(patient_bolus_delivery_started,123),  not_happensInInc(patient_bolus_delivery_started,123,123) }
@@ -10,9 +10,9 @@ BINDINGS:
 X = 30
 
 
-  real [m]  0.04 (avg of 5 runs)
-  real [s]  2.68 (avg of 5 runs)
-  user [s]  2.62
+  real [m]  0.05 (avg of 5 runs)
+  real [s]  2.72 (avg of 5 runs)
+  user [s]  2.76
   sys  [s]  0.03
-  mem  [MB] 27.89 (avg of 5 runs)
-  mem  [KB] 27887.20 (avg of 5 runs)
+  mem  [MB] 27.91 (avg of 5 runs)
+  mem  [KB] 27909.60 (avg of 5 runs)

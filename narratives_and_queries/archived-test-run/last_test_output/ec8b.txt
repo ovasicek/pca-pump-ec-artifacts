@@ -6,8 +6,8 @@ no models
 
 
   real [m]  0.04 (avg of 5 runs)
-  real [s]  2.13 (avg of 5 runs)
-  user [s]  2.13
-  sys  [s]  0.01
-  mem  [MB] 27.66 (avg of 5 runs)
-  mem  [KB] 27661.60 (avg of 5 runs)
+  real [s]  2.19 (avg of 5 runs)
+  user [s]  2.18
+  sys  [s]  0.03
+  mem  [MB] 27.67 (avg of 5 runs)
+  mem  [KB] 27674.40 (avg of 5 runs)

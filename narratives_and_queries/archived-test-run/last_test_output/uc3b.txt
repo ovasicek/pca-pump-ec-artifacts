@@ -2,12 +2,19 @@ scasp -s0 --dcc ../model-original-wcache.pl ./uc3b.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),happens(clinician_bolus_delivery_started(30),120),happens(patient_bolus_delivery_started,130),happens(clinician_bolus_suspended(30),130),happens(patient_bolus_completed,T2),happens(clinician_bolus_resumed(30),T2),happens(clinician_bolus_completed,T3),initiallyP(vtbi(X1)),holdsAt(clinician_bolus_drug_delivered(X1),T3),30 #= T3-(120+(T2-130)),not_happensInInc(clinician_bolus_halted_max_dose,120,T3),happens(basal_delivery_started,T3),holdsAfter(basal_delivery_enabled,T3).
 
-no models
+	ANSWER:	1 (in 35210.226 ms)
+
+MODEL:
+{ happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  happens(clinician_bolus_delivery_started(30),120),  happens(clinician_bolus_requested_valid(30),120),  happens(clinician_bolus_requested(30),120),  initiallyP(min_t_between_patient_bolus(30)),  holdsAt(basal_delivery_enabled,120),  happens(patient_bolus_delivery_started,130),  happens(patient_bolus_requested_valid,130),  happens(patient_bolus_requested,130),  holdsAt(clinician_bolus_delivery_enabled,130),  initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled,120),  not_stoppedIn(120,clinician_bolus_delivery_enabled,130),  not_happens(patient_bolus_denied_too_soon,130),  not_happensInInc(patient_bolus_denied_too_soon,130,130),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(vtbi(1)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(pump_flow_rate_max_MlperHour(100)),  holdsAt(total_drug_delivered(22/3),130),  initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled(30),120),  trajectory(clinician_bolus_delivery_enabled(30),120,total_drug_delivered(22/3),130),  holdsAt(total_drug_delivered(6),120),  trajectory(basal_delivery_enabled,60,total_drug_delivered(6),120),  holdsAt(total_drug_delivered(0),60),  initiallyP(pump_not_running),  trajectory(pump_not_running,0,total_drug_delivered(0),60),  initiallyP(initial_total_drug_delivered(0)),  not_stoppedIn(0,pump_not_running,60),  not_stoppedIn(120,clinician_bolus_delivery_enabled(30),130),  holdsAt(total_drug_delivered(0),0),  trajectory(pump_not_running,0,total_drug_delivered(0),0),  not_stoppedIn(0,pump_not_running,0),  happens(clinician_bolus_suspended(30),130),  holdsAt(clinician_bolus_delivery_enabled(30),130),  not_happens(clinician_bolus_completed,130),  not_happensInInc(clinician_bolus_completed,130,130),  happens(patient_bolus_completed,131),  initiates(patient_bolus_delivery_started,patient_bolus_delivery_enabled,130),  trajectory(patient_bolus_delivery_enabled,130,patient_bolus_drug_delivered(1),131),  not_stoppedIn(130,patient_bolus_delivery_enabled,131),  happens(clinician_bolus_resumed(30),131),  holdsAt(clinician_bolus_is_suspended(30),131),  initiates(clinician_bolus_suspended(30),clinician_bolus_is_suspended(30),130),  not_stoppedIn(130,clinician_bolus_is_suspended(30),131),  happens(clinician_bolus_completed,151),  happens(clinician_bolus_delivery_started(30),131),  initiates(clinician_bolus_delivery_started(30),clinician_bolus_delivery_enabled(30),131),  trajectory(clinician_bolus_delivery_enabled(30),131,clinician_bolus_drug_delivered(1),151),  holdsAt(clinician_bolus_suspended_drug_delivered(1/3),131),  initiates(clinician_bolus_suspended(30),clinician_bolus_suspended_drug_delivered(1/3),130),  holdsAt(clinician_bolus_drug_delivered(1/3),130),  trajectory(clinician_bolus_delivery_enabled(30),120,clinician_bolus_drug_delivered(1/3),130),  not_holdsAt(clinician_bolus_is_suspended,120),  not_stoppedIn(130,clinician_bolus_suspended_drug_delivered(1/3),131),  not_stoppedIn(131,clinician_bolus_delivery_enabled(30),151),  holdsAt(clinician_bolus_drug_delivered(1),151),  not_happensInInc(clinician_bolus_halted_max_dose,120,151),  happens(basal_delivery_started,151),  not_happens(patient_bolus_delivery_started,151),  not_happensInInc(patient_bolus_delivery_started,151,151),  initiates(basal_delivery_started,basal_delivery_enabled,151),  not_stoppedIn(151,basal_delivery_enabled,100000) }
+BINDINGS: 
+T2 = 131 
+T3 = 151 
+X1 = 1
 
 
-  real [m]  0.05 (avg of 5 runs)
-  real [s]  3.03 (avg of 5 runs)
-  user [s]  3.05
-  sys  [s]  0.04
-  mem  [MB] 27.89 (avg of 5 runs)
-  mem  [KB] 27894.40 (avg of 5 runs)
+  real [m]  0.62 (avg of 5 runs)
+  real [s]  37.13 (avg of 5 runs)
+  user [s]  36.62
+  sys  [s]  0.03
+  mem  [MB] 29.69 (avg of 5 runs)
+  mem  [KB] 29688.80 (avg of 5 runs)

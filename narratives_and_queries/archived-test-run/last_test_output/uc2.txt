@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./uc2.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- holdsIn(basal_delivery_enabled,60,120),initiallyP(min_t_between_patient_bolus(MinT)),T1 #= 120-MinT,not_holdsIn(patient_bolus_delivery_enabled,T1,120),not_happens(patient_bolus_denied_too_soon,120),not_happens(patient_bolus_denied_max_dose,120),happens(patient_bolus_delivery_started,120),happens(patient_bolus_completed,T2),initiallyP(vtbi(VTBI)),holdsAt(patient_bolus_drug_delivered(VTBI),T2),happens(basal_delivery_started,T2),holdsAfter(basal_delivery_enabled,T2).
 
-	ANSWER:	1 (in 1761.927 ms)
+	ANSWER:	1 (in 1799.023 ms)
 
 MODEL:
 { happens(basal_delivery_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  initiallyN(pump_running),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,120),  initiallyP(min_t_between_patient_bolus(30)),  not_holdsAt(patient_bolus_delivery_enabled,90),  initiallyN(patient_bolus_delivery_enabled),  not_startedIn(0,patient_bolus_delivery_enabled,90),  not_happens(patient_bolus_denied_too_soon,120),  not_happensInInc(patient_bolus_denied_too_soon,120,120),  not_happens(patient_bolus_denied_max_dose,120),  not_happensInInc(patient_bolus_denied_max_dose,120,120),  happens(patient_bolus_delivery_started,120),  happens(patient_bolus_requested_valid,120),  initiallyP(vtbi_hard_limit_over_time(53/2,240)),  initiallyP(basal_flow_rate(1/10)),  initiallyP(basal_flow_rate_MlperHour(6)),  initiallyP(vtbi(1)),  initiallyP(patient_bolus_flow_rate(1)),  initiallyP(patient_bolus_flow_rate_MlperHour(60)),  initiallyP(pump_flow_rate_max(5/3)),  initiallyP(pump_flow_rate_max_MlperHour(100)),  holdsAt(total_drug_delivered(6),120),  trajectory(basal_delivery_enabled,60,total_drug_delivered(6),120),  holdsAt(total_drug_delivered(0),60),  initiallyP(pump_not_running),  trajectory(pump_not_running,0,total_drug_delivered(0),60),  initiallyP(initial_total_drug_delivered(0)),  not_stoppedIn(0,pump_not_running,60),  holdsAt(total_drug_delivered(0),0),  trajectory(pump_not_running,0,total_drug_delivered(0),0),  not_stoppedIn(0,pump_not_running,0),  happens(patient_bolus_completed,121),  happens(patient_bolus_requested,120),  holdsAt(basal_delivery_enabled,120),  initiates(patient_bolus_delivery_started,patient_bolus_delivery_enabled,120),  trajectory(patient_bolus_delivery_enabled,120,patient_bolus_drug_delivered(1),121),  not_stoppedIn(120,patient_bolus_delivery_enabled,121),  holdsAt(patient_bolus_drug_delivered(1),121),  happens(basal_delivery_started,121),  not_holdsAt(clinician_bolus_is_suspended,121),  initiallyN(clinician_bolus_is_suspended),  not_startedIn(0,clinician_bolus_is_suspended,121),  initiates(basal_delivery_started,basal_delivery_enabled,121),  not_stoppedIn(121,basal_delivery_enabled,100000) }
@@ -14,8 +14,8 @@ VTBI = 1
 
 
   real [m]  0.05 (avg of 5 runs)
-  real [s]  3.15 (avg of 5 runs)
-  user [s]  3.15
-  sys  [s]  0.02
-  mem  [MB] 27.87 (avg of 5 runs)
-  mem  [KB] 27874.40 (avg of 5 runs)
+  real [s]  3.17 (avg of 5 runs)
+  user [s]  3.17
+  sys  [s]  0.04
+  mem  [MB] 27.92 (avg of 5 runs)
+  mem  [KB] 27919.20 (avg of 5 runs)

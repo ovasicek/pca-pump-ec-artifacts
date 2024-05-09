@@ -2,7 +2,7 @@ scasp -s0 --dcc ../model-original-wcache.pl ./uc1.pl
 NOTE: DCC activates the use of the --prev_forall implementation
 % QUERY:?- not_holdsIn(pump_running,0,60),happens(pump_started,60),happens(basal_delivery_started,60),holdsIn(pump_running,60,6000),holdsIn(basal_delivery_enabled,60,6000),happens(pump_stopped,6000),happens(basal_delivery_stopped,6000),not_holdsAfter(pump_running,6000).
 
-	ANSWER:	1 (in 290.081 ms)
+	ANSWER:	1 (in 307.575 ms)
 
 MODEL:
 { not_holdsAt(pump_running,0),  initiallyN(pump_running),  not_startedIn(0,pump_running,0),  happens(pump_started,60),  happens(start_button_pressed_valid,60),  happens(start_button_pressed,60),  not_holdsAt(pump_running,60),  not_startedIn(0,pump_running,60),  not_holdsAt(alarm_active,60),  initiallyN(alarm_active),  not_startedIn(0,alarm_active,60),  happens(basal_delivery_started,60),  initiates(pump_started,pump_running,60),  not_stoppedIn(60,pump_running,6000),  initiates(basal_delivery_started,basal_delivery_enabled,60),  not_stoppedIn(60,basal_delivery_enabled,6000),  happens(pump_stopped,6000),  happens(stop_button_pressed_valid,6000),  happens(stop_button_pressed,6000),  holdsAt(pump_running,6000),  happens(basal_delivery_stopped,6000),  holdsAt(basal_delivery_enabled,6000),  terminates(pump_stopped,pump_running,6000),  not_startedIn(6000,pump_running,100000) }
@@ -10,8 +10,8 @@ BINDINGS:
 
 
   real [m]  0.03 (avg of 5 runs)
-  real [s]  1.67 (avg of 5 runs)
-  user [s]  1.63
-  sys  [s]  0.03
-  mem  [MB] 27.64 (avg of 5 runs)
-  mem  [KB] 27644.80 (avg of 5 runs)
+  real [s]  1.69 (avg of 5 runs)
+  user [s]  1.64
+  sys  [s]  0.04
+  mem  [MB] 27.63 (avg of 5 runs)
+  mem  [KB] 27629.60 (avg of 5 runs)
