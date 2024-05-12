@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: This file implements the specific three run approach needed to reason about the drug reservoir
+#       related alarms (not a general multi run approach for any event). 
+
 #USRDIR="$(pwd)"
 #ROOTDIR="$(dirname "$(realpath "$0")")"
 
