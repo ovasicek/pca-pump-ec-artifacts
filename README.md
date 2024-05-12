@@ -1,7 +1,8 @@
 # pca-pump-ec-artifacts
 
-This is a repository with source codes and experiments for the ICLP'24 paper "TODO" by Vasicek O., Arias J., Fiedor J.,
-Hall B., Krena B., Larson B., Varanasi S. Ch., Vojnar T., and Gupta G.
+This is a repository with source codes and experiments for the ICLP'24 paper "Early Validation of High-level System Requirements
+with Event Calculus and Answer Set Programming" by Vasicek O., Arias J., Fiedor J., Gupta G., Hall B., Krena B., Larson B.,
+Varanasi S. Ch., and Vojnar T.
 
 ## Directory Structure
 - `ec_theory/bec_scasp-pca_pump.pl`            - Our implementation of BEC axioms
