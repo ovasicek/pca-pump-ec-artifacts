@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: The incremental abduction approach is currently only implemented for the specific case of a 
+#       predicate with exactly two parameters (not for a any number N of paramters)
+
 USRDIR="$(pwd)"
 ROOTDIR="$(dirname "$(realpath "$0")")"
 
