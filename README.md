@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/778253227.svg)](https://doi.org/10.5281/zenodo.15737761)
+
 # pca-pump-ec-artifacts
 
 This is a repository with source codes and experiments for the ICLP'24 paper "Early Validation of High-level System Requirements
