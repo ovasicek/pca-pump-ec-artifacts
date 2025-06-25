@@ -2,7 +2,7 @@
 
 This is a repository with source codes and experiments for the ICLP'24 paper "Early Validation of High-level System Requirements
 with Event Calculus and Answer Set Programming" by Vasicek O., Arias J., Fiedor J., Gupta G., Hall B., Krena B., Larson B.,
-Varanasi S. Ch., and Vojnar T.
+Varanasi S. Ch., and Vojnar T (https://doi.org/10.1017/S1471068424000280).
 
 The PCA pump requirements specification PDF version 1.0.0, included in this repository, was copied from
 `http://pub.santoslab.org/open-pca-pump/artifacts/Open-PCA-Pump-Requirements.pdf` in order to assure that the PDF is 
